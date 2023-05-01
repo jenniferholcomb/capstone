@@ -1,0 +1,33 @@
+Project Proposal Template
+Name of Student: Jennifer Holcomb
+
+Name of Project: (still working on name) 
+
+Project's Purpose or Goal: (What will it do for users?) 
+ - A forecasting tool used by small restaurants to plan food inventory and labor
+
+List the absolute minimum features the project requires to meet this purpose or goal:
+- API calls to determine tourism probability (Airdna - get % rentals booked on specific day)
+- API for weather (many free API's, maybe OpenWeather?)
+- API for tracking how many out-of-towners are in area (have yet to find an API that tracks this)
+- vendor invoice into NoSQL 
+    - use OCRLY API to turn scans to text
+    - track data, highlight changes with red/yellow/green prompts
+    - (still figuring out exactly what this data looks like)
+- calendar to extract data by date?
+
+What tools, frameworks, libraries, APIs, modules and/or other resources (whatever is specific to your track, and your language) will you use to create this MVP? List them all here. Be specific.
+- React/Javascript
+- CSS/HTML
+- NoSQL - Firestore
+- (still researching what else)
+
+If you finish developing the minimum viable product (MVP) with time to spare, what will you work on next? Describe these features here: Be specific.
+- incorporate the restaurant menu/ highlight items to push / items to pull (based on costing)
+- 
+
+What additional tools, frameworks, libraries, APIs, or other resources will these additional features require?
+- not sure yet
+
+Is there anything else you'd like your instructor to know?
+- this is still evolving... Have general sense of how I'd like app to look when finished, but will have better idea as I start building
