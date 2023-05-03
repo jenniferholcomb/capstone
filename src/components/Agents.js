@@ -6,12 +6,14 @@ import Holidays from "./Holidays";
 
 function Agents () {
   return (
-    <React.Fragment>
-      <Weather />
-      <ShortTermRental />
-      <Events />
-      <Holidays />
-    </React.Fragment>
+    <div id="agents">
+      <React.Fragment>
+        <Weather />
+        <ShortTermRental />
+        <Events />
+        <Holidays />
+      </React.Fragment>
+    </div>
   );
 }
 

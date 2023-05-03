@@ -1,11 +1,15 @@
 import React from 'react';
 import GoodsControl from './GoodsControl';
+import Agents from './Agents';
 
 function App() {
   return (
-    <React.Fragment>
-      <GoodsControl />
-    </React.Fragment>
+    <div id="main-body">
+      <React.Fragment>
+        <GoodsControl />
+        <Agents />
+      </React.Fragment>
+    </div>
   );
 }
 

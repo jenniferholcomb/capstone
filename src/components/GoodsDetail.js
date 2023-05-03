@@ -2,9 +2,11 @@ import React from "react";
 
 function GoodsDetail () {
   return (
-    <React.Fragment>
-      <p>Goods Detail</p>
-    </React.Fragment>
+    <div id="goods-detail">
+      <React.Fragment>
+        <p>Goods Detail</p>
+      </React.Fragment>
+    </div>
   );
 }
 

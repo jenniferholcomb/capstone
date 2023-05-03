@@ -3,10 +3,12 @@ import Calendar from "./Calendar";
 
 function Header () {
   return (
-    <React.Fragment>
-      <p>Header</p>
-      <Calendar />
-    </React.Fragment>
+    <div id="header">
+      <React.Fragment>
+        <p>Header</p>
+        <Calendar />
+      </React.Fragment>
+    </div>
   );
 }
 

@@ -2,9 +2,11 @@ import React from "react";
 
 function Calendar () {
   return (
-    <React.Fragment>
-      <p>Calendar</p>
-    </React.Fragment>
+    <div id="calendar">
+      <React.Fragment>
+        <p>Calendar</p>
+      </React.Fragment>
+    </div>
   );
 }
 
