@@ -1,12 +1,18 @@
 import React from "react";
+import styled from 'styled-components';
+
+const GoodsDetailWrapper = styled.section`
+  grid-column: 1 / span 2;
+  grid-row: 3;
+  outline: 1px solid black;
+  margin-left: 30px;
+`;
 
 function GoodsDetail () {
   return (
-    <div id="goods-detail">
-      <React.Fragment>
-        <p>Goods Detail</p>
-      </React.Fragment>
-    </div>
+    <GoodsDetailWrapper>
+      <p>Goods Detail</p>
+    </GoodsDetailWrapper>
   );
 }
 

@@ -1,12 +1,15 @@
 import React from "react";
+import styled from 'styled-components';
+
+const ShortTermRentalWrapper = styled.section`
+  border-bottom: 1px solid black; 
+`;
 
 function ShortTermRental () {
   return (
-    <div id="short-term-rental">
-      <React.Fragment>
-        <p>Short Term Rental</p>
-      </React.Fragment>
-    </div>
+    <ShortTermRentalWrapper>
+      <p>Short Term Rental</p>
+    </ShortTermRentalWrapper>
   );
 }
 

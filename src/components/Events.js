@@ -1,12 +1,15 @@
 import React from "react";
+import styled from 'styled-components';
+
+const EventsWrapper = styled.section`
+  border-bottom: 1px solid black; 
+`;
 
 function Events () {
   return (
-    <div id="events">
-      <React.Fragment>
-        <p>Events</p>
-      </React.Fragment>
-    </div>
+    <EventsWrapper>
+      <p>Events</p>
+    </EventsWrapper>
   );
 }
 
