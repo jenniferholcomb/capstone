@@ -1,10 +1,11 @@
 import React from "react";
+import CalendarDay from "./CalendarDay";
 
 function Calendar () {
   return (
     <div id="calendar">
       <React.Fragment>
-        <p>Calendar</p>
+        <CalendarDay />
       </React.Fragment>
     </div>
   );
