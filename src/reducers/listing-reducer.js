@@ -3,11 +3,15 @@ import * as c from '../actions/ActionTypes';
 const listingReducer = (state, action) => {
   switch (action.type) {
     case c.GET_LISTING_SUCCESS:
-      const newWeeklyAvailability = action.data[0].days.reduce((array, day) => array.concat(day.available), []);
+      const oneMonthAvailabile = action.data[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
+      const twoMonthAvailable = action.data[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
+      const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
+      const today = new Date().toISOString().substring(0,10);
+      const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
       return {
         ...state,
         isLoaded: true,
-        properties: newWeeklyAvailability
+        listingAvailability: twoWeeks
       };
     case c.GET_LISTING_FAILURE:
       return {
