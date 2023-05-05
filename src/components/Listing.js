@@ -20,24 +20,28 @@ function Listing (props) {
   const id = props.id;
 
   useEffect(() => {
-    fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
-      method: 'GET'
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json()
-        }
+    setInterval(() => {
+      console.log("herer");
+      fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
+        method: 'GET'
       })
-      .then((jsonifiedResponse) => {
-        const action = getListingSuccess(jsonifiedResponse.data)
-        dispatch(action)
-      })
-      .catch((error) => {
-        const action = getListingFailure(error.message)
-        dispatch(action)
-      });
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`${response.status}: ${response.statusText}`);
+          } else {
+            return response.json()
+          }
+        })
+        .then((jsonifiedResponse) => {
+          const action = getListingSuccess(jsonifiedResponse.data)
+          dispatch(action)
+        })
+        .catch((error) => {
+          const action = getListingFailure(error.message)
+          dispatch(action)
+        });
+    }, 2000);
+
   }, [])
 
   const { error, isLoaded, listingAvailability } = state;
