@@ -1,16 +1,64 @@
-import React from "react";
+import React, { useEffect, useReducer } from 'react';
+import agentsReducer from '../reducers/agents-reducer';
+import { getFetchFailure, getHolidaySuccess } from '../actions';
 import styled from 'styled-components';
 
 const HolidayWrapper = styled.section`
-  border-bottom: 1px solid black; 
+  border-bottom: 1px solid black;
 `;
 
-function Holidays () {
-  return (
-    <HolidayWrapper>
-      <p>Holidays</p>
-    </HolidayWrapper>
-  );
+const initialState = {
+  isLoaded: false,
+  holidayList: [],
+  error: null
+};
+
+function Holiday () {
+
+  const [state, dispatch] = useReducer(agentsReducer, initialState)
+
+  useEffect(() => {
+    fetch(`=${process.env.REACT_APP_API_KEY2}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        } else {
+          return response.json()
+        }
+      })
+      .then((jsonifiedResponse) => {
+        const action = getHolidaySuccess(jsonifiedResponse.list)
+        dispatch(action)
+      })
+      .catch((error) => {
+        const action = getFetchFailure(error.message)
+        dispatch(action)
+      });
+  }, [])
+
+  const { error, isLoaded, holidayList } = state;
+
+  if (error) {
+    return ( 
+      <HolidayWrapper>
+        <h1>Error: {error}</h1>
+      </HolidayWrapper> 
+    );
+  } else if (!isLoaded) {
+    return (
+      <HolidayWrapper>
+        <h1>...Loading...</h1>
+      </HolidayWrapper>
+    );
+  } else {
+    return (
+
+      <HolidayWrapper>
+        <p>{holidayList}</p>
+
+      </HolidayWrapper>
+    );
+  }
 }
 
-export default Holidays;
+export default Holiday;

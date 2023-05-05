@@ -41,7 +41,6 @@ const agentsReducer = (state, action) => {
         };
 
     case c.GET_EVENTS_SUCCESS:
-      console.log(action);
       const newEventsList = action.eventsList.reduce((array, list) => 
                                           array.concat(list.name)
                                           .concat(list.dates.start.localDate), 
@@ -50,6 +49,18 @@ const agentsReducer = (state, action) => {
           ...state,
           isLoaded: true,
           eventsList: newEventsList
+        };
+
+    case c.GET_HOLIDAY_SUCCESS:
+      console.log(action);
+      const newHolidayList = action.eventsList.reduce((array, list) => 
+                                          array.concat(list.name)
+                                          .concat(list.dates.start.localDate), 
+      []);
+      return {
+          ...state,
+          isLoaded: true,
+          holidayList: newHolidayList
         };
 
     case c.GET_FETCH_FAILURE:

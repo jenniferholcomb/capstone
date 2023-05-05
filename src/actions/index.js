@@ -20,6 +20,11 @@ export const getEventsSuccess = (eventsList) => ({
   eventsList
 });
 
+export const getHolidaySuccess = (holidayList) => ({
+  type: c.GET_HOLIDAY_SUCCESS,
+  holidayList
+});
+
 export const getFetchFailure = (error) => ({
   type: c.GET_FETCH_FAILURE,
   error
