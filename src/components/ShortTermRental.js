@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import propertiesReducer from '../reducers/properties-reducer';
 import { getPropertiesFailure, getPropertiesSuccess } from '../actions';
+import Listing from './Listing';
 import styled from 'styled-components';
 
 const ShortTermRentalWrapper = styled.section`
@@ -53,7 +54,7 @@ function ShortTermRental () {
   } else {
     return (
       <ShortTermRentalWrapper>
-        <p>Number of properties to analyze: {properties.length}</p>
+        <p>Number of properties to analyze: {properties.map(id => <p>{id}</p>)}</p>
       </ShortTermRentalWrapper>
     );
   }

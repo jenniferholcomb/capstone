@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import listingReducer from '../reducers/properties-reducer';
 import { getListingFailure, getListingSuccess } from '../actions';
 import styled from 'styled-components';
@@ -15,28 +15,29 @@ const initialState = {
 
 function Listing () {
 
-  const [state, dispatch] = useReducer(propertiesReducer, initialState)
+  const [state, dispatch] = useReducer(listingReducer, initialState);
+  const [finalAvailability, setFinalAvailability] = useState([]);
 
-  useEffect(() => {
-    fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
-      method: 'GET'
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json()
-        }
-      })
-      .then((jsonifiedResponse) => {
-        const action = getListingSuccess(jsonifiedResponse.data)
-        dispatch(action)
-      })
-      .catch((error) => {
-        const action = getListingFailure(error.message)
-        dispatch(action)
-      });
-  }, [])
+  // useEffect(() => {
+  //   fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
+  //     method: 'GET'
+  //   })
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error(`${response.status}: ${response.statusText}`);
+  //       } else {
+  //         return response.json()
+  //       }
+  //     })
+  //     .then((jsonifiedResponse) => {
+  //       const action = getListingSuccess(jsonifiedResponse.data)
+  //       dispatch(action)
+  //     })
+  //     .catch((error) => {
+  //       const action = getListingFailure(error.message)
+  //       dispatch(action)
+  //     });
+  // }, [])
 
   const { error, isLoaded, listingAvailability } = state;
 
@@ -55,9 +56,7 @@ function Listing () {
   } else {
     return (
       <ListingWrapper>
-        {listingAvailability.forEach(available =>
-          <p>available</p>
-        )}
+       
       </ListingWrapper>
     );
   }
