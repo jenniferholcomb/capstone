@@ -56,19 +56,23 @@ function ShortTermRental () {
       </ShortTermRentalWrapper>
     );
   } else {
+    console.log("is this the problem")
     return (
+
       <ShortTermRentalWrapper>
         <Listing 
           id={properties[0]}
           onAvailabilityCall = {handleAvailabilityData} />
-        {/* {properties.map(id => 
-          <Listing 
-          id={id}
-          onAvailabilityCall = {handleAvailabilityData} />
-        )} */}
+
       </ShortTermRentalWrapper>
     );
   }
 }
 
 export default ShortTermRental;
+
+        //  {properties.map(id => 
+        //   <Listing 
+        //   id={id}
+        //   onAvailabilityCall = {handleAvailabilityData} />
+        // )} 
