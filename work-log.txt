@@ -18,4 +18,4 @@ Sunday 4/30
 - after reading Firestore lessons, brainstormed collections/documents that will use setting up database
     - 
 
-
+l
