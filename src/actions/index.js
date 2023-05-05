@@ -10,12 +10,12 @@ export const getPropertiesFailure = (error) => ({
   error
 });
 
-// export const getListingSuccess = (listing) => ({
-//   type: c.GET_LISTING_SUCCESS,
-//   listingAvailability
-// });
+export const getListingSuccess = (listing) => ({
+  type: c.GET_LISTING_SUCCESS,
+  listingAvailability
+});
 
-// export const getListingFailure = (error) => ({
-//   type: c.GET_LISTING_FAILURE,
-//   error
-// });
+export const getListingFailure = (error) => ({
+  type: c.GET_LISTING_FAILURE,
+  error
+});

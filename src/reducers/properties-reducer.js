@@ -11,7 +11,7 @@ const propertiesReducer = (state, action) => {
                                                                    && listing.longitude < -121.27744);
       
       const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
-      const shortenedPropertiesList = propertiesId.slice(0, 5);
+      const shortenedPropertiesList = propertiesId.slice(0, 1);
       return {
         ...state,
         isLoaded: true,

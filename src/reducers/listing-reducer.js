@@ -1,6 +1,7 @@
 import * as c from '../actions/ActionTypes';
 
 const listingReducer = (state, action) => {
+  console.log("run");
   switch (action.type) {
     case c.GET_LISTING_SUCCESS:
       const oneMonthAvailabile = action.data[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);

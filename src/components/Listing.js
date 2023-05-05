@@ -1,6 +1,7 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import listingReducer from '../reducers/properties-reducer';
+import React, { useEffect, useReducer } from 'react';
+import listingReducer from '../reducers/listing-reducer';
 import { getListingFailure, getListingSuccess } from '../actions';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ListingWrapper = styled.section`
@@ -13,31 +14,31 @@ const initialState = {
   error: null
 };
 
-function Listing () {
+function Listing (props) {
 
   const [state, dispatch] = useReducer(listingReducer, initialState);
-  const [finalAvailability, setFinalAvailability] = useState([]);
+  const id = props.id;
 
-  // useEffect(() => {
-  //   fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
-  //     method: 'GET'
-  //   })
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error(`${response.status}: ${response.statusText}`);
-  //       } else {
-  //         return response.json()
-  //       }
-  //     })
-  //     .then((jsonifiedResponse) => {
-  //       const action = getListingSuccess(jsonifiedResponse.data)
-  //       dispatch(action)
-  //     })
-  //     .catch((error) => {
-  //       const action = getListingFailure(error.message)
-  //       dispatch(action)
-  //     });
-  // }, [])
+  useEffect(() => {
+    fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
+      method: 'GET'
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        } else {
+          return response.json()
+        }
+      })
+      .then((jsonifiedResponse) => {
+        const action = getListingSuccess(jsonifiedResponse.data)
+        dispatch(action)
+      })
+      .catch((error) => {
+        const action = getListingFailure(error.message)
+        dispatch(action)
+      });
+  }, [])
 
   const { error, isLoaded, listingAvailability } = state;
 
@@ -56,10 +57,15 @@ function Listing () {
   } else {
     return (
       <ListingWrapper>
-       
+       {props.onAvailabilityCall(listingAvailability)}
       </ListingWrapper>
     );
-  }
+  };
 }
+
+Listing.propTypes = {
+  id: PropTypes.array,
+  onAvailabilityCall: PropTypes.func
+};
 
 export default Listing;

@@ -37,6 +37,10 @@ function ShortTermRental () {
       });
   }, [])
 
+  const handleAvailabilityData = (availability) => {
+    console.log(availability);
+  };
+
   const { error, isLoaded, properties } = state;
 
   if (error) {
@@ -54,7 +58,14 @@ function ShortTermRental () {
   } else {
     return (
       <ShortTermRentalWrapper>
-        <p>Number of properties to analyze: {properties.map(id => <p>{id}</p>)}</p>
+        <Listing 
+          id={properties[0]}
+          onAvailabilityCall = {handleAvailabilityData} />
+        {/* {properties.map(id => 
+          <Listing 
+          id={id}
+          onAvailabilityCall = {handleAvailabilityData} />
+        )} */}
       </ShortTermRentalWrapper>
     );
   }
