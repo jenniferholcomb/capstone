@@ -15,9 +15,9 @@ export const getWeatherSuccess = (forecast) => ({
   forecast
 });
 
-export const getEventsSuccess = (forecast) => ({
+export const getEventsSuccess = (eventsList) => ({
   type: c.GET_EVENTS_SUCCESS,
-  forecast
+  eventsList
 });
 
 export const getFetchFailure = (error) => ({

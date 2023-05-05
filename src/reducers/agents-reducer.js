@@ -31,7 +31,6 @@ const agentsReducer = (state, action) => {
     //   };
 
     case c.GET_WEATHER_SUCCESS:
-      console.log(action);
       const newForecast = action.forecast.filter((e, i) => e.dt_txt.includes("9:00:00") || e.dt_txt.includes("15:00:00"))
                                           .reduce((array, list) => array.concat(list.main.temp_max).concat(list.weather[0].main), 
       []);
@@ -39,6 +38,18 @@ const agentsReducer = (state, action) => {
           ...state,
           isLoaded: true,
           forecast: newForecast
+        };
+
+    case c.GET_EVENTS_SUCCESS:
+      console.log(action);
+      const newEventsList = action.eventsList.reduce((array, list) => 
+                                          array.concat(list.name)
+                                          .concat(list.dates.start.localDate), 
+      []);
+      return {
+          ...state,
+          isLoaded: true,
+          eventsList: newEventsList
         };
 
     case c.GET_FETCH_FAILURE:

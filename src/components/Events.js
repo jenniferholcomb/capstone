@@ -18,7 +18,7 @@ function Events () {
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
-    fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${process.env.REACT_APP_API_KEY_TICKET}`)
+    fetch(`https://app.ticketmaster.com/discovery/v2/events?apikey=${process.env.REACT_APP_API_KEY_TICKET}&postalCode=97701&radius=20&locale=*&endDateTime=2023-05-19T15:01:00Z`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
