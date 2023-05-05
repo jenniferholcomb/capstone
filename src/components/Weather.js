@@ -18,7 +18,7 @@ function Weather () {
   const [state, dispatch] = useReducer(weatherReducer, initialState)
 
   useEffect(() => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=bend,or,us&cnt=14&appid=${process.env.REACT_APP_API_KEY2}`)
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=44.06&lon=-121.32&appid=${process.env.REACT_APP_API_KEY2}&units=imperial`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);

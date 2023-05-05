@@ -4,8 +4,10 @@ const weatherReducer = (state, action) => {
 
   switch (action.type) {
     case c.GET_WEATHER_SUCCESS:
-      console.log("herer")
-      const newForecast = action.forecast.reduce((array, list) => array.concat(list.main.temp_max).concat(list.weather[0].main), []);
+      console.log(action);
+      const newForecast = action.forecast.filter((e, i) => e.dt_txt.includes("9:00:00") || e.dt_txt.includes("15:00:00"))
+                                         .reduce((array, list) => array.concat(list.main.temp_max).concat(list.weather[0].main), 
+      []);
 
     return {
         ...state,
