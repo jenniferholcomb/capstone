@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import propertiesReducer from '../reducers/properties-reducer';
 import { getPropertiesFailure, getPropertiesSuccess } from '../actions';
-import Listing from './Listing';
+// import Listing from './Listing';
 import styled from 'styled-components';
 
 const ShortTermRentalWrapper = styled.section`
@@ -37,9 +37,9 @@ function ShortTermRental () {
       });
   }, [])
 
-  const handleAvailabilityData = (availability) => {
-    console.log(availability);
-  };
+  // const handleAvailabilityData = (availability) => {
+  //   console.log(availability);
+  // };
 
   const { error, isLoaded, properties } = state;
 
@@ -56,13 +56,10 @@ function ShortTermRental () {
       </ShortTermRentalWrapper>
     );
   } else {
-    console.log("is this the problem")
     return (
 
       <ShortTermRentalWrapper>
-        <Listing 
-          id={properties[0]}
-          onAvailabilityCall = {handleAvailabilityData} />
+        <p>{properties}</p>
 
       </ShortTermRentalWrapper>
     );
@@ -76,3 +73,7 @@ export default ShortTermRental;
         //   id={id}
         //   onAvailabilityCall = {handleAvailabilityData} />
         // )} 
+
+        // <Listing 
+        // id={properties[0]}
+        // onAvailabilityCall = {handleAvailabilityData} />
