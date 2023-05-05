@@ -14,6 +14,12 @@ const initialState = {
   error: null
 };
 
+const fetchData = async (id) => {
+  const response = await fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${id}`, {
+    method: 'GET'
+  });
+}
+
 function Listing (props) {
 
   const [state, dispatch] = useReducer(listingReducer, initialState);
