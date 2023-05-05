@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
-import weatherReducer from '../reducers/weather-reducer';
-import { getWeatherFailure, getWeatherSuccess } from '../actions';
+import agentsReducer from '../reducers/agents-reducer';
+import { getFetchFailure, getWeatherSuccess } from '../actions';
 import styled from 'styled-components';
 
 const WeatherWrapper = styled.section`
@@ -15,7 +15,7 @@ const initialState = {
 
 function Weather () {
 
-  const [state, dispatch] = useReducer(weatherReducer, initialState)
+  const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
     fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=44.06&lon=-121.32&appid=${process.env.REACT_APP_API_KEY2}&units=imperial`)
@@ -31,7 +31,7 @@ function Weather () {
         dispatch(action)
       })
       .catch((error) => {
-        const action = getWeatherFailure(error.message)
+        const action = getFetchFailure(error.message)
         dispatch(action)
       });
   }, [])

@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
-import propertiesReducer from '../reducers/properties-reducer';
-import { getPropertiesFailure, getPropertiesSuccess } from '../actions';
+import agentsReducer from '../reducers/agents-reducer';
+import { getFetchFailure, getPropertiesSuccess } from '../actions';
 // import Listing from './Listing';
 import styled from 'styled-components';
 
@@ -16,7 +16,7 @@ const initialState = {
 
 function ShortTermRental () {
 
-  const [state, dispatch] = useReducer(propertiesReducer, initialState)
+  const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
     fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
@@ -32,7 +32,7 @@ function ShortTermRental () {
         dispatch(action)
       })
       .catch((error) => {
-        const action = getPropertiesFailure(error.message)
+        const action = getFetchFailure(error.message)
         dispatch(action)
       });
   }, [])

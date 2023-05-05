@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
-import eventsReducer from '../reducers/events-reducer';
-import { getEventFailure, getEventSuccess } from '../actions';
+import agentsReducer from '../reducers/agents-reducer';
+import { getFetchFailure, getEventsSuccess } from '../actions';
 import styled from 'styled-components';
 
 const EventsWrapper = styled.section`
@@ -15,7 +15,7 @@ const initialState = {
 
 function Events () {
 
-  const [state, dispatch] = useReducer(eventsReducer, initialState)
+  const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
     fetch(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=${process.env.REACT_APP_API_KEY_TICKET}`)
@@ -31,7 +31,7 @@ function Events () {
         dispatch(action)
       })
       .catch((error) => {
-        const action = getEventsFailure(error.message)
+        const action = getFetchFailure(error.message)
         dispatch(action)
       });
   }, [])

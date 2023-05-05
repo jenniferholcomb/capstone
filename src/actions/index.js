@@ -5,19 +5,9 @@ export const getPropertiesSuccess = (properties) => ({
   properties
 });
 
-export const getPropertiesFailure = (error) => ({
-  type: c.GET_PROPERTIES_FAILURE,
-  error
-});
-
 // export const getListingSuccess = (listing) => ({
 //   type: c.GET_LISTING_SUCCESS,
 //   listingAvailability
-// });
-
-// export const getListingFailure = (error) => ({
-//   type: c.GET_LISTING_FAILURE,
-//   error
 // });
 
 export const getWeatherSuccess = (forecast) => ({
@@ -25,7 +15,12 @@ export const getWeatherSuccess = (forecast) => ({
   forecast
 });
 
-export const getWeatherFailure = (error) => ({
-  type: c.GET_WEATHER_FAILURE,
+export const getEventsSuccess = (forecast) => ({
+  type: c.GET_EVENTS_SUCCESS,
+  forecast
+});
+
+export const getFetchFailure = (error) => ({
+  type: c.GET_FETCH_FAILURE,
   error
 });

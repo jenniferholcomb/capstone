@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
-import listingReducer from '../reducers/listing-reducer';
-import { getListingFailure, getListingSuccess } from '../actions';
+import agentsReducer from '../reducers/agents-reducer';
+import { getFetchFailure, getListingSuccess } from '../actions';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -24,7 +24,7 @@ const fetchData = async (id) => {
 
 function Listing (props) {
 
-  const [state, dispatch] = useReducer(listingReducer, initialState);
+  const [state, dispatch] = useReducer(agentsReducer, initialState);
   const id = props.id;
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Listing (props) {
             dispatch(action)
           })
           .catch((error) => {
-            const action = getListingFailure(error.message)
+            const action = getFetchFailure(error.message)
             dispatch(action)
           });
       
