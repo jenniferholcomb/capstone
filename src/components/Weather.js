@@ -9,7 +9,7 @@ const WeatherWrapper = styled.section`
 
 const initialState = {
   isLoaded: false,
-  properties: [],
+  forecast: [],
   error: null
 };
 
@@ -18,7 +18,7 @@ function Weather () {
   const [state, dispatch] = useReducer(weatherReducer, initialState)
 
   useEffect(() => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=bend,or,us&cnt=14&appid=${process.env.REACT_APP_API_KEY}`)
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=bend,or,us&cnt=14&appid=${process.env.REACT_APP_API_KEY2}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
@@ -35,11 +35,30 @@ function Weather () {
         dispatch(action)
       });
   }, [])
-  return (
-    <WeatherWrapper>
-      <p>Weather</p>
-    </WeatherWrapper>
-  );
+
+  const { error, isLoaded, forecast } = state;
+
+  if (error) {
+    return ( 
+      <WeatherWrapper>
+        <h1>Error: {error}</h1>
+      </WeatherWrapper> 
+    );
+  } else if (!isLoaded) {
+    return (
+      <WeatherWrapper>
+        <h1>...Loading...</h1>
+      </WeatherWrapper>
+    );
+  } else {
+    return (
+
+      <WeatherWrapper>
+        <p>{forecast}</p>
+
+      </WeatherWrapper>
+    );
+  }
 }
 
 export default Weather;
@@ -47,41 +66,3 @@ export default Weather;
 
 
 
-
-
-
-
-function ShortTermRental () {
-
-
-
-  // const handleAvailabilityData = (availability) => {
-  //   console.log(availability);
-  // };
-
-  const { error, isLoaded, properties } = state;
-
-  if (error) {
-    return ( 
-      <ShortTermRentalWrapper>
-        <h1>Error: {error}</h1>
-      </ShortTermRentalWrapper> 
-    );
-  } else if (!isLoaded) {
-    return (
-      <ShortTermRentalWrapper>
-        <h1>...Loading...</h1>
-      </ShortTermRentalWrapper>
-    );
-  } else {
-    return (
-
-      <ShortTermRentalWrapper>
-        <p>{properties}</p>
-
-      </ShortTermRentalWrapper>
-    );
-  }
-}
-
-export default ShortTermRental;
