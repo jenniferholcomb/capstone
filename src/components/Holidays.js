@@ -18,7 +18,7 @@ function Holiday () {
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
-    fetch(`https://calendarific.com/api/v2/holidays?&api_key=${process.env.REACT_APP_API_KEY_HOLIDAY}&country=US&year=2023`)
+    fetch(`https://calendarific.com/api/v2/holidays?&api_key=${process.env.REACT_APP_API_KEY_HOLIDAY}&country=US&year=2023&month=5`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
