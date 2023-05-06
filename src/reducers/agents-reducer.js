@@ -1,6 +1,7 @@
 import * as c from '../actions/ActionTypes';
 
 const agentsReducer = (state, action) => {
+
   switch (action.type) {
     case c.GET_PROPERTIES_SUCCESS:
       const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
@@ -53,16 +54,27 @@ const agentsReducer = (state, action) => {
 
     case c.GET_HOLIDAY_SUCCESS:
       const newHolidayList = action.holidayList.filter((e, i) => e.primary_type === "State Holiday" ||
-                                                                 e.primary_type === "Federal Holiday" ||
                                                                  e.primary_type === "Christian" )
                                                .reduce((array, list) => array.concat(list.name).concat(list.date.iso), 
       []);
-      // const uniqueList = [...new Set(newHolidayList)];
+
+      const reduceDuplicates = (arr, count) => {
+        if (count >= arr.length-2) {
+          return arr;
+        } else if (arr[count] === arr[count + 2]) {
+          return reduceDuplicates(arr.toSpliced(count+2, 2), count);
+        } else {
+          return reduceDuplicates(arr, count += 2);
+        }
+      };
+
+      const uniqueList = reduceDuplicates(newHolidayList, 0);
+
       // console.log(uniqueList);
       return {
           ...state,
           isLoaded: true,
-          holidayList: newHolidayList
+          holidayList: uniqueList
         };
 
     case c.GET_FETCH_FAILURE:
@@ -77,4 +89,6 @@ const agentsReducer = (state, action) => {
 }
 
 export default agentsReducer;
+
+
 
