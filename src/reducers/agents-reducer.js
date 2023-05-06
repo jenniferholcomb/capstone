@@ -53,9 +53,11 @@ const agentsReducer = (state, action) => {
 
     case c.GET_HOLIDAY_SUCCESS:
       console.log(action);
-      const newHolidayList = action.eventsList.reduce((array, list) => 
-                                          array.concat(list.name)
-                                          .concat(list.dates.start.localDate), 
+      const newHolidayList = action.holidayList.filter((e, i) => e.primary_type === "State Holiday" ||
+                                                                 e.primary_type === "Federal Holiday" ||
+                                                                 e.primary_type === "Christian" || 
+                                                                 e.primary_type === "Season" )
+                                               .reduce((array, list) => array.concat(list.name).concat(list.date.iso), 
       []);
       return {
           ...state,

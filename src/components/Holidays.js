@@ -18,7 +18,7 @@ function Holiday () {
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
-    fetch(`https://www.googleapis.com/calendar/v3/calendars/en.usa#holiday@group.v.calendar.google.com/events?key=${process.env.REACT_APP_API_KEY_HOLIDAY}`)
+    fetch(`https://calendarific.com/api/v2/holidays?&api_key=${process.env.REACT_APP_API_KEY_HOLIDAY}&country=US&year=2023`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
@@ -27,7 +27,7 @@ function Holiday () {
         }
       })
       .then((jsonifiedResponse) => {
-        const action = getHolidaySuccess(jsonifiedResponse.list)
+        const action = getHolidaySuccess(jsonifiedResponse.response.holidays)
         dispatch(action)
       })
       .catch((error) => {
