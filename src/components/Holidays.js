@@ -18,7 +18,7 @@ function Holiday () {
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   useEffect(() => {
-    fetch(`=${process.env.REACT_APP_API_KEY2}`)
+    fetch(`https://www.googleapis.com/calendar/v3/calendars/en.usa#holiday@group.v.calendar.google.com/events?key=${process.env.REACT_APP_API_KEY_HOLIDAY}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
