@@ -12,24 +12,26 @@ const agentsReducer = (state, action) => {
                                                                    && listing.longitude < -121.27744);
       
       const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
-      const shortenedPropertiesList = propertiesId.slice(0, 1);
+      const shortenedPropertiesList = propertiesId.slice(0, 2);
       return {
         ...state,
-        isLoaded: true,
+        isPropertiesLoaded: true,
         properties: shortenedPropertiesList
       };
 
-    // case c.GET_LISTING_SUCCESS:
-    //   const oneMonthAvailabile = action.data[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-    //   const twoMonthAvailable = action.data[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-    //   const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
-    //   const today = new Date().toISOString().substring(0,10);
-    //   const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
-    //   return {
-    //     ...state,
-    //     isLoaded: true,
-    //     listingAvailability: twoWeeks
-    //   };
+    case c.GET_LISTING_SUCCESS:
+      console.log(action);
+      const oneMonthAvailabile = action.data[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
+      const twoMonthAvailable = action.data[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
+      const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
+      const today = new Date().toISOString().substring(0,10);
+      const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
+      return {
+        ...state,
+        isListingLoaded: true,
+        listings: twoWeeks,
+        counter: (state.counter + 1)
+      };
 
     case c.GET_WEATHER_SUCCESS:
       const newForecast = action.forecast.filter((e, i) => e.dt_txt.includes("9:00:00") || e.dt_txt.includes("15:00:00"))

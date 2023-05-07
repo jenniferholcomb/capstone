@@ -5,10 +5,10 @@ export const getPropertiesSuccess = (properties) => ({
   properties
 });
 
-// export const getListingSuccess = (listing) => ({
-//   type: c.GET_LISTING_SUCCESS,
-//   listingAvailability
-// });
+export const getListingSuccess = (listings) => ({
+  type: c.GET_LISTING_SUCCESS,
+  listings
+});
 
 export const getWeatherSuccess = (forecast) => ({
   type: c.GET_WEATHER_SUCCESS,

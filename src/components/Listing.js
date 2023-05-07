@@ -47,9 +47,10 @@ function Listing (props) {
             const action = getFetchFailure(error.message)
             dispatch(action)
           });
-      
-
     }, 2000);
+    return () => {
+      clearInterval(response);
+    };
   }, [])
 
   const { error, isLoaded, listingAvailability } = state;
