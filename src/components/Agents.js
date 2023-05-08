@@ -17,13 +17,15 @@ function Agents () {
   return (
     // <div id="agents">
       <AgentsWrapper>
-        <Weather />
-        <ShortTermRental />
-        <Events />
-        <Holidays />
+   
       </AgentsWrapper>
     // </div>
   );
 }
 
 export default Agents;
+
+{/* <Weather />
+<ShortTermRental />
+<Events />
+<Holidays /> */}

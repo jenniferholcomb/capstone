@@ -3,34 +3,38 @@ import * as c from '../actions/ActionTypes';
 const agentsReducer = (state, action) => {
 
   switch (action.type) {
-    case c.GET_PROPERTIES_SUCCESS:
-      const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
-                                                                   && listing.room_type === "Entire home/apt"
-                                                                   && listing.latitude < 44.10125
-                                                                   && listing.latitude > 44.03699
-                                                                   && listing.longitude > -121.36035
-                                                                   && listing.longitude < -121.27744);
+    // case c.GET_PROPERTIES_SUCCESS:
+    //   const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
+    //                                                                && listing.room_type === "Entire home/apt"
+    //                                                                && listing.latitude < 44.10125
+    //                                                                && listing.latitude > 44.03699
+    //                                                                && listing.longitude > -121.36035
+    //                                                                && listing.longitude < -121.27744);
       
-      const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
-      const shortenedPropertiesList = propertiesId.slice(0, 2);
-      return {
-        ...state,
-        isPropertiesLoaded: true,
-        properties: shortenedPropertiesList
-      };
+    //   const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
+    //   const shortenedPropertiesList = propertiesId.slice(0, 1);
+    //   console.log(propertiesId);
+    //   return {
+    //     ...state,
+    //     isPropertiesLoaded: true,
+    //     properties: shortenedPropertiesList
+    //   };
 
     case c.GET_LISTING_SUCCESS:
-      console.log(action);
-      const oneMonthAvailabile = action.data[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-      const twoMonthAvailable = action.data[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-      const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
-      const today = new Date().toISOString().substring(0,10);
-      const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
+
+      // const oneMonthAvailable = action.listings[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
+      const oneMonthAvailable = action.listings[0].days;
+      console.log(oneMonthAvailable);
+      // const twoMonthAvailable = action[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
+      // const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
+      // const today = new Date().toISOString().substring(0,10);
+      // const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
       return {
         ...state,
+        isPropertiesLoaded: false,
         isListingLoaded: true,
-        listings: twoWeeks,
-        counter: (state.counter + 1)
+        listings: oneMonthAvailable,
+        // counter: (state.counter + 1)
       };
 
     case c.GET_WEATHER_SUCCESS:

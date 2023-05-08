@@ -5,6 +5,9 @@ import styled from 'styled-components';
 
 const WeatherWrapper = styled.section`
   border-bottom: 1px solid black;
+  border-right: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 `;
 
 const initialState = {

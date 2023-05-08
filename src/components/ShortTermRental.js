@@ -1,17 +1,19 @@
 import React, { useEffect, useReducer } from 'react';
 import agentsReducer from '../reducers/agents-reducer';
-import { getFetchFailure, getPropertiesSuccess, getListingSuccess } from '../actions';
+import { getFetchFailure, getListingSuccess } from '../actions';  //getPropertiesSuccess
 // import Listing from './Listing';
 import styled from 'styled-components';
 
 const ShortTermRentalWrapper = styled.section`
   border-bottom: 1px solid black; 
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
 `;
 
 const initialState = {
-  isPropertiesLoaded: false,
+  isPropertiesLoaded: true,
   isListingLoaded: false,
-  properties: [],
+  properties: ['47700213', '48145151', '50636849', '574769491394496704', '45065826', '37282385', '15835761', '32240051', '43848210', '32292475'],
   listings: [],
   counter: 0,
   error: null
@@ -21,65 +23,59 @@ function ShortTermRental () {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState);
 
-  useEffect(() => {
-    fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json()
-        }
-      })
-      .then((jsonifiedResponse) => {
-        const action = getPropertiesSuccess(jsonifiedResponse.properties)
-        dispatch(action)
-      })
-      .catch((error) => {
-        const action = getFetchFailure(error.message)
-        dispatch(action)
-      });
-  }, [])
-
   const { error, isPropertiesLoaded, isListingLoaded, properties, counter, listings } = state;
 
-  // need to loop through all listings and collect availability, calls at 1/second
-  useEffect(() => {
-    if (isPropertiesLoaded) {
-      setInterval(() => {
-        console.log(properties);
-        console.log(counter);
-        fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${properties[counter]}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`${response.status}: ${response.statusText}`);
-          } else {
-            return response.json()
-          }
-        })
-        .then((jsonifiedResponse) => {
-          const action = getListingSuccess(jsonifiedResponse)
-          dispatch(action)
-        })
-        .catch((error) => {
-          const action = getFetchFailure(error.message)
-          dispatch(action)
-        });
-      }, 2000);
-      return () => {
-        clearInterval(isPropertiesLoaded);
-      };
-    }
-  }, [isPropertiesLoaded] )
+  // useEffect(() => {
+  //   fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error(`${response.status}: ${response.statusText}`);
+  //       } else {
+  //         return response.json()
+  //       }
+  //     })
+  //     .then((jsonifiedResponse) => {
+  //       const action = getPropertiesSuccess(jsonifiedResponse.properties)
+  //       dispatch(action)
+  //     })
+  //     .catch((error) => {
+  //       const action = getFetchFailure(error.message)
+  //       dispatch(action)
+  //     });
+  // }, [])
 
-  const handleAvailability = () => {
-    properties.map( item => <p>item</p>)
-  }
+  // useEffect(() => {
+  //   if (isPropertiesLoaded) {
+  //     setInterval(() => {
+  //       fetch(`https://airbnb19.p.rapidap.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${properties[counter]}`)
+  //       .then(response => {
+  //         if (!response.ok) {
+  //           throw new Error(`${response.status}: ${response.statusText}`);
+  //         } else {
+  //           return response.json()
+  //         }
+  //       })
+  //       .then((jsonifiedResponse) => {
+  //         const action = getListingSuccess(jsonifiedResponse.data)
+  //         dispatch(action)
+  //       })
+  //       .catch((error) => {
+  //         const action = getFetchFailure(error.message)
+  //         dispatch(action)
+  //       });
+  //     }, 2000);
+  //     return () => {
+  //       clearInterval(isPropertiesLoaded);
+  //     };
+  //   }
+  // }, [] )
+
+  // const handleAvailability = () => {
+  //   properties.map( item => <p>item</p>)
+  // }
   // create a listener to check if properties !== []. If true make second api call 
 
-  // const handleAvailabilityData = (availability) => {
-  //   console.log(availability);
-  // };
-  console.log(listings);
+  // console.log(listings);
   
 
   if (error) {
@@ -88,7 +84,7 @@ function ShortTermRental () {
         <h1>Error: {error}</h1>
       </ShortTermRentalWrapper> 
     );
-  } else if (!isListingLoaded) {
+  } else if (!isListingLoaded ) {
     return (
       <ShortTermRentalWrapper>
 

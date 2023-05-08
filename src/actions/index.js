@@ -1,9 +1,9 @@
 import * as c from './ActionTypes';
 
-export const getPropertiesSuccess = (properties) => ({
-  type: c.GET_PROPERTIES_SUCCESS,
-  properties
-});
+// export const getPropertiesSuccess = (properties) => ({
+//   type: c.GET_PROPERTIES_SUCCESS,
+//   properties
+// });
 
 export const getListingSuccess = (listings) => ({
   type: c.GET_LISTING_SUCCESS,

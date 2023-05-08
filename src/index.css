@@ -23,7 +23,10 @@ code {
 
 [class^='cal-item']:nth-last-child(-n+7) {
   border-bottom: 1px solid black;
+}
 
+[class^='event-item'] {
+  border-right: 1px solid black;
 }
 
 /* .App {
