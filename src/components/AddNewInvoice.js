@@ -18,11 +18,6 @@ function AddNewInvoice(props) {
       invoiceNumber: event.target.invoiceNumber.value,
       date: event.target.date.value,
       total: event.target.total.value,
-      itemCode: event.target.itemCode.value,
-      description: event.target.description.value,
-      quantity: event.target.quantity.value,
-      unitPrice: event.target.unitPrice.value,
-      extendedAmount: event.target.extendedAmount.value
     });
   }
 
@@ -47,28 +42,7 @@ function AddNewInvoice(props) {
             name='total'
             step= '.01'
             placeholder='Invoice Total' required/>
-          <input
-            type='number'
-            name='itemCode'
-            placeholder='Item Code' required/>
-          <textarea
-            name='description'
-            placeholder='Description' required/>
-          <input
-            type='number'
-            name='quantity'
-            placeholder='Quantity' required/>
-          <input
-            type='number'
-            name='unitPrice'
-            step= '.01'
-            placeholder='Unit Price' required/>
-          <input
-            type='number'
-            name='extendedAmount'
-            step= '.01'
-            placeholder='Extended Amount' required/>
-          <button type='submit'>ADD INVOICE</button>
+          <button type='submit'>ADD INVOICE ITEMS</button>
         </form>
       </NewInvoiceWrapper>
     </React.Fragment>

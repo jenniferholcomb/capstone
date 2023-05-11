@@ -34,7 +34,28 @@ export const getFormVisible = () => ({
   type: c.GET_FORM_VISIBLE
 });
 
-export const getAddInvoice = () => ({
-  type: c.GET_ADD_INVOICE
+export const getCompleteInvoice = () => ({
+  type: c.GET_COMPLETE_INVOICE
 });
+
+export const getCreateInvoice = (newInfo) => ({
+  type: c.GET_CREATE_INVOICE,
+  newInfo
+});
+
+export const getInvoices = (invoices) => ({
+  type: c.GET_INVOICES,
+  invoices
+});
+
+export const getInvoicesFailure = (error) => ({
+  type: c.GET_INVOICES_FAILURE,
+  error
+});
+
+export const getAddItemsInvoice = (newItemsData) => ({
+  type: c.GET_ADD_ITEMS_INVOICE,
+  newItemsData
+})
+
 
