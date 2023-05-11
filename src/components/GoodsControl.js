@@ -6,6 +6,8 @@ import { getFormVisible, getAddInvoice } from "../actions";
 // import GoodsDetail from "./GoodsDetail";
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
+import db from './../firebase.js';
+import { collection, addDoc } from 'firebase/firestore';
 
 const initialState = {
   formVisible: false,
@@ -27,8 +29,9 @@ function GoodsControl () {
     dispatch(action);
   }
 
-  const handleAddingNewInvoice = (invoice) => {
-    const action = getAddInvoice(invoice);
+  const handleAddingNewInvoice = async (newInvoiceData) => {
+    await addDoc(collection(db, "invoices"), newInvoiceData);
+    const action = getAddInvoice();
     dispatch(action);
   }
 

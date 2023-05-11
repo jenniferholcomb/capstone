@@ -12,8 +12,7 @@ const goodsControlReducer = (state, action) => {
     case c.GET_ADD_INVOICE:
       return {
         ...state,
-        formVisible: false,
-        invoiceData: action.invoice
+        formVisible: false
       }
 
     default:
