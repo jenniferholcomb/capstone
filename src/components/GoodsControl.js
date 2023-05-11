@@ -7,7 +7,7 @@ function GoodsControl () {
   return (
     <React.Fragment>
       <Header />
-      <CurrentDay />
+
       <GoodsDetail />
     </React.Fragment>
   );
