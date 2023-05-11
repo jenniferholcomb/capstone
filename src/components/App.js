@@ -15,7 +15,7 @@ function App() {
     <div id="main-body">
       <BodyWrapper>
         <GoodsControl />
-        <Agents />
+          <Agents />
       </BodyWrapper>
     </div>
   );

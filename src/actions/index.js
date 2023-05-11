@@ -29,3 +29,13 @@ export const getFetchFailure = (error) => ({
   type: c.GET_FETCH_FAILURE,
   error
 });
+
+export const getFormVisible = () => ({
+  type: c.GET_FORM_VISIBLE
+});
+
+export const getAddInvoice = (invoice) => ({
+  type: c.GET_ADD_INVOICE,
+  invoice
+});
+

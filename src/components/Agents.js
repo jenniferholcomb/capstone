@@ -1,8 +1,8 @@
 import React from "react";
-import Weather from "./Weather";
-import ShortTermRental from "./ShortTermRental";
-import Events from "./Events";
-import Holidays from "./Holidays";
+// import Weather from "./Weather";
+// import ShortTermRental from "./ShortTermRental";
+// import Events from "./Events";
+// import Holidays from "./Holidays";
 import styled from 'styled-components';
 
 const AgentsWrapper = styled.section`
