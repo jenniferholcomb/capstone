@@ -14,13 +14,12 @@ const goodsControlReducer = (state, action) => {
         ...state,
         formVisible: false,
         itemsFormVisible: true,
-        currentInvoiceId: action.newInfo.currentInvoiceId,
-        createInvoice: action.newInfo
+        createInvoice: [action.newInfo]
       }
     case c.GET_ADD_ITEMS_INVOICE:
       return {
         ...state,
-        createInvoice: state.push(action.newItemsData)
+        createInvoice: [...state.createInvoice, action.newItemsData]
       }
     case c.GET_COMPLETE_INVOICE:
       return {

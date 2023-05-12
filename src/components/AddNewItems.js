@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 function AddNewItems(props) {
 
   const handleNewItemsSubmission = (event) => {
+    console.log("here")
     event.preventDefault();
     props.onAddItemsCreation({
       itemCode: event.target.itemCode.value,
       description: event.target.description.value,
-      quantity: event.target.quantity.value,
-      unitPrice: event.target.unitPrice.value,
-      extendedAmount: event.target.extendedAmount.value, 
-      invoiceId: props.invoiceId
+      quantity: parseInt(event.target.quantity.value),
+      unitPrice: parseInt(event.target.unitPrice.value),
+      extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
+      invoiceId: props.invoiceId,
+      date: props.date
     });
   };
 
@@ -23,7 +25,12 @@ function AddNewItems(props) {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleCompleteItemSubmission}>
+      <form onSubmit={(event) => {
+        const buttonName = event.nativeEvent.submitter.name;
+        if (buttonName === 'submitItems') handleCompleteItemSubmission(event);
+        if (buttonName === 'addMore') handleNewItemsSubmission(event);
+        }}
+      >
         <input
           type='number'
           name='itemCode'
@@ -40,13 +47,8 @@ function AddNewItems(props) {
           name='unitPrice'
           step= '.01'
           placeholder='Unit Price' required/>
-        <input
-          type='number'
-          name='extendedAmount'
-          step= '.01'
-          placeholder='Extended Amount' required/>
-        <button type='submit'>SUBMIT</button>
-        <button type='submit' formaction={handleNewItemsSubmission}>ADD MORE ITEMS</button>
+        <button type='submit' name='submitItems'>SUBMIT</button>
+        <button type='submit' name='addMore'>ADD MORE ITEMS</button>
       </form>
     </React.Fragment>
   );
@@ -55,7 +57,8 @@ function AddNewItems(props) {
 AddNewItems.propTypes = {
   onAddItemsCreation: PropTypes.func,
   onCompleteAddingItems: PropTypes.func,
-  invoiceId: PropTypes.number
+  invoiceId: PropTypes.number,
+  date: PropTypes.string
 };
 
 export default AddNewItems;

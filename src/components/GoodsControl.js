@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
 import Header from "./Header";
 import AddNewInvoice from "./AddNewInvoice";
 import { getFormVisible, getCreateInvoice, getInvoices, 
@@ -17,7 +17,6 @@ const initialState = {
   addItemsAgain: false,
   invoiceData: [],
   createInvoice: [],
-  currentInvoiceId: null,
   error: null
 };
 
@@ -30,6 +29,7 @@ const GoodsControlWrapper = styled.section`
 
 function GoodsControl () {
   const [state, dispatch] = useReducer(goodsControlReducer, initialState);
+  const currentItems = useRef(state.createInvoice);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -68,8 +68,14 @@ function GoodsControl () {
   }
 
   const handleCompleteAddingItems = async () => {
-    //await addDoc(collection(db, "invoices"), newInvoiceData);
+    await addDoc(collection(db, "invoices"), createInvoice[0]);
+    console.log(createInvoice)
+    const itemsInvoice = currentItems.current.slice(1);
 
+    // await addDoc(collection(db, "items"), createInvoice[1]);
+    await itemsInvoice.map(item => 
+      addDoc(collection(db, "items"), item)
+    );
     const action = getCompleteInvoice();
     dispatch(action);
   }
@@ -84,8 +90,10 @@ function GoodsControl () {
     dispatch(action);
   }
 
-  const { formVisible, itemsFormVisible, invoiceData, currentInvoiceId, error } = state;
+  const { formVisible, itemsFormVisible, invoiceData, createInvoice, error } = state;
+  currentItems.current = createInvoice;
   console.log(invoiceData);
+  console.log(createInvoice);
  
   return (
     <React.Fragment>
@@ -101,7 +109,8 @@ function GoodsControl () {
           <AddNewItems
             onAddItemsCreation={handleAddingMoreItems}
             onCompleteAddingItems={handleCompleteAddingItems}
-            invoiceId={currentInvoiceId}/>
+            invoiceId={createInvoice[0].invoiceNumber}
+            date={createInvoice[0].date} />
         </React.Fragment>
       :
         <GoodsControlWrapper>
