@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { v4 } from 'uuid';
 
 const NewInvoiceWrapper = styled.section`
   display: grid;
@@ -17,7 +18,7 @@ function AddNewInvoice(props) {
       purveyor: event.target.purveyor.value,
       invoiceNumber: parseInt(event.target.invoiceNumber.value),
       date: event.target.date.value,
-      total: parseInt(event.target.total.value)
+      key: v4()
     });
   }
 
@@ -37,10 +38,6 @@ function AddNewInvoice(props) {
             type='date'
             name='date'
             placeholder='Date' required/>
-          <input 
-            type='number'
-            name='total'
-            placeholder='Total' required/>
           <button type='submit'>NEXT</button>
         </form>
       </NewInvoiceWrapper>

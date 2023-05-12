@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import { v4 } from 'uuid';
 
 function AddNewItems(props) {
   const { currentInvoice } = props;
@@ -14,7 +15,8 @@ function AddNewItems(props) {
       unitPrice: parseInt(event.target.unitPrice.value),
       extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
       invoiceId: currentInvoice.current[0].invoiceNumber,
-      date: currentInvoice.current[0].date
+      date: currentInvoice.current[0].date,
+      key: v4()
     });
     event.target.reset();
   };
@@ -70,9 +72,10 @@ function AddNewItems(props) {
 AddNewItems.propTypes = {
   onAddItemsCreation: PropTypes.func,
   onCompleteAddingItems: PropTypes.func,
-  invoiceId: PropTypes.number,
+  invoiceNumber: PropTypes.number,
   date: PropTypes.string,
-  currentInvoice: PropTypes.array
+  currentInvoice: PropTypes.object,
+  key: PropTypes.string
 };
 
 export default AddNewItems;

@@ -71,3 +71,7 @@ export const getGoods = (goods) => ({
   goods
 });
 
+export const getReset = () => ({
+  type: c.GET_RESET
+});
+

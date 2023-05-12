@@ -22,13 +22,18 @@ const goodsControlReducer = (state, action) => {
         createInvoice: [...state.createInvoice, action.newItemsData]
       }
     case c.GET_COMPLETE_INVOICE:
-      // add total invoice amount
-      // add number of items in invoice
+      const numberItems = state.createInvoice.length - 1;
+      console.log(numberItems)
+      const total = state.createInvoice.slice(1)
+                    .reduce((accum, current) => accum + current.extendedAmount, 0);
+      console.log(total)
+      const newInfo = [ Object.assign(state.createInvoice[0], {totalGoods: numberItems, totalAmount: total}) ];
+      console.log(newInfo)
+      const newCreateInvoice = state.createInvoice.slice(1).push(newInfo);
+      console.log(newCreateInvoice)
       return {
         ...state,
-        itemsFormVisible: false,
-        currentInvoiceId: null,
-        createInvoice: []
+        createInvoice: newCreateInvoice
       }
     case c.GET_INVOICES:
       return {
@@ -54,6 +59,15 @@ const goodsControlReducer = (state, action) => {
       return {
         ...state,
         goodsList: true
+      }
+    case c.GET_RESET:
+      return {
+        ...state,
+        formVisible: false,
+        addItemsAgain: false,
+        createInvoice: [],
+        updateInvoice: false,
+        goodsList: false
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);

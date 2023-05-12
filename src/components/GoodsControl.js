@@ -7,7 +7,7 @@ import InvoiceList from './InvoiceList';
 import InvoiceDetail from "./InvoiceDetail";
 import { getFormVisible, getCreateInvoice, getInvoices, 
          getAddItemsInvoice, getCompleteInvoice, getDataFailure,
-         getFormUpdate, getGoodsList, getGoods } from "../actions";
+         getFormUpdate, getGoodsList, getGoods, getReset } from "../actions";
 // import CurrentDay from "./CurrentDay";
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
@@ -47,6 +47,7 @@ function GoodsControl () {
             purveyor: doc.data().purveyor,
             invoiceNumber: doc.data().invoiceNumber,
             date: doc.data().date,
+            numberItems: doc.data().numberItems,
             total: doc.data().total,
             id: doc.id
           });
@@ -103,16 +104,22 @@ function GoodsControl () {
 
   const handleGoodsClick = () => {
     const action = getGoodsList();
+    dispatch(action);
   }
 
   const handleCompleteAddingItems = async () => {
-    await addDoc(collection(db, "invoices"), createInvoice[0]);
-    const itemsInvoice = currentItems.current.slice(1);
-    await itemsInvoice.map(item => 
-      addDoc(collection(db, "items"), item)
-    );
     const action = getCompleteInvoice();
     dispatch(action);
+
+    await addDoc(collection(db, "invoices"), createInvoice[0]);
+    const itemsInvoice = currentItems.current;
+    console.log(itemsInvoice)
+    // await itemsInvoice.map(item => 
+    //   addDoc(collection(db, "items"), item)
+    // );
+
+    const action2 = getReset();
+    dispatch(action2);
   }
 
   const handleAddingInvoiceInfo = (newInfo) => {
@@ -133,7 +140,6 @@ function GoodsControl () {
   currentItems.current = createInvoice;
   console.log(invoiceData);
   console.log(goodsData);
-  console.log(formVisible)
 
   return (
     <React.Fragment>
