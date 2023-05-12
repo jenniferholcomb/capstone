@@ -36,7 +36,7 @@ function AddNewInvoice(props) {
             type='date'
             name='date'
             placeholder='Date' required/>
-          <button type='submit'>ADD INVOICE ITEMS</button>
+          <button type='submit'>NEXT</button>
         </form>
       </NewInvoiceWrapper>
     </React.Fragment>

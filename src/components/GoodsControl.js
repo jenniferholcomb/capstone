@@ -71,8 +71,6 @@ function GoodsControl () {
     await addDoc(collection(db, "invoices"), createInvoice[0]);
     console.log(createInvoice)
     const itemsInvoice = currentItems.current.slice(1);
-
-    // await addDoc(collection(db, "items"), createInvoice[1]);
     await itemsInvoice.map(item => 
       addDoc(collection(db, "items"), item)
     );
@@ -109,8 +107,7 @@ function GoodsControl () {
           <AddNewItems
             onAddItemsCreation={handleAddingMoreItems}
             onCompleteAddingItems={handleCompleteAddingItems}
-            invoiceId={createInvoice[0].invoiceNumber}
-            date={createInvoice[0].date} />
+            currentInvoice={currentItems} />
         </React.Fragment>
       :
         <GoodsControlWrapper>

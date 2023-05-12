@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 function AddNewItems(props) {
+  const { currentInvoice } = props;
+  console.log(currentInvoice);
 
   const handleNewItemsSubmission = (event) => {
-    console.log("here")
     event.preventDefault();
     props.onAddItemsCreation({
       itemCode: event.target.itemCode.value,
@@ -12,9 +13,10 @@ function AddNewItems(props) {
       quantity: parseInt(event.target.quantity.value),
       unitPrice: parseInt(event.target.unitPrice.value),
       extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
-      invoiceId: props.invoiceId,
-      date: props.date
+      invoiceId: currentInvoice.current[0].invoiceNumber,
+      date: currentInvoice.current[0].date
     });
+    event.target.reset();
   };
 
   const handleCompleteItemSubmission = (event) => {
@@ -29,8 +31,7 @@ function AddNewItems(props) {
         const buttonName = event.nativeEvent.submitter.name;
         if (buttonName === 'submitItems') handleCompleteItemSubmission(event);
         if (buttonName === 'addMore') handleNewItemsSubmission(event);
-        }}
-      >
+        }} >
         <input
           type='number'
           name='itemCode'
@@ -50,6 +51,18 @@ function AddNewItems(props) {
         <button type='submit' name='submitItems'>SUBMIT</button>
         <button type='submit' name='addMore'>ADD MORE ITEMS</button>
       </form>
+      <div className="">
+        { currentInvoice.length >= 1 ? 
+          <h3>{currentInvoice[0].invoiceId} - {currentInvoice[0].date}</h3>
+        :
+          <React.Fragment>
+            <h3>{currentInvoice.current[0].invoiceNumber} - {currentInvoice.current[0].date}</h3>
+            {currentInvoice.current.slice(1).map(item => 
+              <p>{item.itemCode} - {item.description} - {item.quantity} - {item.extendedAmount}</p>
+            )}
+          </React.Fragment>
+        }
+      </div>
     </React.Fragment>
   );
 }
@@ -58,7 +71,8 @@ AddNewItems.propTypes = {
   onAddItemsCreation: PropTypes.func,
   onCompleteAddingItems: PropTypes.func,
   invoiceId: PropTypes.number,
-  date: PropTypes.string
+  date: PropTypes.string,
+  currentInvoice: PropTypes.array
 };
 
 export default AddNewItems;
