@@ -22,6 +22,8 @@ const goodsControlReducer = (state, action) => {
         createInvoice: [...state.createInvoice, action.newItemsData]
       }
     case c.GET_COMPLETE_INVOICE:
+      // add total invoice amount
+      // add number of items in invoice
       return {
         ...state,
         itemsFormVisible: false,
@@ -29,15 +31,29 @@ const goodsControlReducer = (state, action) => {
         createInvoice: []
       }
     case c.GET_INVOICES:
-      
       return {
         ...state,
         invoiceData: action.invoices
       }
-    case c.GET_INVOICES_FAILURE:
+    case c.GET_GOODS:
+      return {
+        ...state,
+        goodsData: action.goods
+      }
+    case c.GET_DATA_FAILURE:
       return {
         ...state,
         error: action.error
+      }
+    case c.GET_FORM_UPDATE:
+      return {
+        ...state,
+        updateInvoice: true
+      }
+    case c.GET_GOODS_LIST:
+      return {
+        ...state,
+        goodsList: true
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);

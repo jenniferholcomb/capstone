@@ -16,7 +16,8 @@ function AddNewInvoice(props) {
     props.onNewInvoiceCreation({
       purveyor: event.target.purveyor.value,
       invoiceNumber: parseInt(event.target.invoiceNumber.value),
-      date: event.target.date.value
+      date: event.target.date.value,
+      total: parseInt(event.target.total.value)
     });
   }
 
@@ -36,6 +37,10 @@ function AddNewInvoice(props) {
             type='date'
             name='date'
             placeholder='Date' required/>
+          <input 
+            type='number'
+            name='total'
+            placeholder='Total' required/>
           <button type='submit'>NEXT</button>
         </form>
       </NewInvoiceWrapper>

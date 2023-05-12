@@ -48,14 +48,26 @@ export const getInvoices = (invoices) => ({
   invoices
 });
 
-export const getInvoicesFailure = (error) => ({
-  type: c.GET_INVOICES_FAILURE,
+export const getDataFailure = (error) => ({
+  type: c.GET_DATA_FAILURE,
   error
 });
 
 export const getAddItemsInvoice = (newItemsData) => ({
   type: c.GET_ADD_ITEMS_INVOICE,
   newItemsData
-})
+});
 
+export const getFormUpdate = () => ({
+  type: c.GET_FORM_UPDATE
+});
+
+export const getGoodsList = () => ({
+  type: c.GET_GOODS_LIST
+});
+
+export const getGoods = (goods) => ({
+  type: c.GET_GOODS,
+  goods
+});
 
