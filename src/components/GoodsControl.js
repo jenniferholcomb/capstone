@@ -13,7 +13,7 @@ import { getFormVisible, getCreateInvoice, getInvoices,
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
 import db from './../firebase.js';
-import { collection, addDoc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 
 const initialState = {
   formVisible: false,
@@ -82,7 +82,8 @@ function GoodsControl () {
             unitPrice: doc.data().unitPrice,
             extendedAmount: doc.data().extendedAmount, 
             invoiceNumber: doc.data().invoiceNumber,
-            date: doc.data().date
+            date: doc.data().date,
+            id: doc.id
           });
         });
         const action = getGoods(goods);
@@ -133,11 +134,20 @@ function GoodsControl () {
     dispatch(action);
   } 
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = async () => {
+    console.log(createInvoice)
+    await deleteDoc(doc(db, "invoices", createInvoice[0][0].id));
+    // createInvoice[1].map(entry => 
+    //     console.log(entry.id)
+    //   );
 
+    await createInvoice[1].map(entry => {
+      deleteDoc(doc(db, "items", entry.id))
+    });
+    dispatch(getReset());
   }
 
-  const handleEditClick = (id) => {
+  const handleEditClick = () => {
     
   }
 
