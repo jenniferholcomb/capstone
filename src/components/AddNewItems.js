@@ -12,7 +12,7 @@ function AddNewItems(props) {
       description: event.target.description.value,
       quantity: parseInt(event.target.quantity.value),
       unitPrice: parseInt(event.target.unitPrice.value),
-      extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
+      extendedAmount: parseInt(event.target.quantity.value) * parseFloat(event.target.unitPrice.value), 
       invoiceNumber: currentInvoice.current[0].invoiceNumber,
       date: currentInvoice.current[0].date,
       key: v4()
@@ -27,7 +27,7 @@ function AddNewItems(props) {
       description: event.target.description.value,
       quantity: parseInt(event.target.quantity.value),
       unitPrice: parseInt(event.target.unitPrice.value),
-      extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
+      extendedAmount: parseInt(event.target.quantity.value) * parseFloat(event.target.unitPrice.value), 
       invoiceNumber: currentInvoice.current[0].invoiceNumber,
       date: currentInvoice.current[0].date,
       key: v4()

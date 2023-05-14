@@ -96,15 +96,13 @@ function GoodsControl () {
   const handleSendingData = async () => {
     const infoIndex = currentItems.current.length-1;
     await addDoc(collection(db, "invoices"), currentItems.current[infoIndex]);
-    console.log(currentItems.current)
-    console.log("here")
     await currentItems.current.slice(0, infoIndex).map(item => 
       addDoc(collection(db, "items"), item)
     );
     clearInterval(internalRef.current);
     internalRef.current = null;
-    // const action = getReset();
-    // dispatch(action);
+    const action = getReset();
+    dispatch(action);
   }
 
   const handleCompleteAddingItems = (finalValues) => {
