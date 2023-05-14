@@ -34,8 +34,9 @@ export const getFormVisible = () => ({
   type: c.GET_FORM_VISIBLE
 });
 
-export const getCompleteInvoice = () => ({
-  type: c.GET_COMPLETE_INVOICE
+export const getCompleteInvoice = (values) => ({
+  type: c.GET_COMPLETE_INVOICE,
+  values
 });
 
 export const getCreateInvoice = (newInfo) => ({

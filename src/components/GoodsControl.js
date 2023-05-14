@@ -76,7 +76,7 @@ function GoodsControl () {
             quantity: doc.data().quantity,
             unitPrice: doc.data().unitPrice,
             extendedAmount: doc.data().extendedAmount, 
-            invoiceId: doc.data().invoiceId,
+            invoiceNumber: doc.data().invoiceNumber,
             date: doc.data().date
           });
         });
@@ -92,34 +92,27 @@ function GoodsControl () {
     return () => unSubscribe();
   }, []);
 
-  const handleClick = () => {
-    const action = getFormVisible();
+  // const handleSendingData = async () => {
+  //   await addDoc(collection(db, "invoices"), createInvoice[0]);
+  //   await itemsInvoice.map(item => 
+  //     addDoc(collection(db, "items"), item)
+  //   );
+  //   const action = getReset();
+  //   dispatch(action);
+  // }
+
+  const handleCompleteAddingItems = (finalValues) => {
+    const action = getCompleteInvoice(finalValues);
     dispatch(action);
-  }
+    
+    console.log(currentItems.current)
+    
+    //const itemsInvoice = currentItems.current;
+    // console.log(itemsInvoice)
 
-  const handleInvoicesClick = () => {
-    const action = getFormUpdate();
-    dispatch(action);
-  }
 
-  const handleGoodsClick = () => {
-    const action = getGoodsList();
-    dispatch(action);
-  }
-
-  const handleCompleteAddingItems = async () => {
-    const action = getCompleteInvoice();
-    dispatch(action);
-
-    await addDoc(collection(db, "invoices"), createInvoice[0]);
-    const itemsInvoice = currentItems.current;
-    console.log(itemsInvoice)
-    // await itemsInvoice.map(item => 
-    //   addDoc(collection(db, "items"), item)
-    // );
-
-    const action2 = getReset();
-    dispatch(action2);
+    // const action2 = getReset();
+    // dispatch(action2);
   }
 
   const handleAddingInvoiceInfo = (newInfo) => {
@@ -138,8 +131,8 @@ function GoodsControl () {
 
   const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, updateInvoice, goodsList, error } = state;
   currentItems.current = createInvoice;
-  console.log(invoiceData);
-  console.log(goodsData);
+  console.log(createInvoice);
+  console.log(currentItems.current);
 
   return (
     <React.Fragment>
@@ -170,9 +163,9 @@ function GoodsControl () {
         </React.Fragment>
       :
         <GoodsControlWrapper>
-          <button onClick={handleClick}>ADD NEW INVOICE</button>
-          <button onClick={handleInvoicesClick}>MANAGE INVOICES</button>
-          <button onClick={handleGoodsClick}>LIST BY ITEM</button>
+          <button onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
+          <button onClick={() => dispatch(getFormUpdate())}>MANAGE INVOICES</button>
+          <button onClick={() => dispatch(getGoodsList())}>LIST BY ITEM</button>
         </GoodsControlWrapper>
       }   
     </React.Fragment>

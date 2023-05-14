@@ -4,7 +4,6 @@ import { v4 } from 'uuid';
 
 function AddNewItems(props) {
   const { currentInvoice } = props;
-  console.log(currentInvoice);
 
   const handleNewItemsSubmission = (event) => {
     event.preventDefault();
@@ -14,7 +13,7 @@ function AddNewItems(props) {
       quantity: parseInt(event.target.quantity.value),
       unitPrice: parseInt(event.target.unitPrice.value),
       extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
-      invoiceId: currentInvoice.current[0].invoiceNumber,
+      invoiceNumber: currentInvoice.current[0].invoiceNumber,
       date: currentInvoice.current[0].date,
       key: v4()
     });
@@ -23,8 +22,16 @@ function AddNewItems(props) {
 
   const handleCompleteItemSubmission = (event) => {
     event.preventDefault();
-    handleNewItemsSubmission(event);
-    props.onCompleteAddingItems();
+    props.onCompleteAddingItems({
+      itemCode: event.target.itemCode.value,
+      description: event.target.description.value,
+      quantity: parseInt(event.target.quantity.value),
+      unitPrice: parseInt(event.target.unitPrice.value),
+      extendedAmount: parseInt(event.target.quantity.value) * parseInt(event.target.unitPrice.value), 
+      invoiceNumber: currentInvoice.current[0].invoiceNumber,
+      date: currentInvoice.current[0].date,
+      key: v4()
+    });
   }
 
   return (
@@ -54,16 +61,13 @@ function AddNewItems(props) {
         <button type='submit' name='addMore'>ADD MORE ITEMS</button>
       </form>
       <div className="">
-        { currentInvoice.length >= 1 ? 
-          <h3>{currentInvoice[0].invoiceId} - {currentInvoice[0].date}</h3>
-        :
-          <React.Fragment>
-            <h3>{currentInvoice.current[0].invoiceNumber} - {currentInvoice.current[0].date}</h3>
-            {currentInvoice.current.slice(1).map(item => 
-              <p>{item.itemCode} - {item.description} - {item.quantity} - {item.extendedAmount}</p>
-            )}
-          </React.Fragment>
-        }
+        <React.Fragment>
+          <h3>{currentInvoice.current[0].invoiceNumber} - {currentInvoice.current[0].date}</h3>
+          {currentInvoice.current.slice(1).map(item => 
+            <p>{item.itemCode} - {item.description} - {item.quantity} - {item.extendedAmount}</p>
+          )}
+        </React.Fragment>
+        
       </div>
     </React.Fragment>
   );
@@ -74,8 +78,8 @@ AddNewItems.propTypes = {
   onCompleteAddingItems: PropTypes.func,
   invoiceNumber: PropTypes.number,
   date: PropTypes.string,
-  currentInvoice: PropTypes.object,
-  key: PropTypes.string
+  currentInvoice: PropTypes.object
 };
 
 export default AddNewItems;
+

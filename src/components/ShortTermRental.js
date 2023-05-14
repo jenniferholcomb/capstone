@@ -44,31 +44,31 @@ function ShortTermRental () {
   //     });
   // }, [])
 
-  // useEffect(() => {
-  //   if (isPropertiesLoaded) {
-  //     setInterval(() => {
-  //       fetch(`https://airbnb19.p.rapidap.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${properties[counter]}`)
-  //       .then(response => {
-  //         if (!response.ok) {
-  //           throw new Error(`${response.status}: ${response.statusText}`);
-  //         } else {
-  //           return response.json()
-  //         }
-  //       })
-  //       .then((jsonifiedResponse) => {
-  //         const action = getListingSuccess(jsonifiedResponse.data)
-  //         dispatch(action)
-  //       })
-  //       .catch((error) => {
-  //         const action = getFetchFailure(error.message)
-  //         dispatch(action)
-  //       });
-  //     }, 2000);
-  //     return () => {
-  //       clearInterval(isPropertiesLoaded);
-  //     };
-  //   }
-  // }, [] )
+  useEffect(() => {
+    if (isPropertiesLoaded) {
+      setInterval(() => {
+        fetch(`https://airbnb19.p.rapidap.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${properties[counter]}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`${response.status}: ${response.statusText}`);
+          } else {
+            return response.json()
+          }
+        })
+        .then((jsonifiedResponse) => {
+          const action = getListingSuccess(jsonifiedResponse.data)
+          dispatch(action)
+        })
+        .catch((error) => {
+          const action = getFetchFailure(error.message)
+          dispatch(action)
+        });
+      }, 2000);
+      return () => {
+        clearInterval(isPropertiesLoaded);
+      };
+    }
+  }, [] )
 
   // const handleAvailability = () => {
   //   properties.map( item => <p>item</p>)
