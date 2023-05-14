@@ -22,16 +22,16 @@ const goodsControlReducer = (state, action) => {
         createInvoice: [...state.createInvoice, action.newItemsData]
       }
     case c.GET_COMPLETE_INVOICE:
-      // const newInvoice = state.createInvoice;
-      // console.log(newInvoice);
-      // const numberItems = newInvoice.length - 1;
-      // const total = newInvoice.slice(1)
-      //               .reduce((accum, current) => accum + current.extendedAmount, 0);
-      // Object.assign(newInvoice[0], {totalGoods: numberItems, totalAmount: total});
-      console.log("here")
+      const newInvoice = [...state.createInvoice, action.values];
+      const numberItems = newInvoice.length - 1;
+      const totalAmt = newInvoice.slice(1)
+                    .reduce((accum, current) => accum + current.extendedAmount, 0);
+      const newInfo = {...newInvoice[0], numItems: numberItems, total: totalAmt};
+      const completeInvoice = newInvoice.slice(1);
+      completeInvoice.push(newInfo);
       return {
         ...state,
-        createInvoice: [...state.createInvoice, action.values],
+        createInvoice: completeInvoice,
         itemsFormVisible: false
       }
     case c.GET_INVOICES:
