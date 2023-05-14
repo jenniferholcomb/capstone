@@ -59,8 +59,13 @@ export const getAddItemsInvoice = (newItemsData) => ({
   newItemsData
 });
 
-export const getFormUpdate = () => ({
-  type: c.GET_FORM_UPDATE
+export const getManageInvoice = () => ({
+  type: c.GET_MANAGE_INVOICES
+});
+
+export const getSelectedInvoice = (id) => ({
+  type: c.GET_SELECTED_INVOICE,
+  id
 });
 
 export const getGoodsList = () => ({
@@ -74,5 +79,13 @@ export const getGoods = (goods) => ({
 
 export const getReset = () => ({
   type: c.GET_RESET
+});
+
+export const getEditInvoice = () => ({
+  type: c.GET_EDIT_INVOICE
+});
+
+export const getDeleteInvoice = () => ({
+  type: c.GET_DELETE_INVOICE
 });
 

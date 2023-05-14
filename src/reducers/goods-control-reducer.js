@@ -49,15 +49,32 @@ const goodsControlReducer = (state, action) => {
         ...state,
         error: action.error
       }
-    case c.GET_FORM_UPDATE:
+    case c.GET_MANAGE_INVOICES:
       return {
         ...state,
-        updateInvoice: true
+        manageInvoiceVisible: true
       }
     case c.GET_GOODS_LIST:
       return {
         ...state,
         goodsList: true
+      }
+    case c.GET_SELECTED_INVOICE:
+      const currentInv = state.invoiceData.filter((entry) => entry.invoiceNumber === action.id);
+      console.log(currentInv)
+      console.log("id")
+      const currentItems = state.goodsData.filter((entry) => entry.invoiceNumber === action.id);
+      console.log(currentItems)
+      return {
+        ...state,
+        manageInvoiceVisible: false,
+        invoiceDetailVisible: true,
+        createInvoice: [currentInv, currentItems]
+      }
+    case c.GET_EDIT_INVOICE:
+      return {
+        ...state,
+        editFormVisible: true
       }
     case c.GET_RESET:
       return {

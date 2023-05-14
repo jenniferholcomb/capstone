@@ -7,11 +7,11 @@ function InvoiceList (props) {
     <React.Fragment>
       {props.invoices.map((entry, index) => 
         <Invoice
-          whenInvoiceClicked= {entry.onInvoiceSelection}
+          whenInvoiceClicked= {props.onInvoiceSelection}
           purveyor={entry.purveyor}
           invoiceNumber={entry.invoiceNumber}
           date={entry.date}
-          numberItems={props.invoices.length - 1}
+          numberItems={entry.numberItems}
           total={entry.total}
           key={index} />
       )}

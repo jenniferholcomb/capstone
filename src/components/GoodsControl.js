@@ -7,7 +7,8 @@ import InvoiceList from './InvoiceList';
 import InvoiceDetail from "./InvoiceDetail";
 import { getFormVisible, getCreateInvoice, getInvoices, 
          getAddItemsInvoice, getCompleteInvoice, getDataFailure,
-         getFormUpdate, getGoodsList, getGoods, getReset } from "../actions";
+         getManageInvoice, getSelectedInvoice, getGoodsList, 
+         getDeleteInvoice, getEditInvoice, getGoods, getReset } from "../actions";
 // import CurrentDay from "./CurrentDay";
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
@@ -21,7 +22,10 @@ const initialState = {
   invoiceData: [],
   goodsData: [],
   createInvoice: [],
-  updateInvoice: false,
+  selectedInvoice: [],
+  manageInvoiceVisible: false,
+  invoiceDetailVisible: false,
+  editFormVisible: false,
   goodsList: false,
   error: null
 };
@@ -124,14 +128,25 @@ function GoodsControl () {
     dispatch(action);
   }
 
-  const handleChangingInvoiceSelection = () => {
-    console.log("here");
+  const handleSelectedInvoice = (id) => {
+    const action = getSelectedInvoice(id);
+    dispatch(action);
+  } 
+
+  const handleDeleteClick = (id) => {
+
   }
 
-  const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, updateInvoice, goodsList, error } = state;
+  const handleEditClick = (id) => {
+    
+  }
+
+  const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, invoiceDetailVisible, manageInvoiceVisible, goodsList, error } = state;
   currentItems.current = createInvoice;
   console.log(invoiceData);
   console.log(goodsData);
+  console.log("inv")
+  console.log(createInvoice)
 
   return (
     <React.Fragment>
@@ -149,12 +164,19 @@ function GoodsControl () {
             onCompleteAddingItems={handleCompleteAddingItems}
             currentInvoice={currentItems} />
         </React.Fragment>
-      : updateInvoice ?
+      : manageInvoiceVisible ?
         <React.Fragment>
           <InvoiceList 
-            onInvoiceSelection={handleChangingInvoiceSelection}
+            onInvoiceSelection={handleSelectedInvoice}
             invoices={invoiceData} />
         </React.Fragment>  
+      : invoiceDetailVisible ?
+        <React.Fragment>
+          <InvoiceDetail 
+            invoice={createInvoice} 
+            onClickingDelete = {handleDeleteClick}
+            onClickingEdit = {handleEditClick}/>
+        </React.Fragment>
       : goodsList ?
         <React.Fragment>
           <GoodsList
@@ -163,7 +185,7 @@ function GoodsControl () {
       :
         <GoodsControlWrapper>
           <button onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
-          <button onClick={() => dispatch(getFormUpdate())}>MANAGE INVOICES</button>
+          <button onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
           <button onClick={() => dispatch(getGoodsList())}>LIST BY ITEM</button>
         </GoodsControlWrapper>
       }   
