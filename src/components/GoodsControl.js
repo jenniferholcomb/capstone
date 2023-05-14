@@ -36,6 +36,7 @@ const GoodsControlWrapper = styled.section`
 function GoodsControl () {
   const [state, dispatch] = useReducer(goodsControlReducer, initialState);
   const currentItems = useRef(state.createInvoice);
+  const internalRef = useRef(null);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -92,27 +93,27 @@ function GoodsControl () {
     return () => unSubscribe();
   }, []);
 
-  // const handleSendingData = async () => {
-  //   await addDoc(collection(db, "invoices"), createInvoice[0]);
-  //   await itemsInvoice.map(item => 
-  //     addDoc(collection(db, "items"), item)
-  //   );
-  //   const action = getReset();
-  //   dispatch(action);
-  // }
+  const handleSendingData = async () => {
+    const infoIndex = currentItems.current.length-1;
+    await addDoc(collection(db, "invoices"), currentItems.current[infoIndex]);
+    console.log(currentItems.current)
+    console.log("here")
+    await currentItems.current.slice(0, infoIndex).map(item => 
+      addDoc(collection(db, "items"), item)
+    );
+    clearInterval(internalRef.current);
+    internalRef.current = null;
+    // const action = getReset();
+    // dispatch(action);
+  }
 
   const handleCompleteAddingItems = (finalValues) => {
     const action = getCompleteInvoice(finalValues);
     dispatch(action);
-    
-    console.log(currentItems.current)
-    
-    //const itemsInvoice = currentItems.current;
-    // console.log(itemsInvoice)
 
-
-    // const action2 = getReset();
-    // dispatch(action2);
+    internalRef.current = setInterval(() => {
+      handleSendingData();
+    }, 1000);
   }
 
   const handleAddingInvoiceInfo = (newInfo) => {
@@ -131,8 +132,8 @@ function GoodsControl () {
 
   const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, updateInvoice, goodsList, error } = state;
   currentItems.current = createInvoice;
-  console.log(createInvoice);
-  console.log(currentItems.current);
+  console.log(invoiceData);
+  console.log(goodsData);
 
   return (
     <React.Fragment>

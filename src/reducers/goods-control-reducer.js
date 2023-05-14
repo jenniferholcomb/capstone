@@ -23,10 +23,10 @@ const goodsControlReducer = (state, action) => {
       }
     case c.GET_COMPLETE_INVOICE:
       const newInvoice = [...state.createInvoice, action.values];
-      const numberItems = newInvoice.length - 1;
+      const numItems = (newInvoice.length) - 1;
       const totalAmt = newInvoice.slice(1)
                     .reduce((accum, current) => accum + current.extendedAmount, 0);
-      const newInfo = {...newInvoice[0], numItems: numberItems, total: totalAmt};
+      const newInfo = {...newInvoice[0], numberItems: numItems, total: totalAmt};
       const completeInvoice = newInvoice.slice(1);
       completeInvoice.push(newInfo);
       return {
