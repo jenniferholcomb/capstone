@@ -28,9 +28,9 @@ function Listing (props) {
   const id = props.id;
 
   useEffect(() => {
-    setInterval(() => {
+    const response = setInterval(() => {
  
-        const response = Promise.any(fetchData(id))
+        Promise.any(fetchData(id))
           .then(response => {
             if (!response.ok) {
               throw new Error(`${response.status}: ${response.statusText}`);

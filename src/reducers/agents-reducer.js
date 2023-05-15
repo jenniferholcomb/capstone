@@ -3,22 +3,36 @@ import * as c from '../actions/ActionTypes';
 const agentsReducer = (state, action) => {
 
   switch (action.type) {
-    // case c.GET_PROPERTIES_SUCCESS:
-    //   const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
-    //                                                                && listing.room_type === "Entire home/apt"
-    //                                                                && listing.latitude < 44.10125
-    //                                                                && listing.latitude > 44.03699
-    //                                                                && listing.longitude > -121.36035
-    //                                                                && listing.longitude < -121.27744);
+    case c.GET_PROPERTIES_SUCCESS:
+      const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
+                                                                   && listing.room_type === "Entire home/apt"
+                                                                   && listing.latitude < 44.10125
+                                                                   && listing.latitude > 44.03699
+                                                                   && listing.longitude > -121.36035
+                                                                   && listing.longitude < -121.27744);
       
-    //   const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
-    //   const shortenedPropertiesList = propertiesId.slice(0, 1);
-    //   console.log(propertiesId);
-    //   return {
-    //     ...state,
-    //     isPropertiesLoaded: true,
-    //     properties: shortenedPropertiesList
-    //   };
+      const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
+      const shortenedPropertiesList = propertiesId.slice(0, 1);
+      console.log(propertiesId);
+      return {
+        ...state,
+        isPropertiesLoaded: true,
+        properties: shortenedPropertiesList
+      };
+    
+    case c.GET_DATA_PUSH:
+      return {
+        ...state,
+        isPropertiesLoaded: false,
+        properties: []
+      }
+
+    case c.GET_DATA_SUCCESS:
+      return {
+        ...state,
+        makeListingCall: true,
+        properties: action.properties
+      }
 
     case c.GET_LISTING_SUCCESS:
 
@@ -31,7 +45,7 @@ const agentsReducer = (state, action) => {
       // const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
       return {
         ...state,
-        isPropertiesLoaded: false,
+        makeListingCall: false,
         isListingLoaded: true,
         listings: oneMonthAvailable,
         // counter: (state.counter + 1)
@@ -99,6 +113,12 @@ const agentsReducer = (state, action) => {
       };
     default:
       throw new Error(`There is no action matching ${action.type}.`);
+    
+    case c.GET_DATA_FAILURE:
+      return {
+        ...state,
+        error: action.error
+      }
   }
 }
 
