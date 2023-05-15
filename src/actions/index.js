@@ -85,7 +85,8 @@ export const getEditInvoice = () => ({
   type: c.GET_EDIT_INVOICE
 });
 
-// export const getDeleteInvoice = () => ({
-//   type: c.GET_DELETE_INVOICE
-// });
+export const getUpdatedItems = (upInv) => ({
+  type: c.GET_UPDATED_ITEMS,
+  upInv
+});
 

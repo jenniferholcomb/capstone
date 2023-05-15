@@ -8,8 +8,8 @@ import InvoiceDetail from "./InvoiceDetail";
 import UpdateInvoiceForm from "./UpdateInvoiceForm";
 import { getFormVisible, getCreateInvoice, getInvoices, 
          getAddItemsInvoice, getCompleteInvoice, getDataFailure,
-         getManageInvoice, getSelectedInvoice, getGoodsList, 
-         getEditInvoice, getGoods, getReset } from "../actions";
+         getManageInvoice, getSelectedInvoice, getGoodsList,
+         getEditInvoice, getGoods, getReset, getUpdatedItems } from "../actions";
 // import CurrentDay from "./CurrentDay";
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
@@ -136,9 +136,8 @@ function GoodsControl () {
   } 
 
   const handleDeleteClick = async () => {
-    console.log(createInvoice)
-    await deleteDoc(doc(db, "invoices", createInvoice[0][0].id));
-    await createInvoice[1].map(entry => 
+    await deleteDoc(doc(db, "invoices", createInvoice[0].id));
+    await createInvoice.slice(1).map(entry => 
       deleteDoc(doc(db, "items", entry.id))
     );
     dispatch(getReset());
@@ -149,10 +148,15 @@ function GoodsControl () {
     currentItems.current = updatedInvoice;
   }
 
+  const handleDeletingItem = async (itemId, updatedItems) => {
+    await deleteDoc(doc(db, "items", itemId));
+    currentItems.current = updatedItems;
+    dispatch(getUpdatedItems(updatedItems));
+  }
+
   const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, invoiceDetailVisible, manageInvoiceVisible, editFormVisible, goodsList, error } = state;
   currentItems.current = createInvoice;
-  console.log(invoiceData);
-  console.log(goodsData);
+
   console.log("inv")
   console.log(createInvoice)
 
@@ -188,8 +192,10 @@ function GoodsControl () {
       : editFormVisible ?
         <React.Fragment>
           <UpdateInvoiceForm
-            invoice={createInvoice}
-            onEditFormCreation={handleUpdatingInvoice} />
+            invoice={currentItems.current}
+            onEditFormCreation={handleUpdatingInvoice} 
+            onDeleteItem={handleDeletingItem} 
+            onClickingDelete = {handleDeleteClick}/>
         </React.Fragment> 
       : goodsList ?
         <React.Fragment>

@@ -10,12 +10,12 @@ function UpdateInvoiceForm(props) {
     const { value, name, type } = event.target;
 
     const newState = [...state];
-    if ( type == 'text') {
+    if ( type === 'text') {
       newState[index] = {
         ...newState[index],
         [name]: value
       };
-    } else if (name == 'unitPrice' || name == 'quantity') {
+    } else if (name === 'unitPrice' || name === 'quantity') {
       newState[index] = {
         ...newState[index],
         [name]: parseFloat(value)
@@ -30,9 +30,6 @@ function UpdateInvoiceForm(props) {
         [name]: parseInt(value)
       };
     }
-
-
-    console.log(newState);
     setState(newState);
   };
 
@@ -50,26 +47,22 @@ function UpdateInvoiceForm(props) {
   }
 
   const handleDeleteItem = (index) => {
-
+    const newState = [...state];
+    if (newState.length === 2) {
+      props.onClickingDelete();
+    } else {
+      const deleteId = newState[index+1].id;
+      const updatedItems = [...newState.slice(0,index+1), ...newState.slice(index+2, newState.length)];
+      console.log(updatedItems);
+      console.log('up')
+      setState(updatedItems);
+      props.onDeleteItem(deleteId, updatedItems);
+    }
   }
 
   const handleEditsSubmission = (event) => {
     event.preventDefault();
-
-
     const newState = [...state];
-    console.log(newState);
-
-    newState[0] = {
-      ...newState[0],
-      'total': newState.slice(1).reduce((accum, current) => accum + current.extendedAmount, 0)
-    };
-    console.log(newState.slice(1).reduce((accum, current) => accum + current.extendedAmount, 0))
-    newState[0] = {
-      ...newState[0],
-      'numberItems': (newState.length) - 1
-    };
-    console.log(newState);
     props.onEditFormCreation(newState);
   }
 
@@ -82,7 +75,7 @@ function UpdateInvoiceForm(props) {
                   type='text'
                   name='purveyor'
                   placeholder={invoice[0].purveyor} 
-                  defaultValue={invoice[0].purveyor}
+                  value={invoice[0].purveyor}
                   onChange={(e) => handleChange(e, 0)}
                   required />
                 <label htmlFor="invoiceNumber">INVOICE NUMBER</label>
@@ -90,7 +83,7 @@ function UpdateInvoiceForm(props) {
                   type='number'
                   name='invoiceNumber'
                   placeholder={invoice[0].invoiceNumber} 
-                  defaultValue={invoice[0].invoiceNumber} 
+                  value={invoice[0].invoiceNumber} 
                   onChange={(e) => handleAllChange(e)}       
                   required />
                 <label htmlFor="date">DATE</label>
@@ -98,7 +91,7 @@ function UpdateInvoiceForm(props) {
                   type='date'
                   name='date'
                   placeholder={invoice[0].date}
-                  defaultValue={invoice[0].date} 
+                  value={invoice[0].date} 
                   onChange={(e) => handleAllChange(e)}                  
                   required />
 
@@ -109,14 +102,14 @@ function UpdateInvoiceForm(props) {
                       type='text'
                       name='itemCode'
                       placeholder={item.itemCode}
-                      defaultValue={item.itemCode} 
+                      value={item.itemCode} 
                       onChange={(e) => handleChange(e, (index+1))}                
                       required />
                     <label htmlFor="description">DESCRIPTION</label>
                     <textarea
                       name='description'
                       placeholder={item.description}
-                      defaultValue={item.description} 
+                      value={item.description} 
                       onChange={(e) => handleChange(e, (index+1))} 
                       required />
                     <label htmlFor="quantity">QUANTITY</label>
@@ -124,7 +117,7 @@ function UpdateInvoiceForm(props) {
                       type='number'
                       name='quantity'
                       placeholder={item.quantity}
-                      defaultValue={item.quantity}  
+                      value={item.quantity}  
                       onChange={(e) => handleChange(e, (index+1))}               
                       required />
                     <label htmlFor="unitPrice">UNIT PRICE</label>
@@ -132,10 +125,10 @@ function UpdateInvoiceForm(props) {
                       type='number'
                       name='unitPrice'
                       placeholder={item.unitPrice}
-                      defaultValue={item.unitPrice}  
+                      value={item.unitPrice}  
                       onChange={(e) => handleChange(e, (index+1))}               
                       required />
-                    <button onClick={handleDeleteItem}>DELETE ITEM</button>
+                    <button onClick={() => handleDeleteItem(index)}>DELETE ITEM</button>
                   </React.Fragment>
                 )};
               <button type="submit">UPDATE INVOICE</button>
@@ -146,7 +139,9 @@ function UpdateInvoiceForm(props) {
 
 UpdateInvoiceForm.propTypes = {
   invoice: PropTypes.array,
-  onEditFormCreation: PropTypes.func
+  onEditFormCreation: PropTypes.func,
+  onDeleteItem: PropTypes.func,
+  onClickingDelete: PropTypes.func
 };
 
 export default UpdateInvoiceForm;

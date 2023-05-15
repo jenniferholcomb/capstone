@@ -61,9 +61,21 @@ const goodsControlReducer = (state, action) => {
       }
     case c.GET_SELECTED_INVOICE:
       const currentInv = state.invoiceData.filter((entry) => entry.invoiceNumber === action.id);
-      console.log(currentInv)
-      console.log("id")
       const currentItems = state.goodsData.filter((entry) => entry.invoiceNumber === action.id);
+      currentItems.sort((a, b) => {
+        let fa = a.description.toLowerCase(),
+            fb = a.description.toLowerCase();
+        
+        if (fa < fb) {
+          return -1;
+        }
+        if (fa > fb) {
+          return 1;
+        }
+        return 0;
+      });
+      console.log(currentItems)
+      console.log("sort")
       return {
         ...state,
         manageInvoiceVisible: false,
@@ -76,6 +88,14 @@ const goodsControlReducer = (state, action) => {
         editFormVisible: true,
         invoiceDetailVisible: false
       }
+    case c.GET_UPDATED_ITEMS:
+      console.log(action.upInv)
+      console.log("kk")
+      return {
+        ...state,
+        createInvoice: action.upInv,
+        editFormVisible: true
+      }
     case c.GET_RESET:
       return {
         ...state,
@@ -84,7 +104,8 @@ const goodsControlReducer = (state, action) => {
         createInvoice: [],
         updateInvoice: false,
         goodsList: false,
-        invoiceDetailVisible: false
+        invoiceDetailVisible: false,
+        editFormVisible: false
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);
