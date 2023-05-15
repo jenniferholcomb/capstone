@@ -5,10 +5,11 @@ import AddNewItems from "./AddNewItems";
 import GoodsList from './GoodsList';
 import InvoiceList from './InvoiceList';
 import InvoiceDetail from "./InvoiceDetail";
+import UpdateInvoiceForm from "./UpdateInvoiceForm";
 import { getFormVisible, getCreateInvoice, getInvoices, 
          getAddItemsInvoice, getCompleteInvoice, getDataFailure,
          getManageInvoice, getSelectedInvoice, getGoodsList, 
-         getDeleteInvoice, getEditInvoice, getGoods, getReset } from "../actions";
+         getEditInvoice, getGoods, getReset } from "../actions";
 // import CurrentDay from "./CurrentDay";
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
@@ -137,21 +138,18 @@ function GoodsControl () {
   const handleDeleteClick = async () => {
     console.log(createInvoice)
     await deleteDoc(doc(db, "invoices", createInvoice[0][0].id));
-    // createInvoice[1].map(entry => 
-    //     console.log(entry.id)
-    //   );
-
-    await createInvoice[1].map(entry => {
+    await createInvoice[1].map(entry => 
       deleteDoc(doc(db, "items", entry.id))
-    });
+    );
     dispatch(getReset());
   }
 
-  const handleEditClick = () => {
-    
+  const handleUpdatingInvoice = (updatedInvoice) => {
+    console.log(updatedInvoice);
+    currentItems.current = updatedInvoice;
   }
 
-  const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, invoiceDetailVisible, manageInvoiceVisible, goodsList, error } = state;
+  const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, invoiceDetailVisible, manageInvoiceVisible, editFormVisible, goodsList, error } = state;
   currentItems.current = createInvoice;
   console.log(invoiceData);
   console.log(goodsData);
@@ -183,10 +181,16 @@ function GoodsControl () {
       : invoiceDetailVisible ?
         <React.Fragment>
           <InvoiceDetail 
-            invoice={createInvoice} 
+            invoice={currentItems.current} 
             onClickingDelete = {handleDeleteClick}
-            onClickingEdit = {handleEditClick}/>
+            onClickingEdit = {() => dispatch(getEditInvoice())}/>
         </React.Fragment>
+      : editFormVisible ?
+        <React.Fragment>
+          <UpdateInvoiceForm
+            invoice={createInvoice}
+            onEditFormCreation={handleUpdatingInvoice} />
+        </React.Fragment> 
       : goodsList ?
         <React.Fragment>
           <GoodsList
