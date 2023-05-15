@@ -3,6 +3,7 @@ import Goods from "./Goods";
 import PropTypes from 'prop-types';
 
 function GoodsList (props) {
+  console.log(props.goods)
   return (
     <React.Fragment>
       <h3>{props.goods[0].itemCode} - {props.goods.description}</h3>

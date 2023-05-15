@@ -20,24 +20,24 @@ function Weather () {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
-  useEffect(() => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=44.06&lon=-121.32&appid=${process.env.REACT_APP_API_KEY2}&units=imperial`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json()
-        }
-      })
-      .then((jsonifiedResponse) => {
-        const action = getWeatherSuccess(jsonifiedResponse.list)
-        dispatch(action)
-      })
-      .catch((error) => {
-        const action = getFetchFailure(error.message)
-        dispatch(action)
-      });
-  }, [])
+  // useEffect(() => {
+  //   fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=44.06&lon=-121.32&appid=${process.env.REACT_APP_API_KEY2}&units=imperial`)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error(`${response.status}: ${response.statusText}`);
+  //       } else {
+  //         return response.json()
+  //       }
+  //     })
+  //     .then((jsonifiedResponse) => {
+  //       const action = getWeatherSuccess(jsonifiedResponse.list)
+  //       dispatch(action)
+  //     })
+  //     .catch((error) => {
+  //       const action = getFetchFailure(error.message)
+  //       dispatch(action)
+  //     });
+  // }, [])
 
   const { error, isLoaded, forecast } = state;
 

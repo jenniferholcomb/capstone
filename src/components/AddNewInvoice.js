@@ -39,14 +39,16 @@ function AddNewInvoice(props) {
             name='date'
             placeholder='Date' required/>
           <button type='submit'>NEXT</button>
-        </form>
+        </form><br />
+        <button onClick={props.onReset}>HOME</button>
       </NewInvoiceWrapper>
     </React.Fragment>
   );
 }
 
 AddNewInvoice.propTypes = {
-  onNewInvoiceCreation: PropTypes.func
+  onNewInvoiceCreation: PropTypes.func,
+  onReset: PropTypes.func
 };
 
 export default AddNewInvoice;

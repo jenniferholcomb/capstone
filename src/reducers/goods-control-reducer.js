@@ -19,6 +19,7 @@ const goodsControlReducer = (state, action) => {
     case c.GET_ADD_ITEMS_INVOICE:
       return {
         ...state,
+        itemsFormVisible: true,
         createInvoice: [...state.createInvoice, action.newItemsData]
       }
     case c.GET_COMPLETE_INVOICE:
@@ -74,8 +75,6 @@ const goodsControlReducer = (state, action) => {
         }
         return 0;
       });
-      console.log(currentItems)
-      console.log("sort")
       return {
         ...state,
         manageInvoiceVisible: false,
@@ -105,7 +104,9 @@ const goodsControlReducer = (state, action) => {
         updateInvoice: false,
         goodsList: false,
         invoiceDetailVisible: false,
-        editFormVisible: false
+        editFormVisible: false,
+        itemsFormVisible: false,
+        manageInvoiceVisible: false
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);

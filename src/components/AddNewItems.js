@@ -67,7 +67,8 @@ function AddNewItems(props) {
             <p>{item.itemCode} - {item.description} - {item.quantity} - {item.extendedAmount}</p>
           )}
         </React.Fragment>
-      </div>
+      </div><br />
+      <button onClick={props.onReset}>HOME</button>
     </React.Fragment>
   );
 }

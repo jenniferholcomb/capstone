@@ -14,14 +14,17 @@ function InvoiceList (props) {
           numberItems={entry.numberItems}
           total={entry.total}
           key={index} />
-      )}
+      )};
+      <br />
+      <button onClick={props.onReset}>HOME</button>
     </React.Fragment>
   );
 }
 
 InvoiceList.propTypes = {
   onInvoiceSelection: PropTypes.func,
-  invoices: PropTypes.array
+  invoices: PropTypes.array,
+  onReset: PropTypes.func
 };
 
 export default InvoiceList;

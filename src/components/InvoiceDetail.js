@@ -9,6 +9,7 @@ function InvoiceDetail (props) {
 
       <button onClick={ props.onClickingEdit }>Edit Invoice</button>
       <button onClick={ props.onClickingDelete }>Delete Invoice</button>
+      <button onClick={props.onReset}>HOME</button>
     </React.Fragment>
   );
 }
@@ -16,7 +17,8 @@ function InvoiceDetail (props) {
 InvoiceDetail.propTypes = {
   invoice: PropTypes.array,
   onClickingDelete: PropTypes.func,
-  onClickingEdit: PropTypes.func
+  onClickingEdit: PropTypes.func,
+  onReset: PropTypes.func
 }
 
 export default InvoiceDetail;

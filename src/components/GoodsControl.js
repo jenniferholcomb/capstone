@@ -36,6 +36,7 @@ const GoodsControlWrapper = styled.section`
   grid-row: 2 / span 2;
   outline: 1px solid black;
   margin-left: 30px;
+  margin-bottom: 30px;
 `;
 
 function GoodsControl () {
@@ -144,7 +145,6 @@ function GoodsControl () {
   }
 
   const handleUpdatingInvoice = (updatedInvoice) => {
-    console.log(updatedInvoice);
     currentItems.current = updatedInvoice;
   }
 
@@ -156,7 +156,7 @@ function GoodsControl () {
 
   const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, invoiceDetailVisible, manageInvoiceVisible, editFormVisible, goodsList, error } = state;
   currentItems.current = createInvoice;
-
+  console.log(goodsData)
   console.log("inv")
   console.log(createInvoice)
 
@@ -168,26 +168,30 @@ function GoodsControl () {
         <p>Theres was an error: {error}</p>
       : formVisible ? 
         <AddNewInvoice 
-          onNewInvoiceCreation={handleAddingInvoiceInfo}/>
+          onNewInvoiceCreation={handleAddingInvoiceInfo}
+          onReset={() => dispatch(getReset())} />
       : itemsFormVisible ?
         <React.Fragment>
           <AddNewItems
             onAddItemsCreation={handleAddingMoreItems}
             onCompleteAddingItems={handleCompleteAddingItems}
-            currentInvoice={currentItems} />
+            currentInvoice={currentItems}
+            onReset={() => dispatch(getReset())} />
         </React.Fragment>
       : manageInvoiceVisible ?
         <React.Fragment>
           <InvoiceList 
             onInvoiceSelection={handleSelectedInvoice}
-            invoices={invoiceData} />
+            invoices={invoiceData}
+            onReset={() => dispatch(getReset())} />
         </React.Fragment>  
       : invoiceDetailVisible ?
         <React.Fragment>
           <InvoiceDetail 
             invoice={currentItems.current} 
             onClickingDelete = {handleDeleteClick}
-            onClickingEdit = {() => dispatch(getEditInvoice())}/>
+            onClickingEdit = {() => dispatch(getEditInvoice())}
+            onReset={() => dispatch(getReset())} />
         </React.Fragment>
       : editFormVisible ?
         <React.Fragment>
@@ -195,7 +199,8 @@ function GoodsControl () {
             invoice={currentItems.current}
             onEditFormCreation={handleUpdatingInvoice} 
             onDeleteItem={handleDeletingItem} 
-            onClickingDelete = {handleDeleteClick}/>
+            onClickingDelete = {handleDeleteClick}
+            onReset={() => dispatch(getReset())}/>
         </React.Fragment> 
       : goodsList ?
         <React.Fragment>
@@ -209,6 +214,7 @@ function GoodsControl () {
           <button onClick={() => dispatch(getGoodsList())}>LIST BY ITEM</button>
         </GoodsControlWrapper>
       }   
+    
     </React.Fragment>
   );
 }

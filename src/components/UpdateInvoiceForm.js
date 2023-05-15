@@ -132,7 +132,8 @@ function UpdateInvoiceForm(props) {
                   </React.Fragment>
                 )};
               <button type="submit">UPDATE INVOICE</button>
-          </form>
+          </form><br />
+          <button onClick={props.onReset}>HOME</button>
     </React.Fragment>
   );
 }

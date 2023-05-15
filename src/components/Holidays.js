@@ -20,24 +20,24 @@ function Holiday () {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
-  useEffect(() => {
-    fetch(`https://calendarific.com/api/v2/holidays?&api_key=${process.env.REACT_APP_API_KEY_HOLIDAY}&country=US&year=2023&month=12`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json()
-        }
-      })
-      .then((jsonifiedResponse) => {
-        const action = getHolidaySuccess(jsonifiedResponse.response.holidays)
-        dispatch(action)
-      })
-      .catch((error) => {
-        const action = getFetchFailure(error.message)
-        dispatch(action)
-      });
-  }, [])
+  // useEffect(() => {
+  //   fetch(`https://calendarific.com/api/v2/holidays?&api_key=${process.env.REACT_APP_API_KEY_HOLIDAY}&country=US&year=2023&month=5`)
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error(`${response.status}: ${response.statusText}`);
+  //       } else {
+  //         return response.json()
+  //       }
+  //     })
+  //     .then((jsonifiedResponse) => {
+  //       const action = getHolidaySuccess(jsonifiedResponse.response.holidays)
+  //       dispatch(action)
+  //     })
+  //     .catch((error) => {
+  //       const action = getFetchFailure(error.message)
+  //       dispatch(action)
+  //     });
+  // }, [])
 
   const { error, isLoaded, holidayList } = state;
 

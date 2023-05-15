@@ -59,8 +59,8 @@ const agentsReducer = (state, action) => {
         };
 
     case c.GET_HOLIDAY_SUCCESS:
-      const newHolidayList = action.holidayList.filter((e, i) => e.primary_type === "State Holiday" ||
-                                                                 e.primary_type === "Christian" )
+      const newHolidayList = action.holidayList.filter((e, i) => e.primary_type === "State Holiday") 
+                                                                 // e.primary_type === "Christian" )
                                                .reduce((array, list) => array.concat(list.name).concat(list.date.iso), 
       []);
 
@@ -76,7 +76,15 @@ const agentsReducer = (state, action) => {
 
       const uniqueList = reduceDuplicates(newHolidayList, 0);
 
-      // console.log(uniqueList);
+      // const today = new Date().getDate();
+      // const month = today.getMonth();
+      // if ((today + 14) >= 30) {
+
+      // } else {
+
+      // }
+      // const twoWeekList = uniqueList.filter(e => e.)
+
       return {
           ...state,
           isLoaded: true,
