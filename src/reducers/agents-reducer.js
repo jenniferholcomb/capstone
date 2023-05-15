@@ -12,22 +12,23 @@ const agentsReducer = (state, action) => {
                                                                    && listing.longitude < -121.27744);
       
       const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
-      const shortenedPropertiesList = propertiesId.slice(0, 1);
+      //const shortenedPropertiesList = [propertiesId.slice(0, 1)];
       console.log(propertiesId);
       return {
         ...state,
+        startLoading: false,
         isPropertiesLoaded: true,
-        properties: shortenedPropertiesList
+        properties: propertiesId
       };
     
-    case c.GET_DATA_PUSH:
-      return {
-        ...state,
-        isPropertiesLoaded: false,
-        properties: []
-      }
+    // case c.GET_DATA_PUSH:
+    //   return {
+    //     ...state,
+    //     properties: []
+    //   }
 
     case c.GET_DATA_SUCCESS:
+      console.log('data sucess')
       return {
         ...state,
         makeListingCall: true,
@@ -38,6 +39,7 @@ const agentsReducer = (state, action) => {
 
       // const oneMonthAvailable = action.listings[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
       const oneMonthAvailable = action.listings[0].days;
+      console.log('month available')
       console.log(oneMonthAvailable);
       // const twoMonthAvailable = action[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
       // const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);

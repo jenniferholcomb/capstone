@@ -25,7 +25,7 @@ const fetchData = async (id) => {
 function Listing (props) {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState);
-  const id = props.id;
+  const { id } = props;
 
   useEffect(() => {
     const response = setInterval(() => {
@@ -53,7 +53,7 @@ function Listing (props) {
     };
   }, [])
 
-  const { error, isLoaded, listingAvailability } = state;
+ const { error, isLoaded, listingAvailability } = state;
 
   if (error) {
     return ( 
@@ -68,12 +68,14 @@ function Listing (props) {
       </ListingWrapper>
     );
   } else {
+    console.log(id);
     return (
       <ListingWrapper>
+        
        {props.onAvailabilityCall(listingAvailability)}
       </ListingWrapper>
     );
-  };
+  }
 }
 
 Listing.propTypes = {
