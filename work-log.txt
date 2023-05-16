@@ -18,3 +18,29 @@ Sunday 4/30
 - after reading Firestore lessons, brainstormed collections/documents that will use setting up database
     - 
 
+bundle.js:2182 Uncaught (in promise) TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+    at Function.any (<anonymous>)
+    at bundle.js:2182:30
+bundle.js:2181 in here
+bundle.js:2168 herer
+bundle.js:2199 
+Promise {<rejected>: TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+    at Function.an…}
+[[Prototype]]
+: 
+Promise
+[[PromiseState]]
+: 
+"rejected"
+[[PromiseResult]]
+: 
+TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator)) at Function.any (<anonymous>) at http://localhost:3000/static/js/bundle.js:2182:30
+message
+: 
+"object is not iterable (cannot read property Symbol(Symbol.iterator))"
+stack
+: 
+"TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))\n    at Function.any (<anonymous>)\n    at http://localhost:3000/static/js/bundle.js:2182:30"
+[[Prototype]]
+: 
+Error

@@ -10,6 +10,11 @@ export const getListingSuccess = (listings) => ({
   listings
 });
 
+export const getListingAvailData = (listingsAvail) => ({
+  type: c.GET_LISTING_AVAIL_DATA,
+  listingsAvail
+});
+
 export const getDataSuccess = (properties) => ({
   type: c.GET_DATA_SUCCESS,
   properties

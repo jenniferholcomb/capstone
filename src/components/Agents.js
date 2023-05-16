@@ -1,6 +1,6 @@
 import React from "react";
 import Weather from "./Weather";
-import ShortTermRental from "./ShortTermRental";
+import PropertyListing from "./PropertyListing";
 import Events from "./Events";
 import Holidays from "./Holidays";
 import styled from 'styled-components';
@@ -20,7 +20,7 @@ function Agents () {
     // <div id="agents">
       <AgentsWrapper>
         <Weather />
-        <ShortTermRental />
+        <PropertyListing />
         <Events />
         <Holidays />
       </AgentsWrapper>

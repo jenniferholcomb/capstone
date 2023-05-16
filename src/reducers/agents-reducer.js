@@ -20,38 +20,28 @@ const agentsReducer = (state, action) => {
         isPropertiesLoaded: true,
         properties: propertiesId
       };
-    
-    // case c.GET_DATA_PUSH:
-    //   return {
-    //     ...state,
-    //     properties: []
-    //   }
 
-    case c.GET_DATA_SUCCESS:
-      console.log('data sucess')
-      return {
-        ...state,
-        makeListingCall: true,
-        properties: action.properties
-      }
 
     case c.GET_LISTING_SUCCESS:
 
       // const oneMonthAvailable = action.listings[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-      const oneMonthAvailable = action.listings[0].days;
-      console.log('month available')
-      console.log(oneMonthAvailable);
+      // console.log(action.listings);
+      // const twoMonthAvailable = action.listings.data[0].days;
+      // console.log('month available')
+      // console.log(twoMonthAvailable);
       // const twoMonthAvailable = action[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
       // const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
       // const today = new Date().toISOString().substring(0,10);
       // const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);
       return {
         ...state,
-        makeListingCall: false,
-        isListingLoaded: true,
-        listings: oneMonthAvailable,
+        // isLoaded: true,
+        // listingAvailability: twoMonthAvailable,
         // counter: (state.counter + 1)
       };
+ 
+
+      
 
     case c.GET_WEATHER_SUCCESS:
       const newForecast = action.forecast.filter((e, i) => e.dt_txt.includes("9:00:00") || e.dt_txt.includes("15:00:00"))
