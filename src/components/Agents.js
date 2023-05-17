@@ -1,14 +1,16 @@
 import React from "react";
 import Weather from "./Weather";
-import PropertyListing from "./PropertyListing";
+//import PropertyListing from "./PropertyListing";
+//import ShortTermRental from "./ShortTermRental";
 import Calendar from "./Calendar";
 // import Events from "./Events";
 // import Holidays from "./Holidays";
 import styled from 'styled-components';
+import PropertyListing from "./PropertyListing";
 
 const AgentsWrapper = styled.section`
   grid-column: 3;
-  grid-row: 1  / span 3;
+  
 
   margin-right: 30px;
   margin-top: 30px;
@@ -21,6 +23,7 @@ function Agents () {
     // <div id="agents">
       <AgentsWrapper>
         <Weather />
+        {/* <ShortTermRental /> */}
         <PropertyListing />
         <Calendar />
         {/* <Events />

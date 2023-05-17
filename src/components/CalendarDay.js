@@ -1,14 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
 
-const BoxWrapper = styled.section`
-  background-color: black;
-`;
+
 
 function CalendarDay () {
   return (
     <React.Fragment>
-      <BoxWrapper>
+      
         <div className="cal-item-1" id='l-border'></div>
         <div className="cal-item-2">1</div>
         <div className="cal-item-3">2</div>
@@ -44,7 +42,7 @@ function CalendarDay () {
         <div className="cal-item-33"></div>
         <div className="cal-item-34"></div>
         <div className="cal-item-35"></div>
-      </BoxWrapper>
+      
     </React.Fragment>
   );
 }

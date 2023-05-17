@@ -13,9 +13,9 @@ const ShortTermRentalWrapper = styled.section`
 function ShortTermRental () {
   const initialProperties = [{propertyId:'47700213'}, {propertyId:'48145151'}, {propertyId:'50636849'}, {propertyId:'574769491394496704'}, {propertyId:'45065826'}, {propertyId:'37282385'}, {propertyId:'15835761'}, {propertyId:'32240051'}, {propertyId:'43848210'}, {propertyId:'32292475'}];
   
-  //const [startLoading, setStartLoading] = useState(false);
+  const [startLoading, setStartLoading] = useState(true);
   const [propLoaded, setPropLoaded] = useState(false);
-  const [sendProps, setSendProps] = useState(true);
+  const [sendProps, setSendProps] = useState(false);
   const [propertyList, setPropertyList] = useState(initialProperties);
   const [listComplete, setListComplete] = useState(false);
   const [listingList, setListingList] = useState(null);
@@ -43,31 +43,41 @@ function ShortTermRental () {
   // }, []);
 
 
-  // useEffect(() => {
-  //   if (startLoading) {
-  //     fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
-  //       .then(response => {
-  //         if (!response.ok) {
-  //           throw new Error(`${response.status}: ${response.statusText}`);
-  //         } else {
-  //           return response.json()
-  //         }
-  //       })
-  //       .then((jsonifiedResponse) => {
-  //         handlePropertiesSuccess(jsonifiedResponse.properties); // update code with logic in reducer when start making airdna calls
-  //         setStartLoading(false);
-  //         setPropLoaded(true);
-  //       })
-  //       .catch((error) => {
-  //         setError(error)
-  //       });
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (startLoading) {
+      fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`${response.status}: ${response.statusText}`);
+          } else {
+            return response.json()
+          }
+        })
+        .then((jsonifiedResponse) => {
+          handlePropertiesSuccess(jsonifiedResponse.properties); // update code with logic in reducer when start making airdna calls
+        })
+        .catch((error) => {
+          setError(error)
+        });
+    }
+  }, [])
 
-  // const handlePropertiesSuccess = (freshProperties) => {
-  //   console.log("fresh properties");
-  //   //setPropertyList(" parsed fresh properties data")
-  // }
+  const handlePropertiesSuccess = (freshProperties) => {
+    console.log("fresh properties");
+    const handleFilteringProperties = freshProperties.filter(listing => listing.platforms.airbnb_property_id !== null 
+      && listing.room_type === "Entire home/apt"
+      && listing.latitude < 44.10125
+      && listing.latitude > 44.03699
+      && listing.longitude > -121.36035
+      && listing.longitude < -121.27744);
+    
+    const propertiesId = handleFilteringProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
+
+    setPropertyList(propertiesId);
+    setStartLoading(false);
+    //setPropLoaded(true);
+    setSendProps(true)
+  };
 
   // useEffect(() => {
   //   if (propLoaded) {
@@ -77,12 +87,14 @@ function ShortTermRental () {
   //   }
   //   setPropLoaded(false);
   //   setSendProps(true);
-  // }, [])
+  // }, [propLoaded])
 
-  const handleAvailabilityData = (listingData) => {
-    setListingList(listingData);
-    setListComplete(true);
-  }
+  // const handleAvailabilityData = (listingData) => {
+  //   setListingList(listingData);
+  //   setListComplete(true);
+  // }
+
+  console.log(propertyList);
 
   if (error) {
     return ( 
@@ -94,18 +106,10 @@ function ShortTermRental () {
     console.log('were moving')
     return (
       <ShortTermRentalWrapper>
-        <Listing 
-         id={propertyList[0].propertyId}
-         onAvailabilityCall = {handleAvailabilityData} />
+
 
       </ShortTermRentalWrapper>
     )
-  } else if (listComplete) {
-    return (
-      <React.Fragment>
-        <p>e</p>
-      </React.Fragment>
-    );
   } else if (!propLoaded) {
     return (
       <ShortTermRentalWrapper>
@@ -134,5 +138,3 @@ export default ShortTermRental;
 //   && listing.longitude > -121.36035
 //   && listing.longitude < -121.27744);
 
-// const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
-// const shortenedPropertiesList = [propertiesId.slice(0, 1)];

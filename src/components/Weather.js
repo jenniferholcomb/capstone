@@ -2,18 +2,20 @@ import React, { useEffect, useReducer } from 'react';
 import agentsReducer from '../reducers/agents-reducer';
 import { getFetchFailure, getWeatherSuccess } from '../actions';
 import styled from 'styled-components';
+import WeatherDay from './WeatherDay';
 
 const WeatherWrapper = styled.section`
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  outline: 1px solid black;
+  border-radius: 10px;
   display: grid;
   grid-row: 1;
-  outline: 1px solid green;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 0px;
+  height: 170px;
 `;
 
 const initialState = {
-  isLoaded: false,
+  isLoaded: true,
   forecast: [],
   error: null
 };
@@ -23,8 +25,9 @@ function Weather () {
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
   // useEffect(() => {
-  //   fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=44.06&lon=-121.32&appid=${process.env.REACT_APP_API_KEY2}&units=imperial`)
-  //     .then(response => {
+  //   fetch(`https://api.open-meteo.com/v1/forecast?latitude=44.06&longitude=-121.32&hourly=temperature_2m,precipitation_probability&temperature_unit=fahrenheit&forecast_days=14&timezone=America%2FLos_Angeles`)
+    
+  //   .then(response => {
   //       if (!response.ok) {
   //         throw new Error(`${response.status}: ${response.statusText}`);
   //       } else {
@@ -43,6 +46,8 @@ function Weather () {
 
   const { error, isLoaded, forecast } = state;
 
+  //console.log(forecast);
+
   if (error) {
     return ( 
       <WeatherWrapper>
@@ -59,7 +64,8 @@ function Weather () {
     return (
 
       <WeatherWrapper>
-        <p>{forecast}</p>
+        <WeatherDay />
+        {/* <p>{forecast}</p> */}
 
       </WeatherWrapper>
     );

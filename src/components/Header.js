@@ -10,6 +10,7 @@ const HeaderWrapper = styled.section`
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  height: 170px;
 `;
 
 function Header () {

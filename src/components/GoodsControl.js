@@ -10,7 +10,6 @@ import { getFormVisible, getCreateInvoice, getInvoices,
          getAddItemsInvoice, getCompleteInvoice, getDataFailure,
          getManageInvoice, getSelectedInvoice, getGoodsList,
          getEditInvoice, getGoods, getReset, getUpdatedItems } from "../actions";
-// import CurrentDay from "./CurrentDay";
 import styled from 'styled-components';
 import goodsControlReducer from "../reducers/goods-control-reducer";
 import db from './../firebase.js';
@@ -35,8 +34,13 @@ const GoodsControlWrapper = styled.section`
   grid-column: 1 / span 2;
   grid-row: 2 / span 2;
   outline: 1px solid black;
+  border-radius: 10px;
   margin-left: 30px;
   margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  align-items: center;
 `;
 
 function GoodsControl () {
@@ -160,9 +164,12 @@ function GoodsControl () {
   console.log("inv")
   console.log(createInvoice)
 
+
+
   return (
     <React.Fragment>
       <Header />
+      <GoodsControlWrapper>
       { 
       error ?
         <p>Theres was an error: {error}</p>
@@ -208,13 +215,13 @@ function GoodsControl () {
             goods={goodsData} />
         </React.Fragment>
       :
-        <GoodsControlWrapper>
+        <React.Fragment>
           <button onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
           <button onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
           <button onClick={() => dispatch(getGoodsList())}>LIST BY ITEM</button>
-        </GoodsControlWrapper>
+        </React.Fragment>
       }   
-    
+      </GoodsControlWrapper>
     </React.Fragment>
   );
 }

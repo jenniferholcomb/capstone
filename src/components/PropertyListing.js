@@ -1,13 +1,28 @@
 import React, { useEffect, useState, useRef } from 'react';
 //import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import ListingDay from './ListingDay';
 
 const ListingWrapper = styled.section`
-  font-style: italic;
-  border-bottom: 1px solid black; 
-  display: grid;
   grid-row: 2;
-  grid-template-columns: repeat(5, 1fr);
+  margin-top: 20px;
+`;
+
+const NameWrapper = styled.section` 
+  grid-column: 1 / span 7 ;
+  justify-self: center;
+  align-self: end;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const ElementWrapper = styled.section`
+outline: 1px solid black;
+border-radius: 10px;
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+grid-gap: 0px;
+height: 170px;
 `;
 //const initialProperties = [{propertyId:'47700213'}, {propertyId:'48145151'}, {propertyId:'50636849'}, {propertyId:'574769491394496704'}, {propertyId:'45065826'}, {propertyId:'37282385'}, {propertyId:'15835761'}, {propertyId:'32240051'}, {propertyId:'43848210'}, {propertyId:'32292475'}];
  
@@ -59,7 +74,12 @@ function PropertyListing (props) {
   } else {
     return (
       <ListingWrapper>
-       <p>e</p>
+         <NameWrapper>
+          STR OCCUPANCY 
+        </NameWrapper>
+        <ElementWrapper>
+          <ListingDay />
+        </ElementWrapper>
       </ListingWrapper>
     );
   }

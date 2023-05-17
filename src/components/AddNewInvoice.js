@@ -5,9 +5,16 @@ import { v4 } from 'uuid';
 
 const NewInvoiceWrapper = styled.section`
   display: grid;
+  width: 60%;
+  height: 80%;
   justify-content: center;
-  margin-left: 30px;
- 
+  padding: 30px;
+  text-align: center;
+  
+  
+  outline: 1px solid black;
+  border-radius: 10px;
+  grid-column: 1 / span 2;
 `;
 
 function AddNewInvoice(props) {
@@ -25,22 +32,26 @@ function AddNewInvoice(props) {
   return (
     <React.Fragment>
       <NewInvoiceWrapper>
+      <h3>START NEW INVOICE</h3>
         <form onSubmit={handleNewInvoiceSubmission}>
           <input
+            class="inv"
             type='text'
             name='purveyor'
-            placeholder='Purveyor' required/>
+            placeholder='Purveyor' required/><br />
           <input 
+          class="inv"
             type='number'
             name='invoiceNumber'
-            placeholder='Invoice #' required/>
+            placeholder='Invoice #' required/><br />
           <input 
+            class="inv"
             type='date'
             name='date'
-            placeholder='Date' required/>
-          <button type='submit'>NEXT</button>
-        </form><br />
-        <button onClick={props.onReset}>HOME</button>
+            placeholder='Date' required/><br />
+          <button class="inv-button" type='submit'>NEXT</button>
+        </form>
+        <button class="inv-button" onClick={props.onReset}>CANCEL</button>
       </NewInvoiceWrapper>
     </React.Fragment>
   );

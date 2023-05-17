@@ -7,14 +7,20 @@ const BodyWrapper = styled.section`
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 200px 325px 325px;
+  grid-template-rows: 200px 283px 282px;
+`;
+
+const GoodsWrapper = styled.section `
+  
 `;
 
 function App() {
   return (
     <div id="main-body">
       <BodyWrapper>
-        <GoodsControl />
+        
+          <GoodsControl />
+        
         <Agents />
       </BodyWrapper>
     </div>
