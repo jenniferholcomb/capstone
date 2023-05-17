@@ -210,10 +210,54 @@ button[class=items-button] {
   cursor: pointer;
 }
 
+/* 
+.input-1, .input-2, .input-3, .input-4 {
+  display: inline;
+}
 
+.update-table thead {
+  position: sticky;
+  top: 0;
+}
 
+.update-table thead th {
+  cursor: pointer;
+}
 
+.update-table thead {
+  cursor: pointer;
+}
 
+.update-table th, 
+.update-table td {
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+}
+
+.update-table td {
+  border: 1px solid #e4eff8;
+}
+
+.update-table .tr-inputs th {
+  position: relative;
+  padding: 0;
+  padding-bottom: 1.2rem;
+  margin: 0;
+}
+
+.update-table .tr-inputs div {
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.update-table input {
+  width: 100%;
+  box-sizing: border-box;
+} */
 
 
 /* .App {

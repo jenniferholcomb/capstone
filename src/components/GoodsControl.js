@@ -42,6 +42,7 @@ const GoodsControlWrapper = styled.section`
   grid-template-rows: repeat(6, 1fr);
   justify-items: center;
   align-items: center;
+  overflow: scroll;
 `;
 
 const GoodsListWrapper = styled.section`
@@ -52,6 +53,17 @@ const GoodsListWrapper = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 20px;
+`;
+
+const UpdateWrapper = styled.section`
+  grid-column: 1 / span 3;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 20px;
   gap: 20px;
 `;
 
@@ -213,14 +225,14 @@ function GoodsControl () {
             onReset={() => dispatch(getReset())} />
         </React.Fragment>
       : editFormVisible ?
-        <React.Fragment>
+        <UpdateWrapper>
           <UpdateInvoiceForm
             invoice={currentItems.current}
             onEditFormCreation={handleUpdatingInvoice} 
             onDeleteItem={handleDeletingItem} 
             onClickingDelete = {handleDeleteClick}
             onReset={() => dispatch(getReset())}/>
-        </React.Fragment> 
+        </UpdateWrapper> 
       :
         <GoodsListWrapper>
           <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
