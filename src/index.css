@@ -13,21 +13,48 @@ code {
 }
 
 [class^='cal-item'] {
+  display: flex;
   border-top: 1px solid black;
-  border-left: 1px solid black;
+  border-right: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  padding: none;
 }
 
-[class^='cal-item']:nth-child(7n) {
+[class^='cal-item']:last-child {
   border-right: 1px solid black;
 }
 
 [class^='cal-item']:nth-last-child(-n+7) {
+  grid-row: 6;
   border-bottom: 1px solid black;
 }
 
-[class^='event-item'] {
-  border-right: 1px solid black;
+[class^='cal-item']:nth-child(-n+8) {
+  grid-row: 2;
 }
+
+[class^='cal-item']:nth-child(9), :nth-child(10), :nth-child(11), :nth-child(12), :nth-child(13), :nth-child(14), :nth-child(15){
+  grid-row: 3;
+}
+
+[class^='cal-item']:nth-child(16), :nth-child(17), :nth-child(18), :nth-child(19), :nth-child(20), :nth-child(21), :nth-child(22){
+  grid-row: 4;
+}
+
+[class^='cal-item']:nth-child(23), :nth-child(24), :nth-child(25), :nth-child(26), :nth-child(27), :nth-child(28), :nth-child(29){
+  grid-row: 5;
+}
+
+#l-border:nth-child(1n) {
+  border-left: 1px solid black;
+}
+
+
+/* [class^='event-item'] {
+  border-right: 1px solid black;
+}  */
 
 /* .App {
   text-align: center;

@@ -7,6 +7,8 @@ const WeatherWrapper = styled.section`
   border-bottom: 1px solid black;
   border-right: 1px solid black;
   display: grid;
+  grid-row: 1;
+  outline: 1px solid green;
   grid-template-columns: repeat(5, 1fr);
 `;
 

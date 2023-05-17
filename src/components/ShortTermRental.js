@@ -80,17 +80,9 @@ function ShortTermRental () {
   // }, [])
 
   const handleAvailabilityData = (listingData) => {
-    console.log(listingData)
-    console.log('listingData')
     setListingList(listingData);
     setListComplete(true);
   }
-
-  console.log("propertiess")
-  console.log(propertyList[0].propertyId);
-  console.log("listings")
-  console.log(listingList);
-  console.log(sendProps)
 
   if (error) {
     return ( 
@@ -129,16 +121,18 @@ function ShortTermRental () {
 export default ShortTermRental;
 
 
-
-
-
-
-
-
 // {properties.map(id => 
 //   <Listing 
 //     id={id}
 //     onAvailabilityCall = {handleAvailabilityData} />
 // )} 
 
- 
+// const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
+//   && listing.room_type === "Entire home/apt"
+//   && listing.latitude < 44.10125
+//   && listing.latitude > 44.03699
+//   && listing.longitude > -121.36035
+//   && listing.longitude < -121.27744);
+
+// const propertiesId = newProperties.reduce((array, listing) => array.concat(listing.airbnb_property_id), []);
+// const shortenedPropertiesList = [propertiesId.slice(0, 1)];
