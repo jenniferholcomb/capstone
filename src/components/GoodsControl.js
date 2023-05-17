@@ -26,7 +26,7 @@ const initialState = {
   manageInvoiceVisible: false,
   invoiceDetailVisible: false,
   editFormVisible: false,
-  goodsList: false,
+  // goodsList: true,
   error: null
 };
 
@@ -39,8 +39,20 @@ const GoodsControlWrapper = styled.section`
   margin-bottom: 30px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   justify-items: center;
   align-items: center;
+`;
+
+const GoodsListWrapper = styled.section`
+  // outline: 1px solid black;
+  grid-column: 1 / span 2;
+  margin-top: -30px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 `;
 
 function GoodsControl () {
@@ -209,17 +221,13 @@ function GoodsControl () {
             onClickingDelete = {handleDeleteClick}
             onReset={() => dispatch(getReset())}/>
         </React.Fragment> 
-      : goodsList ?
-        <React.Fragment>
-          <GoodsList
-            goods={goodsData} />
-        </React.Fragment>
       :
-        <React.Fragment>
-          <button onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
-          <button onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
-          <button onClick={() => dispatch(getGoodsList())}>LIST BY ITEM</button>
-        </React.Fragment>
+        <GoodsListWrapper>
+          <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
+          <button class="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
+          {/* <GoodsList
+            goods={goodsData} /> */}
+        </GoodsListWrapper>
       }   
       </GoodsControlWrapper>
     </React.Fragment>
@@ -227,3 +235,5 @@ function GoodsControl () {
 }
 
 export default GoodsControl;
+
+{/* <button class="nav-3" onClick={() => dispatch(getGoodsList())}>LIST BY ITEM</button> */}

@@ -1,22 +1,29 @@
 import React from "react";
-// import Calendar from "./Calendar";
 import styled from "styled-components";
+import logoArt from "./../img/BendSpoon.svg"
 
 const HeaderWrapper = styled.section`
   grid-column: 1 / span 2;
   grid-row: 1;
-  outline: 1px solid black;
-  margin-left: 30px;
+  
+  margin-left: 80px;
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   height: 170px;
+  align-items: center;
+`;
+
+const ImgWrapper = styled.section`
+
 `;
 
 function Header () {
   return (
     <HeaderWrapper>
-      <p>Header</p>
+      <ImgWrapper>
+        <img className="logo"src={logoArt} alt="Logo" />
+      </ImgWrapper>
     </HeaderWrapper>
   );
 }

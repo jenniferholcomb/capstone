@@ -126,8 +126,45 @@ button[class=inv-button] {
   cursor: pointer;
 }
 
+button[class=nav-1] {
+  width: 45%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+  
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[class=nav-2] {
+  width: 45%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[class=nav-3] {
+  width: 30%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 button[class=inv-button]:hover {
   background-color: #45a049;
+}
+
+.logo {
+  width: 75%;
 }
 
 

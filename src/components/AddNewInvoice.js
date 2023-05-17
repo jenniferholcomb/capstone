@@ -15,6 +15,7 @@ const NewInvoiceWrapper = styled.section`
   outline: 1px solid black;
   border-radius: 10px;
   grid-column: 1 / span 2;
+  grid-row: 1 / span 6;
 `;
 
 function AddNewInvoice(props) {
