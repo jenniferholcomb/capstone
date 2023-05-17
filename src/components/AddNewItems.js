@@ -1,6 +1,22 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { v4 } from 'uuid';
+
+const NewItemsWrapper = styled.section`
+  display: grid;
+  width: 90%;
+  height: 90%;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+  
+  
+  outline: 1px solid black;
+  border-radius: 10px;
+  grid-column: 1 ;
+  grid-row: 1 / span 6;
+`;
 
 function AddNewItems(props) {
   const { currentInvoice } = props;
@@ -36,30 +52,38 @@ function AddNewItems(props) {
 
   return (
     <React.Fragment>
-      <form onSubmit={(event) => {
-        const buttonName = event.nativeEvent.submitter.name;
-        if (buttonName === 'submitItems') handleCompleteItemSubmission(event);
-        if (buttonName === 'addMore') handleNewItemsSubmission(event);
-        }} >
-        <input
-          type='number'
-          name='itemCode'
-          placeholder='Item Code' required/>
-        <textarea
-          name='description'
-          placeholder='Description' required/>
-        <input
-          type='number'
-          name='quantity'
-          placeholder='Quantity' required/>
-        <input
-          type='number'
-          name='unitPrice'
-          step= '.01'
-          placeholder='Unit Price' required/>
-        <button type='submit' name='submitItems'>SUBMIT</button>
-        <button type='submit' name='addMore'>ADD MORE ITEMS</button>
-      </form>
+      <NewItemsWrapper>
+      <h5>ADD ITEMS</h5>
+        <form onSubmit={(event) => {
+          const buttonName = event.nativeEvent.submitter.name;
+          if (buttonName === 'submitItems') handleCompleteItemSubmission(event);
+          if (buttonName === 'addMore') handleNewItemsSubmission(event);
+          }} >
+          <input
+            class="items"
+            type='number'
+            name='itemCode'
+            placeholder='&nbsp;&nbsp;&nbsp;Item Code' required/>
+          <textarea
+            class="items"
+            name='description'
+            placeholder='Description' required/>
+          <input
+            class="items"
+            type='number'
+            name='quantity'
+            placeholder='&nbsp;&nbsp;&nbsp;Quantity' required/>
+          <input
+            class="items"
+            type='number'
+            name='unitPrice'
+            step= '.01'
+            placeholder='&nbsp;&nbsp;&nbsp;$/Unit' required/><br /><br />
+          <button type='submit' class="items-button" name='addMore'>ADD MORE ITEMS</button><br /><br />
+          <button class="items-button" type='submit' name='submitItems'>FINISH INVOICE</button>
+          <button class="items-button" onClick={props.onReset}>CANCEL</button>
+        </form>
+      </NewItemsWrapper>
       <div className="">
         <React.Fragment>
           <h3>{currentInvoice.current[0].invoiceNumber} - {currentInvoice.current[0].date}</h3>
@@ -67,8 +91,9 @@ function AddNewItems(props) {
             <p>{item.itemCode} - {item.description} - {item.quantity} - {item.extendedAmount}</p>
           )}
         </React.Fragment>
+        
       </div><br />
-      <button onClick={props.onReset}>HOME</button>
+      
     </React.Fragment>
   );
 }

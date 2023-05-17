@@ -38,7 +38,7 @@ const GoodsControlWrapper = styled.section`
   margin-left: 30px;
   margin-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(6, 1fr);
   justify-items: center;
   align-items: center;
@@ -46,7 +46,7 @@ const GoodsControlWrapper = styled.section`
 
 const GoodsListWrapper = styled.section`
   // outline: 1px solid black;
-  grid-column: 1 / span 2;
+  grid-column: 1 / span 3;
   margin-top: -30px;
   width: 100%;
   display: flex;
