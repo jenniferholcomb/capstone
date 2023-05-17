@@ -10,12 +10,29 @@ const NewItemsWrapper = styled.section`
   justify-content: center;
   padding: 30px;
   text-align: center;
-  
-  
   outline: 1px solid black;
   border-radius: 10px;
   grid-column: 1 ;
   grid-row: 1 / span 6;
+`;
+
+const InvPrintWrapper = styled.section`
+  display: grid;
+  grid-column: 2 / span 2;
+  width: 95%
+`;
+
+const HeadingWrapper = styled.section`
+  grid-column: 2;
+  width: 90%;
+`;
+
+const DateWrapper = styled.section`
+  grid-column: 3;
+  width: 90%;
+  text-align: right;
+  padding-right: 30px;
+  font-weight: bold;
 `;
 
 function AddNewItems(props) {
@@ -63,7 +80,7 @@ function AddNewItems(props) {
             class="items"
             type='number'
             name='itemCode'
-            placeholder='&nbsp;&nbsp;&nbsp;Item Code' required/>
+            placeholder='&nbsp;&nbsp;&nbsp;Item #' required/>
           <textarea
             class="items"
             name='description'
@@ -84,15 +101,36 @@ function AddNewItems(props) {
           <button class="items-button" onClick={props.onReset}>CANCEL</button>
         </form>
       </NewItemsWrapper>
-      <div className="">
-        <React.Fragment>
-          <h3>{currentInvoice.current[0].invoiceNumber} - {currentInvoice.current[0].date}</h3>
+      
+        <HeadingWrapper>
+          <h3>INVOICE# {currentInvoice.current[0].invoiceNumber}</h3>
+        </HeadingWrapper>  
+        <DateWrapper>
+          {currentInvoice.current[0].date}
+        </DateWrapper>
+        <InvPrintWrapper>
+        <table >
+          <tr>
+            <th>Item#</th>
+            <th>Description</th>
+            <th>Units</th>
+            <th>Price/Unit</th>
+          </tr>
+          
           {currentInvoice.current.slice(1).map(item => 
-            <p>{item.itemCode} - {item.description} - {item.quantity} - {item.extendedAmount}</p>
+            <React.Fragment>
+              <tr>
+                <td>{item.itemCode}</td>
+                <td>{item.description}</td>
+                <td>{item.quantity}</td>
+                <td>{item.extendedAmount.toFixed(2)}</td>
+              </tr>
+            </React.Fragment>
           )}
-        </React.Fragment>
+        </table>
+      </InvPrintWrapper>
         
-      </div><br />
+      
       
     </React.Fragment>
   );
@@ -108,3 +146,15 @@ AddNewItems.propTypes = {
 
 export default AddNewItems;
 
+{/* <CodeWrapper>
+<p>{item.itemCode}</p> 
+</CodeWrapper>
+<DescriptionWrapper>
+<p>{item.description}</p> 
+</DescriptionWrapper>
+<UnitsWrapper>
+<p>{item.quantity}</p> 
+</UnitsWrapper>
+<PriceWrapper>
+<p>{item.extendedAmount}</p> 
+</PriceWrapper> */}

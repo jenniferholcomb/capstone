@@ -172,7 +172,7 @@ input[class=items] {
   padding-top: 14px;
   padding-bottom: 14px;
   margin: 8px 0;
-
+  text-align: center;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
@@ -196,6 +196,7 @@ textarea {
   resize: none;
   font-size: 14px;
   text-align: center;
+  padding-top: 11px;
 }
 
 button[class=items-button] {
