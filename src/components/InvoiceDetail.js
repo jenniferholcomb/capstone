@@ -55,6 +55,7 @@ function InvoiceDetail (props) {
             <th>Item#</th>
             <th>Description</th>
             <th>Units</th>
+            <th>Unit/Price</th>
             <th>Amount</th>
           </tr>
           
@@ -65,6 +66,7 @@ function InvoiceDetail (props) {
                 <td>{item.itemCode}</td>
                 <td>{item.description}</td>
                 <td>{item.quantity}</td>
+                <td>{item.unitPrice.toFixed(2)}</td>
                 <td>{item.extendedAmount.toFixed(2)}</td>
               </tr>
             </React.Fragment>

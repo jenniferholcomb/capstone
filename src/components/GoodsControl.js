@@ -21,6 +21,7 @@ const initialState = {
   addItemsAgain: false,
   invoiceData: [],
   goodsData: [],
+  goodsLoaded: false,
   createInvoice: [],
   selectedInvoice: [],
   manageInvoiceVisible: false,
@@ -70,6 +71,7 @@ const UpdateWrapper = styled.section`
 function GoodsControl () {
   const [state, dispatch] = useReducer(goodsControlReducer, initialState);
   const currentItems = useRef(state.createInvoice);
+  const currentGoods = useRef(state.goodsData);
   const internalRef = useRef(null);
 
   useEffect(() => {
@@ -172,8 +174,14 @@ function GoodsControl () {
     dispatch(getReset());
   }
 
-  const handleUpdatingInvoice = (updatedInvoice) => {
-    currentItems.current = updatedInvoice;
+  const handleUpdatingInvoice = async (updatedInvoice) => {
+    const invoiceRef = doc(db, "invoices", updatedInvoice[0].id);
+    await updateDoc(invoiceRef, updatedInvoice[0]);
+    await updatedInvoice.slice(1).map(item => {
+      const itemsRef = doc(db, "items", item.id);
+      updateDoc(itemsRef, item);
+    });
+    dispatch(getManageInvoice());
   }
 
   const handleDeletingItem = async (itemId, updatedItems) => {
@@ -182,8 +190,9 @@ function GoodsControl () {
     dispatch(getUpdatedItems(updatedItems));
   }
 
-  const { formVisible, itemsFormVisible, invoiceData, goodsData, createInvoice, invoiceDetailVisible, manageInvoiceVisible, editFormVisible, goodsList, error } = state;
+  const { formVisible, itemsFormVisible, invoiceData, goodsData, goodsLoaded, createInvoice, invoiceDetailVisible, manageInvoiceVisible, editFormVisible, goodsList, error } = state;
   currentItems.current = createInvoice;
+  currentGoods.current = goodsData;
   console.log(goodsData)
   console.log("inv")
   console.log(createInvoice)
@@ -231,13 +240,21 @@ function GoodsControl () {
             onClickingDelete = {handleDeleteClick}
             onReset={() => dispatch(getReset())}/>
         </UpdateWrapper> 
-      :
+      : goodsLoaded ?
         <GoodsListWrapper>
           <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
           <button class="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
-          {/* <GoodsList
-            goods={goodsData} /> */}
+          <GoodsList
+            goods={currentGoods.current} />
+            <p>dd</p>
         </GoodsListWrapper>
+      :
+        <React.Fragment>
+          <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
+          <button class="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
+          <p><em>...Loading</em></p>
+        </React.Fragment>
+
       }   
       </GoodsControlWrapper>
     </React.Fragment>

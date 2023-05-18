@@ -43,6 +43,7 @@ const goodsControlReducer = (state, action) => {
     case c.GET_GOODS:
       return {
         ...state,
+        goodsLoaded: true,
         goodsData: action.goods
       }
     case c.GET_DATA_FAILURE:
@@ -53,7 +54,9 @@ const goodsControlReducer = (state, action) => {
     case c.GET_MANAGE_INVOICES:
       return {
         ...state,
-        manageInvoiceVisible: true
+        manageInvoiceVisible: true,
+        createInvoice: [],
+        editFormVisible: false
       }
     case c.GET_GOODS_LIST:
       return {
@@ -95,6 +98,12 @@ const goodsControlReducer = (state, action) => {
         createInvoice: action.upInv,
         editFormVisible: true
       }
+    // case c.GET_UPDATED_INVOICE:
+    //   return {
+    //     ...state,
+    //     editFormVisible: false,
+
+    //   }
     case c.GET_RESET:
       return {
         ...state,

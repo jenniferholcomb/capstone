@@ -107,7 +107,7 @@ function UpdateInvoiceForm(props) {
               type='text'
               name='purveyor'
               placeholder={invoice[0].purveyor} 
-              value={invoice[0].purveyor}
+              defaultValue={invoice[0].purveyor}
               onChange={(e) => handleChange(e, 0)}
               required /></td>
         </tr>
@@ -118,7 +118,7 @@ function UpdateInvoiceForm(props) {
                 type='number'
                 name='invoiceNumber'
                 placeholder={invoice[0].invoiceNumber} 
-                value={invoice[0].invoiceNumber} 
+                defaultValue={invoice[0].invoiceNumber} 
                 onChange={(e) => handleAllChange(e)}       
                 required /></td>
         </tr>
@@ -129,7 +129,7 @@ function UpdateInvoiceForm(props) {
                 type='date'
                 name='date'
                 placeholder={invoice[0].date}
-                value={invoice[0].date} 
+                defaultValue={invoice[0].date} 
                 onChange={(e) => handleAllChange(e)}                  
                 required /></td>
         </tr>
@@ -156,14 +156,14 @@ function UpdateInvoiceForm(props) {
                   type='text'
                   name='itemCode'
                   placeholder={item.itemCode}
-                  value={item.itemCode} 
+                  defaultValue={item.itemCode} 
                   onChange={(e) => handleChange(e, (index+1))}                
                   required /></td>      
                 <td><textarea
                   class="input-2"
                   name='description'
                   placeholder={item.description}
-                  value={item.description} 
+                  defaultValue={item.description} 
                   onChange={(e) => handleChange(e, (index+1))} 
                   required /></td>
                 <td><input
@@ -171,7 +171,7 @@ function UpdateInvoiceForm(props) {
                   type='number'
                   name='quantity'
                   placeholder={item.quantity}
-                  value={item.quantity}  
+                  defaultValue={item.quantity}  
                   onChange={(e) => handleChange(e, (index+1))}               
                   required /></td>
                 <td><input
@@ -179,7 +179,7 @@ function UpdateInvoiceForm(props) {
                   type='number'
                   name='unitPrice'
                   placeholder={item.unitPrice}
-                  value={item.unitPrice}  
+                  defaultValue={item.unitPrice}  
                   onChange={(e) => handleChange(e, (index+1))}               
                   required /></td>
                 <td><button class="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
