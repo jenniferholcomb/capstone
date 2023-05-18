@@ -4,24 +4,40 @@ import PropTypes from 'prop-types';
 function Goods(props) {
   const [newList, setNewList] = useState(null);
   const [listLoaded, setListLoaded] = useState(false);
+  const [color, setColor] = useState(null);
 
   useEffect(() => {
     const sortedArray = props.itemCodeList.sort((a,b) => {
       return new Date(a.date) - new Date(b.date);
     });
     const ascendingArray = sortedArray.reverse();
+
+    console.log(ascendingArray);
+
+    if (ascendingArray.length >= 2) {
+      if (ascendingArray[0].unitPrice < ascendingArray[1].unitPrice) {
+        setColor("rgb(223, 238, 206)");
+      } else if (ascendingArray[0].unitPrice > ascendingArray[1].unitPrice) {
+        setColor("rgb(254, 232, 218")
+      } else {
+        setColor("rgba(255, 255, 255, 0.785)");
+      }
+    }
     setNewList(ascendingArray);
     setListLoaded(true);
+
   }, [])
 
   console.log(newList)
   console.log("newList")
 
+
+
   return (
     <React.Fragment>
       {
         listLoaded ?
-          <div className="itemCard-2">
+          <div style={{backgroundColor: `${color}`}}className="itemCard-2">
             <table >
               <tr>
                 <th>ITEM CODE</th>

@@ -9,6 +9,7 @@ const HeaderWrapper = styled.section`
   margin-left: 40px;
   margin-top: 30px;
   display: flex;
+  
   grid-template-columns: repeat(3, 1fr);
   height: 170px;
   align-items: center;
@@ -28,7 +29,7 @@ function Header () {
     <HeaderWrapper>
       <div className='img-container'>
         <img className="logo"src={logoArt} alt="Logo" />
-        <div></div>
+        <div><em>BENDING BUSINESS TO CUSTOMER FORECASTS</em></div>
       </div>
     </HeaderWrapper>
     </React.Fragment>
