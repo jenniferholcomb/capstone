@@ -1,12 +1,21 @@
 import React from "react";
 import styled from 'styled-components';
 
+const DatesWrapper = styled.section`
+  outline: 1px solid beige;
+  border-radius: 10px;
+  grid-template-rows: 55px 55px 55px 55px 55px;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 0px;
+  display: grid;
+  background-color: rgb(247, 243, 236);
+`;
 
-
-function CalendarDay () {
+function CalendarDay (props) {
   return (
     <React.Fragment>
-      
+      <div onClick = {() => props.whenCalendarClicked()}>
+        <DatesWrapper>
         <div className="cal-item-1" id='l-border'></div>
         <div className="cal-item-2">1</div>
         <div className="cal-item-3">2</div>
@@ -42,7 +51,9 @@ function CalendarDay () {
         <div className="cal-item-33"></div>
         <div className="cal-item-34"></div>
         <div className="cal-item-35"></div>
-      
+        </DatesWrapper>
+      </div>
+
     </React.Fragment>
   );
 }

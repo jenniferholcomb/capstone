@@ -9,13 +9,14 @@ const CompWrapper = styled.section`
 `;
 
 const WeatherWrapper = styled.section`
-  outline: 1px solid black;
+  outline: px solid white;
   border-radius: 10px;
   display: grid;
   grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 0px;
   height: 150px;
+  background-color: rgb(247, 243, 236);
 `;
 
 const NameWrapper = styled.section` 

@@ -17,12 +17,13 @@ const NameWrapper = styled.section`
 `;
 
 const ElementWrapper = styled.section`
-outline: 1px solid black;
+
 border-radius: 10px;
 display: grid;
 grid-template-columns: repeat(7, 1fr);
 grid-gap: 0px;
 height: 170px;
+background-color: rgb(247, 243, 236);
 `;
 //const initialProperties = [{propertyId:'47700213'}, {propertyId:'48145151'}, {propertyId:'50636849'}, {propertyId:'574769491394496704'}, {propertyId:'45065826'}, {propertyId:'37282385'}, {propertyId:'15835761'}, {propertyId:'32240051'}, {propertyId:'43848210'}, {propertyId:'32292475'}];
  
@@ -75,7 +76,7 @@ function PropertyListing (props) {
     return (
       <ListingWrapper>
          <NameWrapper>
-          STR OCCUPANCY 
+          STR OCCUPANCY %
         </NameWrapper>
         <ElementWrapper>
           <ListingDay />

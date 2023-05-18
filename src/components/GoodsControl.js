@@ -34,7 +34,7 @@ const initialState = {
 const GoodsControlWrapper = styled.section`
   grid-column: 1 / span 2;
   grid-row: 2 / span 2;
-  outline: 1px solid black;
+
   border-radius: 10px;
   margin-left: 30px;
   margin-bottom: 30px;
@@ -45,6 +45,7 @@ const GoodsControlWrapper = styled.section`
   justify-items: center;
   align-items: center;
   overflow-y: scroll;
+  background-color: rgb(247, 243, 236);
 `;
 
 const GoodsListWrapper = styled.section`

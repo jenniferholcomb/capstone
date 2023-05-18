@@ -8,10 +8,14 @@ const HeaderWrapper = styled.section`
   
   margin-left: 40px;
   margin-top: 30px;
-  display: grid;
+  display: flex;
   grid-template-columns: repeat(3, 1fr);
   height: 170px;
   align-items: center;
+`;
+
+const LinerWrapper = styled.section`
+  
 `;
 
 // const ImgWrapper = styled.section`
@@ -20,11 +24,14 @@ const HeaderWrapper = styled.section`
 
 function Header () {
   return (
+    <React.Fragment>
     <HeaderWrapper>
       <div className='img-container'>
         <img className="logo"src={logoArt} alt="Logo" />
+        <div></div>
       </div>
     </HeaderWrapper>
+    </React.Fragment>
   );
 }
 

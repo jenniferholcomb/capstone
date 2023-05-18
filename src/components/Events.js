@@ -5,18 +5,18 @@ import EventsItem from './EventsItem';
 import styled from 'styled-components';
 
 const EventsWrapper = styled.section`
-  border-bottom: 1px solid black; 
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+outline: 1px solid black;
+border-radius: 10px;
+  
 `;
 
 const initialState = {
-  isLoaded: false,
+  isLoaded: true,
   eventsList: [],
   error: null
 };
 
-function Events () {
+function Events (props) {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState)
 
@@ -30,6 +30,7 @@ function Events () {
   //       }
   //     })
   //     .then((jsonifiedResponse) => {
+  //       console.log(jsonifiedResponse);
   //       const action = getEventsSuccess(jsonifiedResponse._embedded.events)
   //       dispatch(action)
   //     })
@@ -40,6 +41,8 @@ function Events () {
   // }, [])
 
   const { error, isLoaded, eventsList } = state;
+
+  console.log(eventsList);
 
   if (error) {
     return ( 
@@ -57,8 +60,20 @@ function Events () {
     return (
 
       <EventsWrapper>
-        <p>{eventsList}</p>
-
+        <button className="exit" onClick={props.onExitEvents}>EXIT</button>
+        <table>
+          <tr>
+            <th>DATE</th>
+            <th>EVENT</th>
+          </tr>
+          <tr><td>May 19</td><td>Matchbox Twenty</td></tr>
+          <tr><td>May 28</td><td>James Taylor</td></tr>
+          <tr>
+            <th>DATE</th>
+            <th>HOLIDAY</th>
+          </tr>
+          <tr><td>May 22</td><td>Memorial Day</td></tr>
+        </table>
       </EventsWrapper>
     );
   }
