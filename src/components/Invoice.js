@@ -5,9 +5,30 @@ function Invoice(props) {
   return (
     <React.Fragment>
       <div onClick = {() => props.whenInvoiceClicked(props.invoiceNumber)}>
-        <h3>{props.invoiceNumber} - {props.date}</h3>
-        <p>{props.purveyor}</p>
-        <p>{props.numberItems} - {props.total}</p>
+        <div className="itemCard">
+          <table >
+            <tr>
+              <th>INVOICE#</th>
+              <td className="list-values">{props.invoiceNumber}</td>
+            </tr>
+            <tr>
+              <th>DATE</th>
+              <td className="list-values">{props.date}</td>
+            </tr>
+            <tr>
+              <th>PURVEYOR</th>
+              <td className="list-values">{props.purveyor}</td>
+            </tr>
+            <tr>
+              <th>NO. ITEMS</th>
+              <td className="list-values">{props.numberItems}</td>
+            </tr>
+            <tr>
+              <th>TOTAL</th>
+              <td className="list-values">${props.total}</td>
+            </tr>
+          </table>
+        </div>
       </div>
     </React.Fragment>
   );

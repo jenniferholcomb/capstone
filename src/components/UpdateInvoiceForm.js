@@ -141,6 +141,7 @@ function UpdateInvoiceForm(props) {
         <hr />
         <table>
         <tr>
+          <th>No./</th>
           <th>Item#</th>
           <th>Description</th>
           <th>Units</th>
@@ -149,6 +150,7 @@ function UpdateInvoiceForm(props) {
             {invoice.slice(1).map((item, index) => 
               <React.Fragment>
                 <tr>
+                <td>{index + 1}</td>
                 <td><input
                   class="input-1"
                   type='text'

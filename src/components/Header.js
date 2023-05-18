@@ -6,7 +6,7 @@ const HeaderWrapper = styled.section`
   grid-column: 1 / span 2;
   grid-row: 1;
   
-  margin-left: 80px;
+  margin-left: 40px;
   margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -14,16 +14,16 @@ const HeaderWrapper = styled.section`
   align-items: center;
 `;
 
-const ImgWrapper = styled.section`
-
-`;
+// const ImgWrapper = styled.section`
+//   background: ${logoArt}:
+// `;
 
 function Header () {
   return (
     <HeaderWrapper>
-      <ImgWrapper>
+      <div className='img-container'>
         <img className="logo"src={logoArt} alt="Logo" />
-      </ImgWrapper>
+      </div>
     </HeaderWrapper>
   );
 }

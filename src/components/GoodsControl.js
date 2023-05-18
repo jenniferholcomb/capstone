@@ -188,8 +188,6 @@ function GoodsControl () {
   console.log("inv")
   console.log(createInvoice)
 
-
-
   return (
     <React.Fragment>
       <Header />
