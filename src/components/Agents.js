@@ -11,9 +11,11 @@ import PropertyListing from "./PropertyListing";
 const AgentsWrapper = styled.section`
   grid-column: 3;
   
-
+  width: 83%;
+  height: auto;
   margin-right: 30px;
   margin-top: 30px;
+  margin-left: 30px;
   margin-bottom: 30px;
   display: grid;
 `;

@@ -33,7 +33,7 @@ function GoodsList (props) {
       return goods.filter(value => value.itemCode === item);
     });
     console.log("goodslist");
-    setGoodsListCode(goodsList.slice(0,2));
+    setGoodsListCode(goodsList);
     setGoodsLoaded(true);
   }, [])
 

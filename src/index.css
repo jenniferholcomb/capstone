@@ -65,9 +65,9 @@ code {
   border-right: none;
 }
 
-/* .wea-item-9,.wea-item-8, .wea-item-9, .wea-item-10, .wea-item-11, .wea-item-12, .wea-item-13, .wea-item-14 {
-  grid-row: 2;
-} */
+.wea-item-9,.wea-item-8, .wea-item-9, .wea-item-10, .wea-item-11, .wea-item-12, .wea-item-13, .wea-item-14 {
+  color: gray;
+}
 
 /* [class^='wea-item']:nth-last-child(-n+7) {
   grid-row: 3;
@@ -79,8 +79,9 @@ code {
   border-right: 1px solid black;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 16px;
   padding: none;
+  font-weight: 600;
 }
 
 [class^='list-item'] {
@@ -363,7 +364,8 @@ button[class=inv-list-btn] {
 }
 
 .itemCard-2 {
-  overflow: scroll;
+  overflow-y: scroll;
+  text-align: ;
 }
 
 td[class=list-values] {

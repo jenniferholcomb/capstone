@@ -4,6 +4,10 @@ import { getFetchFailure, getWeatherSuccess } from '../actions';
 import styled from 'styled-components';
 import WeatherDay from './WeatherDay';
 
+const CompWrapper = styled.section`
+  grid-row: 1;
+`;
+
 const WeatherWrapper = styled.section`
   outline: 1px solid black;
   border-radius: 10px;
@@ -11,8 +15,25 @@ const WeatherWrapper = styled.section`
   grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 0px;
-  height: 170px;
+  height: 150px;
 `;
+
+const NameWrapper = styled.section` 
+  display: grid;
+  justify-items: end;
+  font-size: 23px;
+  font-weight: bold;
+  font-style: italic;
+`;
+
+// const ElementWrapper = styled.section`
+// outline: 1px solid black;
+// border-radius: 10px;
+// display: grid;
+// grid-template-columns: repeat(7, 1fr);
+// grid-gap: 0px;
+// height: 170px;
+// `;
 
 const initialState = {
   isLoaded: true,
@@ -62,12 +83,14 @@ function Weather () {
     );
   } else {
     return (
-
-      <WeatherWrapper>
-        <WeatherDay />
-        {/* <p>{forecast}</p> */}
-
-      </WeatherWrapper>
+      <CompWrapper>
+        <NameWrapper>
+          7-DAY FORECAST 
+        </NameWrapper>
+        <WeatherWrapper>
+          <WeatherDay />
+        </WeatherWrapper>
+      </CompWrapper>
     );
   }
 }

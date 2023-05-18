@@ -9,11 +9,11 @@ const ListingWrapper = styled.section`
 `;
 
 const NameWrapper = styled.section` 
-  grid-column: 1 / span 7 ;
-  justify-self: center;
-  align-self: end;
-  font-size: 30px;
+  display: grid;
+  justify-items: end;
+  font-size: 23px;
   font-weight: bold;
+  font-style: italic;
 `;
 
 const ElementWrapper = styled.section`

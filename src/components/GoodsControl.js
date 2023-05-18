@@ -38,12 +38,13 @@ const GoodsControlWrapper = styled.section`
   border-radius: 10px;
   margin-left: 30px;
   margin-bottom: 30px;
+  margin-right: 0px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(6, 1fr);
   justify-items: center;
   align-items: center;
-  overflow: scroll;
+  overflow-y: scroll;
 `;
 
 const GoodsListWrapper = styled.section`
