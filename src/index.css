@@ -165,6 +165,8 @@ button[class=inv-button]:hover {
 
 .logo {
   width: 75%;
+  height: 100px;
+  display: absolute;
 }
 
 input[class=items] {
@@ -179,9 +181,31 @@ input[class=items] {
   font-size: 14px;
 }
 
+input[class=input-3] {
+  width: 100%;
+  margin: 8px 0;
+  margin-left: 10px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
 input[class=items]::placeholder {
   text-align: center;
 
+}
+
+input[class=input-1] {
+  width: 48%;
+  height: 35px;
+  margin: 8px 0;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
 }
 
 textarea {
@@ -197,6 +221,12 @@ textarea {
   font-size: 14px;
   text-align: center;
   padding-top: 11px;
+ 
+}
+
+textarea[class=input-2] {
+  height: 35px;
+  width: 90%;
 }
 
 button[class=items-button] {
@@ -208,6 +238,31 @@ button[class=items-button] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+button[class=up-btn] {
+  width: 150px;
+  height: 60%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[class=delete] {
+  width: 75px;
+  height: 25px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
 }
 
 /* 

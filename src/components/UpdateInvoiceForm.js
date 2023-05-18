@@ -5,9 +5,9 @@ import styled from "styled-components";
 
 
 const InvoiceWrapper = styled.section`
-display: grid;
-justify-content: center;
-outline: 1px solid black;
+  display: grid;
+  justify-items: center;
+  outline: none;
 `;
 
 const TableWrapper = styled.section`
@@ -15,14 +15,16 @@ const TableWrapper = styled.section`
   grid-column: 1 / span 3;
   grid-row: 2;
   width: 95%
-  outline: 1px solid black;
+  outline: none;
+  padding-right: 40px;
+  padding-left: 40px;
+  
 `;
 
 const CancelWrapper = styled.section`
-  display: flex;
-  grid-column: 3;
+  display: grid;
+  grid-column: 2 / span 2;;
   grid-row: 1;
-  outline: 1px solid black;
 `;
 
 function UpdateInvoiceForm(props) {
@@ -89,6 +91,8 @@ function UpdateInvoiceForm(props) {
     props.onEditFormCreation(newState);
   }
 
+  console.log(invoice)
+
   return (
     <React.Fragment>
       
@@ -99,6 +103,7 @@ function UpdateInvoiceForm(props) {
         <tr>
           <td><label htmlFor="purveyor">PURVEYOR</label></td>
           <td><input
+              className="input-3"
               type='text'
               name='purveyor'
               placeholder={invoice[0].purveyor} 
@@ -107,8 +112,9 @@ function UpdateInvoiceForm(props) {
               required /></td>
         </tr>
         <tr>
-          <td><label htmlFor="invoiceNumber">INVOICE NUMBER</label></td>
+          <td><label htmlFor="invoiceNumber">INVOICE#</label></td>
           <td><input
+                className="input-3"
                 type='number'
                 name='invoiceNumber'
                 placeholder={invoice[0].invoiceNumber} 
@@ -118,26 +124,28 @@ function UpdateInvoiceForm(props) {
         </tr>
         <tr> 
           <td><label htmlFor="date">DATE</label></td>
-              <input
+          <td><input
+                className="input-3"
                 type='date'
                 name='date'
                 placeholder={invoice[0].date}
                 value={invoice[0].date} 
                 onChange={(e) => handleAllChange(e)}                  
-                required />
+                required /></td>
         </tr>
+
+        </table>
+        
+        
+        <TableWrapper>
+        <hr />
+        <table>
         <tr>
           <th>Item#</th>
           <th>Description</th>
           <th>Units</th>
           <th>Price/Unit</th>
         </tr>
-        </table>
-        
-        
-        <TableWrapper>
-        <table>
-        
             {invoice.slice(1).map((item, index) => 
               <React.Fragment>
                 <tr>
@@ -157,7 +165,7 @@ function UpdateInvoiceForm(props) {
                   onChange={(e) => handleChange(e, (index+1))} 
                   required /></td>
                 <td><input
-                  class="input-3"
+                  class="input-1"
                   type='number'
                   name='quantity'
                   placeholder={item.quantity}
@@ -165,26 +173,25 @@ function UpdateInvoiceForm(props) {
                   onChange={(e) => handleChange(e, (index+1))}               
                   required /></td>
                 <td><input
-                  class="input-4"
+                  class="input-1"
                   type='number'
                   name='unitPrice'
                   placeholder={item.unitPrice}
                   value={item.unitPrice}  
                   onChange={(e) => handleChange(e, (index+1))}               
                   required /></td>
-                <td><button onClick={() => handleDeleteItem(index)}>DELETE</button></td>
+                <td><button class="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
                 </tr>
               </React.Fragment>
-            )};
+            )}
           </table>
           </TableWrapper>
-          <CancelWrapper><button onClick={props.onReset}>CANCEL</button>
-          <button type="submit">UPDATE INVOICE</button></CancelWrapper>
+            <CancelWrapper>
+              <button className="up-btn" type="submit">UPDATE INVOICE</button>
+              <button className="up-btn" onClick={props.onReset}>CANCEL</button>
+            </CancelWrapper>
           </InvoiceWrapper>
         </form><br />
-      
-          
-          
     </React.Fragment>
   );
 }
