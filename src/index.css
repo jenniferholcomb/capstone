@@ -148,6 +148,42 @@ button[class=nav-2] {
   cursor: pointer;
 }
 
+button[class=nav-5] {
+  width: 61%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+button[class=nav-6] {
+  width: 61%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[class=inv-list-btn-mmm] {
+  width: 150px;
+  height: 60%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 5%;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
 button[class=nav-3] {
   width: 30%;
   background-color: #4CAF50;
@@ -303,7 +339,7 @@ button[class=inv-list-btn] {
   
 }
 
-.itemCard {
+[class^='itemCard'] {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -320,10 +356,14 @@ button[class=inv-list-btn] {
   background-color: rgba(255, 255, 255, 0.785);
 }
 
-.itemCard:hover {
+.itemCard-1:hover {
   transform: scale(1.04);
   transition: all 0.5s ease;
   /* background-color: rgba(244, 241, 238, 0.515); */
+}
+
+.itemCard-2 {
+  overflow: scroll;
 }
 
 td[class=list-values] {

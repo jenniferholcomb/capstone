@@ -1,46 +1,64 @@
 import React, { useEffect, useState } from "react";
 import Goods from "./Goods";
 import PropTypes from 'prop-types';
+import styled from "styled-components";
+
+const ContainerWrapper = styled.section`
+  grid-column: 1 / span 3;
+  justify-self: start;
+  padding-left: 10px;
+`;
+
+const InvListWrapper = styled.section`
+  grid-column: 1 / span 3;
+  grid-row: 2;
+  padding-top: 60px;
+  padding: 20px;
+  display: inline-flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: center;
+`;
 
 function GoodsList (props) {
 
-  const [allItemID, setAllItemId] = useState(null);
+  const [goodsListCode, setGoodsListCode] = useState(null);
+  const [goodsLoaded, setGoodsLoaded] = useState(false);
   const { goods } = props;
 
   useEffect(() => {
-    console.log(goods);
     const allItemCode = goods.reduce((array, value) => array.concat(value.itemCode), []);
-    console.log(allItemCode);
     const uniqueGoodsCode = [...new Set(allItemCode)];
-    console.log(uniqueGoodsCode);
     const goodsList = uniqueGoodsCode.map(item => {
-      return [goods.filter(value => value.itemCode === item)];
+      return goods.filter(value => value.itemCode === item);
     });
-    console.log(goodsList);
-    //setAllItemId(uniqueGoodsCode);
-  })
-  
+    console.log("goodslist");
+    setGoodsListCode(goodsList.slice(0,2));
+    setGoodsLoaded(true);
+  }, [])
+
   return (
     <React.Fragment>
-      {/* <h3>{props.goods[0].itemCode} - {props.goods.description}</h3>
-      
-      {props.goods.map((entry, index) => 
-        <Goods
-          itemCode={entry.itemCode}
-          description={entry.description}
-          quantity={entry.quantity}
-          unitPrice={entry.unitPrice}
-          extendedAmount={entry.extendedAmount} 
-          invoiceId={entry.invoiceId}
-          date={entry.date}
-          key={index} />
-      )} */}
+      <ContainerWrapper>
+        <button class="nav-5" onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
+        <button class="nav-6" onClick={props.onAddInvoiceClick}>ADD NEW INVOICE</button>
+      </ContainerWrapper>
+      { 
+      goodsLoaded ?
+      <InvListWrapper>
+        {goodsListCode.map((entry, index) => 
+          <Goods
+            itemCodeList={entry} />
+        )}
+      </InvListWrapper>
+      :
+        <p><em>...Loading</em></p>
+      }
     </React.Fragment>
   );
 }
 
 GoodsList.propTypes = {
-  onInvoiceSelection: PropTypes.func,
   goods: PropTypes.array
 };
 

@@ -241,13 +241,12 @@ function GoodsControl () {
             onReset={() => dispatch(getReset())}/>
         </UpdateWrapper> 
       : goodsLoaded ?
-        <GoodsListWrapper>
-          <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
-          <button class="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
+        <React.Fragment>
           <GoodsList
-            goods={currentGoods.current} />
-            <p>dd</p>
-        </GoodsListWrapper>
+            goods={currentGoods.current} 
+            onManageInvoicesClick={() => dispatch(getManageInvoice())}
+            onAddInvoiceClick={() => dispatch(getFormVisible())} />
+        </React.Fragment>
       :
         <React.Fragment>
           <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>

@@ -18,7 +18,6 @@ const InvListWrapper = styled.section`
   flex-flow: row wrap;
   width: 100%;
   justify-content: center;
-
 `;
 
 function InvoiceList (props) {

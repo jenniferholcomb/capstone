@@ -5,7 +5,7 @@ function Invoice(props) {
   return (
     <React.Fragment>
       <div onClick = {() => props.whenInvoiceClicked(props.invoiceNumber)}>
-        <div className="itemCard">
+        <div className="itemCard-1">
           <table >
             <tr>
               <th>INVOICE#</th>
