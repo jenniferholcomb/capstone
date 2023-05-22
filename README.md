@@ -18,8 +18,6 @@
 
 #### This application is a UI dashboard that highlights data driven red/yellow/green prompts for business decision making. It also incorporates tools to determine tourism probability for the week.
 
-## Component Diagram for application
-<!-- ![alt](src/img/.png "component-diagram") -->
 
 ## Setup/Installation Requirements
 
@@ -32,7 +30,7 @@
 
 ## Known Bugs
 
-* 
+* No known bugs. 
 * If any issues are discovered, please email jenniferlholcomb@gmail.com.
 
 ## License

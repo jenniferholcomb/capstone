@@ -17,10 +17,10 @@ function ListingDay () {
       <div className="list-day-12">5</div>
       <div className="list-day-13">6</div>
       <div className="list-day-14">7</div> */}
-      <div className="list-item-1">86</div>
+      <div className="list-item-8">86</div>
       <div className="list-item-2">95</div>
       <div className="list-item-3">96</div>
-      <div className="list-item-4">93</div>
+      <div className="list-item-9">93</div>
       <div className="list-item-5">54</div>
       <div className="list-item-6">16</div>
       <div className="list-item-7">21</div>

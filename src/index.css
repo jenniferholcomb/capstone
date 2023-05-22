@@ -31,15 +31,15 @@ code {
 }
 
 .cal-item-20 {
-  background-color: rgb(250, 221, 188);
+  background-color: rgb(254, 232, 218);
 }
 
 .cal-item-23 {
-  background-color: rgb(250, 221, 188);
+  background-color: rgb(254, 232, 218);
 }
 
 .cal-item-29 {
-  background-color: rgb(250, 221, 188);
+  background-color: rgb(254, 232, 218);
 }
 
 [class^='cal-item']:last-child {
@@ -113,6 +113,9 @@ code {
   font-size: 17px;
   font-weight: 600;
   padding: none;
+}
+.list-item-2, .list-item-3, .list-item-8, .list-item-9 {
+  background-color: rgb(254, 232, 218);
 }
 
 .list-day-8, .list-day-9, .list-day-8, .list-day-8, .list-day-8, .list-day-8,.list-day-8   {

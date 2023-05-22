@@ -37,7 +37,7 @@ function Goods(props) {
     <React.Fragment>
       {
         listLoaded ?
-          <div style={{backgroundColor: `${color}`}}className="itemCard-2">
+          <div style={{backgroundColor: `${color}`}} className="itemCard-2">
             <table >
               <tr>
                 <th>ITEM CODE</th>
