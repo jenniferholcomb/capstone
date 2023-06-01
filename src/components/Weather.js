@@ -37,18 +37,21 @@ const NameWrapper = styled.section`
 // `;
 
 const initialState = {
+  //isLoaded: false,
+  //forecast: [],
+
   isLoaded: true,
-  forecast: [],
+  forecast: [67, 36, 'c02d', 'Few clouds', 69, 42, 'c02d', 'Few clouds', 75, 45, 'c02d', 'Few clouds', 78, 50, 'c02d', 'Few clouds', 81, 52, 'c02d', 'Few clouds', 84, 55, 'r02d', 'Moderate rain', 77, 55, 'c03d', 'Broken clouds'],
   error: null
 };
 
 function Weather () {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState)
+  
 
   // useEffect(() => {
-  //   fetch(`https://api.open-meteo.com/v1/forecast?latitude=44.06&longitude=-121.32&hourly=temperature_2m,precipitation_probability&temperature_unit=fahrenheit&forecast_days=14&timezone=America%2FLos_Angeles`)
-    
+  //   fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=Bend,OR&key=${process.env.REACT_APP_API_KEY_WEATHER}&units=I&days=7`)
   //   .then(response => {
   //       if (!response.ok) {
   //         throw new Error(`${response.status}: ${response.statusText}`);
@@ -57,7 +60,8 @@ function Weather () {
   //       }
   //     })
   //     .then((jsonifiedResponse) => {
-  //       const action = getWeatherSuccess(jsonifiedResponse.list)
+  //       console.log(jsonifiedResponse)
+  //       const action = getWeatherSuccess(jsonifiedResponse.data)
   //       dispatch(action)
   //     })
   //     .catch((error) => {
@@ -68,7 +72,7 @@ function Weather () {
 
   const { error, isLoaded, forecast } = state;
 
-  //console.log(forecast);
+  console.log(forecast);
 
   if (error) {
     return ( 
@@ -85,11 +89,8 @@ function Weather () {
   } else {
     return (
       <CompWrapper>
-        <NameWrapper>
-          7-DAY FORECAST 
-        </NameWrapper>
         <WeatherWrapper>
-          <WeatherDay />
+          <WeatherDay newForecast={forecast}/>
         </WeatherWrapper>
       </CompWrapper>
     );
