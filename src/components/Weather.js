@@ -37,11 +37,11 @@ const NameWrapper = styled.section`
 // `;
 
 const initialState = {
-  //isLoaded: false,
-  //forecast: [],
+  // isLoaded: false,
+  // forecast: [],
 
   isLoaded: true,
-  forecast: [67, 36, 'c02d', 'Few clouds', 69, 42, 'c02d', 'Few clouds', 75, 45, 'c02d', 'Few clouds', 78, 50, 'c02d', 'Few clouds', 81, 52, 'c02d', 'Few clouds', 84, 55, 'r02d', 'Moderate rain', 77, 55, 'c03d', 'Broken clouds'],
+  forecast: [64, 69, 75, 79, 81, 83, 80, 36, 41, 44, 48, 51, 58, 59, 'c02d', 'c01d', 'c02d', 'c02d', 'c02d', 'c02d', 'c02d', 'Few clouds', 'Clear Sky', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds'],
   error: null
 };
 
