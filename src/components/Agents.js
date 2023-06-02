@@ -1,6 +1,5 @@
 import React from "react";
 import Weather from "./Weather";
-//import PropertyListing from "./PropertyListing";
 //import ShortTermRental from "./ShortTermRental";
 import Calendar from "./Calendar";
 // import Events from "./Events";
@@ -10,7 +9,6 @@ import PropertyListing from "./PropertyListing";
 
 const AgentsWrapper = styled.section`
   grid-column: 3;
-  
   width: 83%;
   height: auto;
   margin-right: 30px;

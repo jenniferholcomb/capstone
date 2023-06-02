@@ -5,7 +5,6 @@ import Events from "./Events";
 
 const CalendarWrapper = styled.section`
   margin-top: 20px;
-  grid-row: 3;
   
 `;
 
@@ -30,6 +29,7 @@ const NameWrapper = styled.section`
 
 function Calendar () {
   const [eventsLoaded, setEventsLoaded] = useState(false);
+  const [days, setDays] = useState(['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA']);
 
   const handleCalendarSelection = () => {
     setEventsLoaded(true);

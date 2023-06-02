@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 function WeatherDay(props) {
 
   const { newForecast } = props;
-  console.log(newForecast);
-
 
   return (
     <React.Fragment>
