@@ -37,7 +37,6 @@ function Calendar (props) {
     setDates(fortnight);
   }, []);
 
-
   const handleCalendarSelection = () => {
     setEventsLoaded(true);
   }
@@ -61,7 +60,6 @@ function Calendar (props) {
               days={props.currentWeek} 
               twoWeeks={dates} />
           }
-        
       </CalendarWrapper>
     </React.Fragment>
   );

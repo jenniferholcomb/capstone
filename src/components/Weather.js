@@ -41,7 +41,7 @@ const initialState = {
   // forecast: [],
 
   isLoaded: true,
-  forecast: [64, 69, 75, 79, 81, 83, 80, 36, 41, 44, 48, 51, 58, 59, 'c02d', 'c01d', 'c02d', 'c02d', 'c02d', 'c02d', 'c02d', 'Few clouds', 'Clear Sky', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds'],
+  forecast: [36, 41, 44, 48, 51, 58, 59, 64, 69, 75, 79, 81, 83, 80, 'c02d', 'c01d', 'c02d', 'c02d', 'c02d', 'c02d', 'c02d', 'Few clouds', 'Clear Sky', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds'],
   error: null
 };
 

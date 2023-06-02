@@ -25,6 +25,7 @@ const ElementWrapper = styled.section`
   height: 150px;
   background-color: rgb(247, 243, 236);
 `;
+
 //const initialProperties = [{propertyId:'47700213'}, {propertyId:'48145151'}, {propertyId:'50636849'}, {propertyId:'574769491394496704'}, {propertyId:'45065826'}, {propertyId:'37282385'}, {propertyId:'15835761'}, {propertyId:'32240051'}, {propertyId:'43848210'}, {propertyId:'32292475'}];
  
 function PropertyListing (props) {
@@ -33,31 +34,34 @@ function PropertyListing (props) {
   const [listings, setListings] = useState([]);
   const [error, setError] = useState(null);
 
-  // useEffect(() => {
-  //   fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${47700213}`) 
-  //   .then((response) => {
-  //       if (!response.ok) {
-  //         throw new Error(`${response.status}: ${response.statusText}`);
-  //       } else {
-  //         return response.json();
-  //       }
-  //     })
-  //     .then((jsonifiedResponse) => {
-  //       setListings(jsonifiedResponse.data[0].days);
-  //       setLoaded(true);
-  //     })
-  //     .catch((error) => {
-  //       setError(error);
-  //     });
-  // }, [])
+  useEffect(() => {
+    fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${47700213}`) 
+    .then((response) => {
+        if (!response.ok) {
+          throw new Error(`${response.status}: ${response.statusText}`);
+        } else {
+          return response.json();
+        }
+      })
+      .then((jsonifiedResponse) => {
+        parseData(jsonifiedResponse.data[0].days)
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, [])
 
   const parseData = (newListings) => {
-    const oneMonthAvailable = newListings[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-    const twoMonthAvailable = newListings[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-    setListings([...oneMonthAvailable, ...twoMonthAvailable]);
+    const newDate = new Date();
+    const today = newDate.getFullYear() + '-' + ('0' + parseInt(newDate.getMonth() + 1)).slice(-2) + '-' + ('0' + newDate.getDate()).slice(-2);
+    const index = newListings.map((x,y) => {if (x.date === today) { return y; }}).filter(x => x !== undefined);
+    const fortnight = newListings.splice(index[0], 14);
+    const available = fortnight.reduce((array, day) => array.concat(day.available), []);
+    setListings(available);
+    setLoaded(true);
   }
   
-  console.log("listings");
+  console.log(listings);
   //console.log(listings[0].available);
 
   if (error) {
