@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Weather from "./Weather";
 //import ShortTermRental from "./ShortTermRental";
 import Calendar from "./Calendar";
@@ -19,15 +19,22 @@ const AgentsWrapper = styled.section`
 `;
 
 function Agents () {
+
+  const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    const current = new Date().getDay();
+    const d = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
+    const week = d.slice(current).concat(d.slice(0, current));
+    setDays(week);
+  }, [])
+
   return (
     // <div id="agents">
       <AgentsWrapper>
         <Weather />
-        {/* <ShortTermRental /> */}
-        <PropertyListing />
-        <Calendar />
-        {/* <Events />
-        <Holidays /> */}
+        <PropertyListing currentWeek={days} />
+        <Calendar currentWeek={days} />
       </AgentsWrapper>
     // </div>
   );

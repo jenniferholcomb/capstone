@@ -5,11 +5,11 @@ const agentsReducer = (state, action) => {
   switch (action.type) {
   
     case c.GET_WEATHER_SUCCESS:
-      const highs = action.forecast.reduce((array, list) => array.concat(Math.round(list.high_temp)), []);
       const lows = action.forecast.reduce((array, list) => array.concat(Math.round(list.low_temp)), []);
+      const highs = action.forecast.reduce((array, list) => array.concat(Math.round(list.high_temp)), []);
       const icons = action.forecast.reduce((array, list) => array.concat(list.weather.icon), []);
       const descript = action.forecast.reduce((array, list) => array.concat(list.weather.description), []);
-      const newForecast = [...highs, ...lows, ...icons, ...descript];
+      const newForecast = [...lows, ...highs, ...icons, ...descript];
                                                                     
       return {
           ...state,

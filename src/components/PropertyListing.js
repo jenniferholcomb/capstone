@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ListingDay from './ListingDay';
 
@@ -79,12 +79,16 @@ function PropertyListing (props) {
           STR OCCUPANCY %
         </NameWrapper>
         <ElementWrapper>
-          <ListingDay />
+          <ListingDay days={props.currentWeek} />
         </ElementWrapper>
       </ListingWrapper>
     );
   }
 }
+
+PropertyListing.propTypes = {
+  currentWeek: PropTypes.array
+};
 
 export default PropertyListing;
 

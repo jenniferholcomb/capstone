@@ -1,15 +1,13 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-function ListingDay () {
+function ListingDay (props) {
   return (
     <React.Fragment>
-      <div className="list-item-1">M</div>
-      <div className="list-item-2">TU</div>
-      <div className="list-item-3">W</div>
-      <div className="list-item-4">TH</div>
-      <div className="list-item-5">F</div>
-      <div className="list-item-6">SA</div>
-      <div className="list-item-7">SU</div>
+      {props.days.map((item, index) => 
+        <div className={`list-item-str-${index + 1}`}>{item}</div>
+      )}
+
       <div className="list-item-8">86</div>
       <div className="list-item-9">95</div>
       <div className="list-item-10">96</div>
@@ -27,5 +25,9 @@ function ListingDay () {
     </React.Fragment>
   )
 }
+
+ListingDay.propTypes = {
+ 
+};
 
 export default ListingDay;

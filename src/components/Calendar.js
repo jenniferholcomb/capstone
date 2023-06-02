@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CalendarDay from "./CalendarDay";
 import styled from 'styled-components';
 import Events from "./Events";
@@ -27,15 +27,22 @@ const NameWrapper = styled.section`
 
 
 
-function Calendar () {
+function Calendar (props) {
   const [eventsLoaded, setEventsLoaded] = useState(false);
-  const [days, setDays] = useState(['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA']);
+  const [dates, setDates] = useState([]);
+
+  useEffect(() => {
+    const today = new Date();
+    const fortnight = [...Array(14)].map((x, i) => new Date(new Date().setDate(today.getDate() + i)).getDate());
+    setDates(fortnight);
+  }, []);
+
 
   const handleCalendarSelection = () => {
     setEventsLoaded(true);
   }
 
-  const handleExitEvens = () => {
+  const handleExitEvents = () => {
     setEventsLoaded(false);
   }
 
@@ -45,14 +52,14 @@ function Calendar () {
         <NameWrapper>
           CALENDAR 
         </NameWrapper>
-        
           {
           eventsLoaded ?
-            <Events onExitEvents={handleExitEvens}/>  
+            <Events onExitEvents={handleExitEvents}/>  
           :
-          
-            <CalendarDay whenCalendarClicked= {handleCalendarSelection}/>
-      
+            <CalendarDay 
+              whenCalendarClicked={handleCalendarSelection}
+              days={props.currentWeek} 
+              twoWeeks={dates} />
           }
         
       </CalendarWrapper>
