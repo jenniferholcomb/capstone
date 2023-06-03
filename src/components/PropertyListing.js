@@ -52,10 +52,9 @@ function PropertyListing (props) {
   }, [])
 
   const parseData = (newListings) => {
-    const newDate = new Date();
-    const today = newDate.getFullYear() + '-' + ('0' + parseInt(newDate.getMonth() + 1)).slice(-2) + '-' + ('0' + newDate.getDate()).slice(-2);
-    const index = newListings.map((x,y) => {if (x.date === today) { return y; }}).filter(x => x !== undefined);
-    const fortnight = newListings.splice(index[0], 14);
+    const today = new Date().toISOString().substring(0,10);
+    const index = newListings.map(e => e.date).indexOf(today);
+    const fortnight = newListings.splice(index, 14);
     const available = fortnight.reduce((array, day) => array.concat(day.available), []);
     setListings(available);
     setLoaded(true);

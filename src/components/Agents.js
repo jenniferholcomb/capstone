@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Weather from "./Weather";
-//import ShortTermRental from "./ShortTermRental";
+import STRController from "./STRController";
 import Calendar from "./Calendar";
 // import Events from "./Events";
 // import Holidays from "./Holidays";
 import styled from 'styled-components';
-import PropertyListing from "./PropertyListing";
+//import PropertyListing from "./PropertyListing";
 
 const AgentsWrapper = styled.section`
   grid-column: 3;
@@ -33,7 +33,7 @@ function Agents () {
     // <div id="agents">
       <AgentsWrapper>
         <Weather />
-        <PropertyListing currentWeek={days} />
+        <STRController currentWeek={days} />
         <Calendar currentWeek={days} />
       </AgentsWrapper>
     // </div>

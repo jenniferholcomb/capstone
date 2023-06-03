@@ -12,8 +12,6 @@ function Goods(props) {
     });
     const ascendingArray = sortedArray.reverse();
 
-    console.log(ascendingArray);
-
     if (ascendingArray.length >= 2) {
       if (ascendingArray[0].unitPrice < ascendingArray[1].unitPrice) {
         setColor("rgb(223, 238, 206)");
@@ -25,13 +23,7 @@ function Goods(props) {
     }
     setNewList(ascendingArray);
     setListLoaded(true);
-
   }, [])
-
-  console.log(newList)
-  console.log("newList")
-
-
 
   return (
     <React.Fragment>
