@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ShortTermRentalWrapper = styled.section`
+  border-bottom: 1px solid black; 
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+`;
 
 function ShortTermRental (props) {
  
-  // const [startLoading, setStartLoading] = useState(true);
-  // const [propLoaded, setPropLoaded] = useState(false);
-  // const [sendProps, setSendProps] = useState(false);
-  // const [propertyList, setPropertyList] = useState([]);
-  // const [listComplete, setListComplete] = useState(false);
-  // const [listingList, setListingList] = useState(null);
-  // const [error, setError] = useState(null);
-
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
@@ -40,11 +41,7 @@ function ShortTermRental (props) {
     const date = new Date().toISOString().substring(0,10);
     const propObj = {date, propertiesId};
     
-    handleSendingProps(propObj);
-    setPropertyList(propertiesId);
-    setStartLoading(false);
-    setPropLoaded(true);
-    //setSendProps(true)
+    props.onSetProperties(propObj);
   };
 
   if (error) {
@@ -53,37 +50,20 @@ function ShortTermRental (props) {
         <h1>Error: {error}</h1>
       </ShortTermRentalWrapper> 
     );
-  } else if (sendProps) {
-    console.log('were moving')
-    return (
-      <ShortTermRentalWrapper>
-        <ListingDay days={props.currentWeek} />        
-      </ShortTermRentalWrapper>
-    )
-  } else if (!propLoaded) {
+  } else {
     return (
       <ShortTermRentalWrapper>
         <h1>...Loading...</h1>
       </ShortTermRentalWrapper>
     );
-  } else {
-    <p>somethings wrong</p>
   }
 }
+
+ShortTermRental.propTypes = {
+  onGetProperties: PropTypes.func
+};
 
 export default ShortTermRental;
 
 
-// {properties.map(id => 
-//   <Listing 
-//     id={id}
-//     onAvailabilityCall = {handleAvailabilityData} />
-// )} 
-
-// const newProperties = action.properties.filter(listing => listing.platforms.airbnb_property_id !== null 
-//   && listing.room_type === "Entire home/apt"
-//   && listing.latitude < 44.10125
-//   && listing.latitude > 44.03699
-//   && listing.longitude > -121.36035
-//   && listing.longitude < -121.27744);
 

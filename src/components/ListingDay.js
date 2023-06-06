@@ -23,11 +23,12 @@ function ListingDay (props) {
       <div className="list-item-20">16</div>
       <div className="list-item-21">21</div>
     </React.Fragment>
-  )
+  );
 }
 
 ListingDay.propTypes = {
- 
+  days: PropTypes.array,
+  propIds: PropTypes.array
 };
 
 export default ListingDay;
