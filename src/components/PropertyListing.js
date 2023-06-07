@@ -33,7 +33,7 @@ function PropertyListing (props) {
   const [listings, setListings] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [error, setError] = useState(null);
-  const getListings = [];
+  const getListings = useRef(true);
 
   const properties = props.propIds[0].propertyId.slice(0, 5);
   console.log(properties)
@@ -71,15 +71,15 @@ function PropertyListing (props) {
     const index = newListings.map(e => e.date).indexOf(today);
     const fortnight = newListings.splice(index, 14);
     const available = fortnight.reduce((array, day) => array.concat(day.available), []);
-    console.log(available)
 
+    //setListings( ? );
     // NEXT! push available to array
 
     // setListings(newListingsAvailable);
     // setLoaded(true);
   }
   
-  console.log(getListings);
+  console.log(listings);
 
   if (error) {
     return ( 
