@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 //import ShortTermRental from './ShortTermRental';
-//import PropertyListing from './PropertyListing';
+import PropertyListing from './PropertyListing';
 import ListingDay from './ListingDay';
 import styled from 'styled-components';
 import db from './../firebase.js';
@@ -15,8 +15,10 @@ const ShortTermRentalWrapper = styled.section`
 function STRController (props) {
 
   const [propertyList, setPropertyList] = useState(null);
+  const [listingList, setListingList] = useState(null);
   //const [getProperties, setGetProperties] = useState(false);
   const [propLoaded, setPropLoaded] = useState(false);
+  const [listingLoaded, setListingLoaded] = useState(false);
   const [error, setError] = useState(null);
   const currPropList = useRef(null);
 
@@ -24,7 +26,6 @@ function STRController (props) {
   // const [sendProps, setSendProps] = useState(false);
   // const [listComplete, setListComplete] = useState(false);
   // const [listingList, setListingList] = useState(null);
-
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -93,12 +94,6 @@ function STRController (props) {
     setPropLoaded(true);
   };
 
-  // const handleAvailabilityData = (listingData) => {
-  //   setListingList(listingData);
-  //   setListComplete(true);
-  // }
-
-
   console.log(currPropList.current);
 
   if (error) {
@@ -110,8 +105,8 @@ function STRController (props) {
   } else if (propLoaded) {
     return (
       <ShortTermRentalWrapper>
-        <ListingDay days={props.currentWeek} 
-                    propIds={currPropList.current} />        
+        <PropertyListing days={props.currentWeek} 
+                         propIds={currPropList.current} />        
       </ShortTermRentalWrapper>
     );
   } else {

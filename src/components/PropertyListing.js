@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ListingDay from './ListingDay';
+import db from './../firebase.js';
+import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 
 const ListingWrapper = styled.section`
   grid-row: 2;
@@ -25,18 +27,20 @@ const ElementWrapper = styled.section`
   height: 150px;
   background-color: rgb(247, 243, 236);
 `;
-
-//const initialProperties = [{propertyId:'47700213'}, {propertyId:'48145151'}, {propertyId:'50636849'}, {propertyId:'574769491394496704'}, {propertyId:'45065826'}, {propertyId:'37282385'}, {propertyId:'15835761'}, {propertyId:'32240051'}, {propertyId:'43848210'}, {propertyId:'32292475'}];
  
 function PropertyListing (props) {
- 
-  const [loaded, setLoaded] = useState(true);
-  const [listings, setListings] = useState([]);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${47700213}`) 
-    .then((response) => {
+  const [listings, setListings] = useState([]);
+  const [loaded, setLoaded] = useState(true);
+  const [error, setError] = useState(null);
+  const getListings = [];
+
+  const properties = props.propIds[0].propertyId.slice(0, 5);
+  console.log(properties)
+
+  const apiCall = async (singleId) => {
+    await fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${singleId}`) 
+      .then((response) => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
         } else {
@@ -49,6 +53,17 @@ function PropertyListing (props) {
       .catch((error) => {
         setError(error);
       });
+  }
+
+  useEffect(() => {
+    if (getListings) {
+      properties.forEach((id, index) => {
+        setTimeout(() => {
+          apiCall(id);
+        }, index * 750)
+      })
+    }
+    getListings.current = false;
   }, [])
 
   const parseData = (newListings) => {
@@ -56,12 +71,15 @@ function PropertyListing (props) {
     const index = newListings.map(e => e.date).indexOf(today);
     const fortnight = newListings.splice(index, 14);
     const available = fortnight.reduce((array, day) => array.concat(day.available), []);
-    setListings(available);
-    setLoaded(true);
+    console.log(available)
+
+    // NEXT! push available to array
+
+    // setListings(newListingsAvailable);
+    // setLoaded(true);
   }
   
-  console.log(listings);
-  //console.log(listings[0].available);
+  console.log(getListings);
 
   if (error) {
     return ( 
@@ -82,7 +100,7 @@ function PropertyListing (props) {
           STR OCCUPANCY %
         </NameWrapper>
         <ElementWrapper>
-          <ListingDay days={props.currentWeek} />
+          <ListingDay days={props.days} />
         </ElementWrapper>
       </ListingWrapper>
     );
@@ -90,18 +108,8 @@ function PropertyListing (props) {
 }
 
 PropertyListing.propTypes = {
-  currentWeek: PropTypes.array
+  propIds: PropTypes.array,
+  days: PropTypes.array,
 };
 
 export default PropertyListing;
-
-
-// const oneMonthAvailable = action.listings[0].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-// console.log(action.listings);
-// const twoMonthAvailable = action.listings.data[0].days;
-// console.log('month available')
-// console.log(twoMonthAvailable);
-// const twoMonthAvailable = action[1].days.reduce((array, day) => array.concat(day.date).concat(day.available), []);
-// const daysAvailable = oneMonthAvailabile.concat(twoMonthAvailable);
-// const today = new Date().toISOString().substring(0,10);
-// const twoWeeks = daysAvailable.slice(daysAvailable.indexOf(today), daysAvailable.indexOf(today)+28).filter((e, i) =>  i % 2 !== 0);

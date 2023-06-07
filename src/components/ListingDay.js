@@ -28,7 +28,7 @@ function ListingDay (props) {
 
 ListingDay.propTypes = {
   days: PropTypes.array,
-  propIds: PropTypes.array
+
 };
 
 export default ListingDay;
