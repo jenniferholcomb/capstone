@@ -37,7 +37,7 @@ function PropertyListing (props) {
   const getListings = useRef(true);
   const listingsArr = useRef(fornightList);
 
-  const properties = props.propIds[0].propertyId.slice(0, 5);
+  const properties = props.propIds[0].propertyId.slice(0, 25);
   console.log(properties)
 
   const apiCall = async (singleId) => {
@@ -76,18 +76,26 @@ function PropertyListing (props) {
 
     const availArr = listingsArr.current;
     available.forEach((item, index) => availArr[index].push(item));
-    console.log(availArr);
     listingsArr.current = availArr;
+    console.log(availArr)
 
     if (availArr[0].length === properties.length) {
-      const finalArr = availArr.map( function(item) {
+      const finalArr = availArr.map(function(item) {
         return (
             item.reduce(function(tally, avail) {
             tally[avail] = (tally[avail] || 0) + 1;
              return tally; 
             }, {}))
       });
-      setAvailability(finalArr);
+      const percentArr = finalArr.map(item => {
+        if(item.true) {
+          return (item.true/properties.length).toFixed(2).substring(2);
+        } else {
+          return '0';
+        }
+      });
+      console.log(percentArr);
+      //setAvailability(percentArr);
     }
     //setListings( ? );
     // NEXT! push available to array
