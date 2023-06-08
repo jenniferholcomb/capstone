@@ -29,11 +29,13 @@ const ElementWrapper = styled.section`
 `;
  
 function PropertyListing (props) {
+  const fornightList = Array.from({length: 14}, () => ([]));
 
   const [listings, setListings] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [error, setError] = useState(null);
   const getListings = useRef(true);
+  const listingsArr = useRef(fornightList);
 
   const properties = props.propIds[0].propertyId.slice(0, 5);
   console.log(properties)
@@ -72,6 +74,10 @@ function PropertyListing (props) {
     const fortnight = newListings.splice(index, 14);
     const available = fortnight.reduce((array, day) => array.concat(day.available), []);
 
+    const availArr = listingsArr.current;
+    available.forEach((item, index) => availArr[index].push(item));
+    console.log(availArr);
+    listingsArr.current = availArr;
     //setListings( ? );
     // NEXT! push available to array
 
@@ -79,7 +85,7 @@ function PropertyListing (props) {
     // setLoaded(true);
   }
   
-  console.log(listings);
+  console.log(listingsArr.current);
 
   if (error) {
     return ( 
