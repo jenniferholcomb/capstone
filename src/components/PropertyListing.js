@@ -34,11 +34,34 @@ function PropertyListing (props) {
   const [availability, setAvailability] = useState([]);
   const [loaded, setLoaded] = useState(true);
   const [error, setError] = useState(null);
-  const getListings = useRef(true);
+  //const getListings = useRef(true);
+  const [listingLoaded, setListingLoaded] = useState(false);
   const listingsArr = useRef(fornightList);
+  const percentArr = useRef(null);
 
-  const properties = props.propIds[0].propertyId.slice(0, 25);
+  const properties = props.propIds[0].propertyId.slice(0, 5);
   console.log(properties)
+
+  useEffect(() => {
+    const unSubscribe = onSnapshot(
+      collection(db, "listings"),
+      (collectionSnapshot) => {
+        const listings = [];
+        collectionSnapshot.forEach((doc) => {
+          listings.push({
+            availPercent: doc.data().availPercent,
+            id: doc.id
+          });
+        });
+        percentArr.current = listings;
+        handleGetListingAvail();
+      },
+      (error) => {
+        setError(error);
+      }
+    );
+    return () => unSubscribe();
+  }, []);
 
   const apiCall = async (singleId) => {
     await fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${singleId}`) 
@@ -57,16 +80,17 @@ function PropertyListing (props) {
       });
   }
 
-  useEffect(() => {
-    if (getListings) {
+  const handleGetListingAvail = () => {
+    if (percentArr.current.length === 0) {
       properties.forEach((id, index) => {
         setTimeout(() => {
           apiCall(id);
         }, index * 750)
       })
+    } else {
+      setListingLoaded(true);
     }
-    getListings.current = false;
-  }, [])
+  };
 
   const parseData = (newListings) => {
     const today = new Date().toISOString().substring(0,10);
@@ -95,15 +119,15 @@ function PropertyListing (props) {
         }
       });
       console.log(percentArr);
-      //setAvailability(percentArr);
+      handleSendingAvail(percentArr);
     }
-    //setListings( ? );
-    // NEXT! push available to array
-
-    // setListings(newListingsAvailable);
-    // setLoaded(true);
   }
   
+  const handleSendingAvail = async (percents) => {
+    await addDoc(collection(db, "listings"), percents);
+    setListingLoaded(true);
+  };
+
   console.log(availability);
 
   if (error) {
@@ -112,13 +136,7 @@ function PropertyListing (props) {
         <h1>Error: {error}</h1>
       </ListingWrapper> 
     );
-  } else if (!loaded) {
-    return (
-      <ListingWrapper>
-        <h1>...Loading...</h1>
-      </ListingWrapper>
-    );
-  } else {
+  } else if (listingLoaded) {
     return (
       <ListingWrapper>
          <NameWrapper>
@@ -127,6 +145,12 @@ function PropertyListing (props) {
         <ElementWrapper>
           <ListingDay days={props.days} />
         </ElementWrapper>
+      </ListingWrapper>
+    );
+  } else {
+    return (
+      <ListingWrapper>
+        <h1>...Loading...</h1>
       </ListingWrapper>
     );
   }

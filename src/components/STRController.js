@@ -16,16 +16,10 @@ function STRController (props) {
 
   const [propertyList, setPropertyList] = useState(null);
   const [listingList, setListingList] = useState(null);
-  //const [getProperties, setGetProperties] = useState(false);
   const [propLoaded, setPropLoaded] = useState(false);
   const [listingLoaded, setListingLoaded] = useState(false);
   const [error, setError] = useState(null);
   const currPropList = useRef(null);
-
-  // const [startLoading, setStartLoading] = useState(false);
-  // const [sendProps, setSendProps] = useState(false);
-  // const [listComplete, setListComplete] = useState(false);
-  // const [listingList, setListingList] = useState(null);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -61,8 +55,7 @@ function STRController (props) {
         }
       })
       .then((jsonifiedResponse) => {
-        handlePropertiesSuccess(jsonifiedResponse.properties); // update code with logic in reducer when start making airdna calls
-        console.log('effect')
+        handlePropertiesSuccess(jsonifiedResponse.properties); 
       })
       .catch((error) => {
         setError(error)
