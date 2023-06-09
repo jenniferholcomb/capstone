@@ -34,8 +34,8 @@ function STRController (props) {
           });
         });
         console.log(properties)
-        currPropList.current = properties;
-        handleGetProperties();
+        // eslint-disable-next-line
+        handleGetProperties(properties);
       },
       (error) => {
         setError(error);
@@ -44,8 +44,8 @@ function STRController (props) {
     return () => unSubscribe();
   }, []);
 
-  const handleGetProperties = async () => {
-    if (currPropList.current.length === 0) {
+  const handleGetProperties = async (propertiesAll) => {
+    if (propertiesAll.length === 0) {
       await fetch(`https://airdna1.p.rapidapi.com/properties?rapidapi-key=${process.env.REACT_APP_API_KEY}&location=bend`)
       .then(response => {
         if (!response.ok) {
@@ -61,6 +61,7 @@ function STRController (props) {
         setError(error)
       });
     } else {
+      currPropList.current = propertiesAll[0].propertyId;
       setPropLoaded(true);
     }
   }
@@ -78,7 +79,7 @@ function STRController (props) {
     const propObj = {date, propertiesId};
     
         // setGetProperties(false);
-    currPropList.current = propObj;
+    currPropList.current = propertiesId;
     handleSendingProps(propObj);
   };
 
@@ -99,7 +100,7 @@ function STRController (props) {
     return (
       <ShortTermRentalWrapper>
         <PropertyListing days={props.currentWeek} 
-                         propIds={currPropList.current} />        
+                         properties={currPropList.current} />        
       </ShortTermRentalWrapper>
     );
   } else {
@@ -112,3 +113,5 @@ function STRController (props) {
 }
 
 export default STRController;
+
+// 618732540583080079, 54057461 - id causes error

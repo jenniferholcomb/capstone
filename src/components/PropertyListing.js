@@ -31,16 +31,14 @@ const ElementWrapper = styled.section`
 function PropertyListing (props) {
   const fornightList = Array.from({length: 14}, () => ([]));
 
-  const [availability, setAvailability] = useState([]);
-  const [loaded, setLoaded] = useState(true);
   const [error, setError] = useState(null);
   //const getListings = useRef(true);
   const [listingLoaded, setListingLoaded] = useState(false);
+  const [fortnightAvail, setFortnightAvail] = useState(null);
   const listingsArr = useRef(fornightList);
   const percentArr = useRef(null);
 
-  const properties = props.propIds[0].propertyId.slice(0, 5);
-  console.log(properties)
+  const { days, properties } = props;
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -49,11 +47,13 @@ function PropertyListing (props) {
         const listings = [];
         collectionSnapshot.forEach((doc) => {
           listings.push({
-            availPercent: doc.data().availPercent,
+            availability: doc.data().availability,
             id: doc.id
           });
         });
+        setFortnightAvail(listings);
         percentArr.current = listings;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         handleGetListingAvail();
       },
       (error) => {
@@ -111,24 +111,25 @@ function PropertyListing (props) {
              return tally; 
             }, {}))
       });
-      const percentArr = finalArr.map(item => {
+      const availability = finalArr.map(item => {
         if(item.true) {
           return (item.true/properties.length).toFixed(2).substring(2);
         } else {
           return '0';
         }
       });
-      console.log(percentArr);
-      handleSendingAvail(percentArr);
+      console.log(availability);
+      handleSendingAvail({availability});
     }
   }
   
   const handleSendingAvail = async (percents) => {
     await addDoc(collection(db, "listings"), percents);
+    setFortnightAvail({percents});
     setListingLoaded(true);
   };
 
-  console.log(availability);
+  console.log(fortnightAvail);
 
   if (error) {
     return ( 
