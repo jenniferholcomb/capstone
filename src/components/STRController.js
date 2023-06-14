@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-//import ShortTermRental from './ShortTermRental';
 import PropertyListing from './PropertyListing';
-import ListingDay from './ListingDay';
 import styled from 'styled-components';
 import db from './../firebase.js';
 import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
@@ -78,7 +76,6 @@ function STRController (props) {
     const date = new Date().toISOString().substring(0,10);
     const propObj = {date, propertiesId};
     
-        // setGetProperties(false);
     currPropList.current = propertiesId;
     handleSendingProps(propObj);
   };

@@ -29,7 +29,7 @@ const ElementWrapper = styled.section`
 `;
  
 function PropertyListing (props) {
-  const fornightList = Array.from({length: 14}, () => ([]));
+  const fornightList = Array.from({length: 17}, () => ([]));
 
   const [error, setError] = useState(null);
   //const getListings = useRef(true);
@@ -39,6 +39,8 @@ function PropertyListing (props) {
   const percentArr = useRef(null);
 
   const { days, properties } = props;
+  //const properties = propertiesAll.slice(0,5);
+  const propLength = useRef(properties.length);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -53,7 +55,7 @@ function PropertyListing (props) {
         });
         setFortnightAvail(listings);
         percentArr.current = listings;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
         handleGetListingAvail();
       },
       (error) => {
@@ -73,12 +75,16 @@ function PropertyListing (props) {
         }
       })
       .then((jsonifiedResponse) => {
-        parseData(jsonifiedResponse.data[0].days)
+        if(jsonifiedResponse.status === true) {
+          parseData(jsonifiedResponse.data[0].days);
+        } else {
+          propLength.current = propLength.current - 1;
+        }
       })
       .catch((error) => {
         setError(error);
       });
-  }
+  };
 
   const handleGetListingAvail = () => {
     if (percentArr.current.length === 0) {
@@ -95,15 +101,17 @@ function PropertyListing (props) {
   const parseData = (newListings) => {
     const today = new Date().toISOString().substring(0,10);
     const index = newListings.map(e => e.date).indexOf(today);
-    const fortnight = newListings.splice(index, 14);
+    const fortnight = newListings.splice(index, 17);
     const available = fortnight.reduce((array, day) => array.concat(day.available), []);
 
     const availArr = listingsArr.current;
     available.forEach((item, index) => availArr[index].push(item));
     listingsArr.current = availArr;
     console.log(availArr)
+    console.log('availarr length', availArr[0].length)
+    console.log('proplength length', propLength.current)
 
-    if (availArr[0].length === properties.length) {
+    if (availArr[0].length === propLength.current) {
       const finalArr = availArr.map(function(item) {
         return (
             item.reduce(function(tally, avail) {
@@ -112,8 +120,8 @@ function PropertyListing (props) {
             }, {}))
       });
       const availability = finalArr.map(item => {
-        if(item.true) {
-          return (item.true/properties.length).toFixed(2).substring(2);
+        if(item.false) {
+          return (item.false/properties.length).toFixed(2).substring(2);
         } else {
           return '0';
         }
