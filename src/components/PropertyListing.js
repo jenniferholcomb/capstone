@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ListingDay from './ListingDay';
+import ListingDays from './ListingDays';
 import db from './../firebase.js';
 import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 
@@ -152,7 +152,8 @@ function PropertyListing (props) {
           STR OCCUPANCY %
         </NameWrapper>
         <ElementWrapper>
-          <ListingDay days={props.days} />
+          <ListingDays days={props.days} 
+                      listings={fortnightAvail} />
         </ElementWrapper>
       </ListingWrapper>
     );
