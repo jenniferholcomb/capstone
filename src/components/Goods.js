@@ -7,6 +7,7 @@ function Goods(props) {
   const [color, setColor] = useState(null);
 
   useEffect(() => {
+    // eslint-disable-next-line
     const sortedArray = props.itemCodeList.sort((a,b) => {
       return new Date(a.date) - new Date(b.date);
     });
@@ -30,24 +31,26 @@ function Goods(props) {
       {
         listLoaded ?
           <div style={{backgroundColor: `${color}`}} className="itemCard-2">
-            <table >
-              <tr>
-                <th>ITEM CODE</th>
-                <td className="list-values">{newList[0].itemCode}</td>
-              </tr>
-              <tr><td className="list-values">{newList[0].description}</td></tr>
-              <tr>
-                <th>DATE</th>
-                <th>PRICE</th>
-              </tr>
-              {newList.map((value, index) => 
-                <React.Fragment>
-                  <tr>
-                    <td className="list-values">{value.date}</td>
-                    <td className="list-values">{value.unitPrice.toFixed(2)}</td>
-                  </tr>
-                </React.Fragment>
-              )}
+            <table>
+              <tbody>
+                <tr>
+                  <th>ITEM CODE</th>
+                  <td className="list-values">{newList[0].itemCode}</td>
+                </tr>
+                <tr><td className="list-values">{newList[0].description}</td></tr>
+                <tr>
+                  <th>DATE</th>
+                  <th>PRICE</th>
+                </tr>
+                {newList.map((value, index) => 
+                  <React.Fragment key={index}>
+                    <tr>
+                      <td className="list-values">{value.date}</td>
+                      <td className="list-values">{value.unitPrice.toFixed(2)}</td>
+                    </tr>
+                  </React.Fragment>
+                )}
+              </tbody>
             </table>
           </div>
         :
@@ -68,5 +71,3 @@ Goods.propTypes = {
 };
 
 export default Goods;
-
-

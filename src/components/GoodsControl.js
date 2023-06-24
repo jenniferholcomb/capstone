@@ -251,8 +251,8 @@ function GoodsControl () {
         </React.Fragment>
       :
         <React.Fragment>
-          <button class="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
-          <button class="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
+          <button className="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
+          <button className="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
           <p><em>...Loading</em></p>
         </React.Fragment>
 

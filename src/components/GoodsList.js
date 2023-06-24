@@ -40,15 +40,16 @@ function GoodsList (props) {
   return (
     <React.Fragment>
       <ContainerWrapper>
-        <button class="nav-5" onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
-        <button class="nav-6" onClick={props.onAddInvoiceClick}>ADD NEW INVOICE</button>
+        <button className="nav-5" onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
+        <button className="nav-6" onClick={props.onAddInvoiceClick}>ADD NEW INVOICE</button>
       </ContainerWrapper>
       { 
       goodsLoaded ?
       <InvListWrapper>
         {goodsListCode.map((entry, index) => 
           <Goods
-            itemCodeList={entry} />
+            itemCodeList={entry} 
+            key={index} />
         )}
       </InvListWrapper>
       :

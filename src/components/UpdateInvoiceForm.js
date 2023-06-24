@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
 import styled from "styled-components";
 
 
@@ -152,7 +151,7 @@ function UpdateInvoiceForm(props) {
                 <tr>
                 <td>{index + 1}</td>
                 <td><input
-                  class="input-1"
+                  className="input-1"
                   type='text'
                   name='itemCode'
                   placeholder={item.itemCode}
@@ -160,14 +159,14 @@ function UpdateInvoiceForm(props) {
                   onChange={(e) => handleChange(e, (index+1))}                
                   required /></td>      
                 <td><textarea
-                  class="input-2"
+                  className="input-2"
                   name='description'
                   placeholder={item.description}
                   defaultValue={item.description} 
                   onChange={(e) => handleChange(e, (index+1))} 
                   required /></td>
                 <td><input
-                  class="input-1"
+                  className="input-1"
                   type='number'
                   name='quantity'
                   placeholder={item.quantity}
@@ -175,14 +174,14 @@ function UpdateInvoiceForm(props) {
                   onChange={(e) => handleChange(e, (index+1))}               
                   required /></td>
                 <td><input
-                  class="input-1"
+                  className="input-1"
                   type='number'
                   name='unitPrice'
                   placeholder={item.unitPrice}
                   defaultValue={item.unitPrice}  
                   onChange={(e) => handleChange(e, (index+1))}               
                   required /></td>
-                <td><button class="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
+                <td><button className="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
                 </tr>
               </React.Fragment>
             )}

@@ -25,10 +25,8 @@ const NameWrapper = styled.section`
 //   display: grid;
 // `;
 
-
-
 function Calendar (props) {
-  const [eventsLoaded, setEventsLoaded] = useState(false);
+  //const [eventsLoaded, setEventsLoaded] = useState(false);
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
@@ -37,13 +35,13 @@ function Calendar (props) {
     setDates(fortnight);
   }, []);
 
-  const handleCalendarSelection = () => {
-    setEventsLoaded(true);
-  }
+  // const handleCalendarSelection = () => {
+  //   setEventsLoaded(true);
+  // }
 
-  const handleExitEvents = () => {
-    setEventsLoaded(false);
-  }
+  // const handleExitEvents = () => {
+  //   setEventsLoaded(false);
+  // }
 
   return (
     <React.Fragment>
@@ -51,18 +49,22 @@ function Calendar (props) {
         <NameWrapper>
           CALENDAR 
         </NameWrapper>
-          {
-          eventsLoaded ?
-            <Events onExitEvents={handleExitEvents}/>  
-          :
-            <CalendarDay 
-              whenCalendarClicked={handleCalendarSelection}
-              days={props.currentWeek} 
-              twoWeeks={dates} />
-          }
+        <CalendarDay 
+          days={props.currentWeek} 
+          twoWeeks={dates} />
       </CalendarWrapper>
     </React.Fragment>
   );
 }
 
 export default Calendar;
+
+// {
+//   eventsLoaded ?
+//     <Events onExitEvents={handleExitEvents}/>  
+//   :
+//     <CalendarDay 
+//       whenCalendarClicked={handleCalendarSelection}
+//       days={props.currentWeek} 
+//       twoWeeks={dates} />
+//   }

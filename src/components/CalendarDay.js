@@ -17,19 +17,16 @@ function CalendarDay (props) {
 
   return (
     <React.Fragment>
-      <div onClick = {() => props.whenCalendarClicked()}>
-        <DatesWrapper>
-          {elements.map((item, index) => 
-            <div className={`list-item-cal-${index + 1}`}>{item}</div>
-          )}
-        </DatesWrapper>
-      </div>
+      <DatesWrapper>
+        {elements.map((item, index) => 
+          <div className={`list-item-cal-${index + 1}`} key={index}>{item}</div>
+        )}
+      </DatesWrapper>
     </React.Fragment>
   );
 }
 
 CalendarDay.propTypes = {
-  whenCalendarClicked: PropTypes.func,
   days: PropTypes.array,
   twoWeeks: PropTypes.array
 };

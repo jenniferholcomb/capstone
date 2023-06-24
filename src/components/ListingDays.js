@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 
 function ListingDays (props) {
 
-  console.log(props.listings)
+  const { listings, days } = props;
+
   return (
     <React.Fragment>
-      {props.days.map((item, index) => 
-        <div className={`list-item-str-${index + 1}`}>{item}</div>
+      {days.map((item, index) => 
+        <div className={`list-item-str-${index + 1}`} key={index}>{item}</div>
       )}
 
-      {props.listings.slice(0, 14).map((item, index) => 
-        <div className={`list-item-${index + 8}`}>{item}</div>
-      )}
+      {listings[0].availability.slice(0, 14).map((item, index) => 
+        <div className={`list-item-${index + 8}`} key={index + 7}>{item}</div>
+      )} 
     </React.Fragment>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Weather from "./Weather";
 import STRController from "./STRController";
 import Calendar from "./Calendar";
-// import Events from "./Events";
+import Events from "./Events";
 // import Holidays from "./Holidays";
 import styled from 'styled-components';
 //import PropertyListing from "./PropertyListing";
@@ -35,6 +35,7 @@ function Agents () {
         <Weather />
         <STRController currentWeek={days} />
         <Calendar currentWeek={days} />
+        <Events />
       </AgentsWrapper>
     // </div>
   );

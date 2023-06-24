@@ -5,9 +5,7 @@ import db from './../firebase.js';
 import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 
 const ShortTermRentalWrapper = styled.section`
-  border-bottom: 1px solid black; 
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
 `;
 
 function STRController (props) {

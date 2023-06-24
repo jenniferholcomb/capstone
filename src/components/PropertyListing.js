@@ -19,8 +19,10 @@ const NameWrapper = styled.section`
 `;
 
 const ElementWrapper = styled.section`
+  outline: px solid white;
   border-radius: 10px;
   display: grid;
+  grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 14% 43% 43%;
   grid-gap: 0px;
@@ -29,7 +31,7 @@ const ElementWrapper = styled.section`
 `;
  
 function PropertyListing (props) {
-  const fornightList = Array.from({length: 17}, () => ([]));
+  const fornightList = Array.from({length: 28}, () => ([]));
 
   const [error, setError] = useState(null);
   //const getListings = useRef(true);
@@ -42,7 +44,7 @@ function PropertyListing (props) {
   //const properties = propertiesAll.slice(0,5);
   const propLength = useRef(properties.length);
 
-  useEffect(() => {
+  const loadListings = async () => {
     const unSubscribe = onSnapshot(
       collection(db, "listings"),
       (collectionSnapshot) => {
@@ -63,9 +65,10 @@ function PropertyListing (props) {
       }
     );
     return () => unSubscribe();
-  }, []);
+  }
 
   const apiCall = async (singleId) => {
+    console.log(singleId);
     await fetch(`https://airbnb19.p.rapidapi.com/api/v1/checkAvailability?rapidapi-key=${process.env.REACT_APP_API_KEY}&propertyId=${singleId}`) 
       .then((response) => {
         if (!response.ok) {
@@ -76,7 +79,7 @@ function PropertyListing (props) {
       })
       .then((jsonifiedResponse) => {
         if(jsonifiedResponse.status === true) {
-          parseData(jsonifiedResponse.data[0].days);
+          parseData(jsonifiedResponse.data);
         } else {
           propLength.current = propLength.current - 1;
         }
@@ -99,15 +102,16 @@ function PropertyListing (props) {
   };
 
   const parseData = (newListings) => {
+    const twoMonths = [...newListings[0].days, ...newListings[1].days];
     const today = new Date().toISOString().substring(0,10);
-    const index = newListings.map(e => e.date).indexOf(today);
-    const fortnight = newListings.splice(index, 17);
+    const index = twoMonths.map(e => e.date).indexOf(today);
+    const fortnight = twoMonths.splice(index, 28);
     const available = fortnight.reduce((array, day) => array.concat(day.available), []);
 
     const availArr = listingsArr.current;
     available.forEach((item, index) => availArr[index].push(item));
     listingsArr.current = availArr;
-    console.log(availArr)
+
     console.log('availarr length', availArr[0].length)
     console.log('proplength length', propLength.current)
 
@@ -133,9 +137,13 @@ function PropertyListing (props) {
   
   const handleSendingAvail = async (percents) => {
     await addDoc(collection(db, "listings"), percents);
-    setFortnightAvail({percents});
+    loadListings();
     setListingLoaded(true);
   };
+
+  useEffect(() => {
+    loadListings();
+  }, []);
 
   console.log(fortnightAvail);
 

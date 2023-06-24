@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const EventsWrapper = styled.section`
 outline: 1px solid black;
 border-radius: 10px;
-  
+margin-top: 20px;
 `;
 
 const initialState = {
@@ -60,7 +60,6 @@ function Events (props) {
     return (
 
       <EventsWrapper>
-        <button className="exit" onClick={props.onExitEvents}>EXIT</button>
         <table>
           <tr>
             <th>DATE</th>
