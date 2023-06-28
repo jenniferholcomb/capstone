@@ -12,9 +12,12 @@ const DatesWrapper = styled.section`
   background-color: rgb(247, 243, 236);
 `;
 
-function CalendarDay (props) {
+function CalendarDay ({ month }) {
+  console.log('m', month)
   const days = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
-  const elements = [...days, ...props.twoWeeks];
+  const dates = month.map(x => x.date.charAt(8) === '0' ? x.date.substring(9) : x.date.substring(8));
+  const elements = [...days, ...dates];
+  console.log('elements', elements)
 
   return (
     <React.Fragment>
@@ -28,8 +31,7 @@ function CalendarDay (props) {
 }
 
 CalendarDay.propTypes = {
-  days: PropTypes.array,
-  twoWeeks: PropTypes.array
+  month: PropTypes.array
 };
 
 export default CalendarDay;
