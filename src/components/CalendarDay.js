@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 
 const DatesWrapper = styled.section`
   border-radius: 10px;
-  grid-template-rows: 14% 43% 43%;
+  grid-template-rows: 8% 18% 18% 18% 18% 18%;
   grid-template-columns: repeat(7, 1fr);
-  height: 150px;
+  height: 300px;
   grid-gap: 0px;
   display: grid;
   background-color: rgb(247, 243, 236);
 `;
 
 function CalendarDay (props) {
-  const elements = [...props.days, ...props.twoWeeks];
+  const days = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
+  const elements = [...days, ...props.twoWeeks];
 
   return (
     <React.Fragment>

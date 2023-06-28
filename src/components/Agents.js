@@ -34,7 +34,7 @@ function Agents () {
       <AgentsWrapper>
         <Weather />
         <STRController currentWeek={days} />
-        <Calendar currentWeek={days} />
+        <Calendar />
         <Events />
       </AgentsWrapper>
     // </div>
