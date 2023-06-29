@@ -3,8 +3,35 @@ import CalendarDay from "./CalendarDay";
 import styled from 'styled-components';
 // import Events from "./Events";
 
-const CalendarWrapper = styled.section`
-  margin-top: 20px;
+// const CalendarWrapper = styled.section`
+//   margin-top: 20px;
+
+// `;
+
+// const CompWrapper = styled.section`
+//   display: grid;
+//   grid-template-columns: repeat(7, 1fr);
+//   grid-template-rows: repeat(6, 1fr);
+// `;
+
+// const NameWrapper = styled.section` 
+//   display: grid;
+//   justify-items: end;
+//   font-size: 23px;
+//   font-weight: bold;
+//   font-style: italic;
+// `;
+
+const CompWrapper = styled.section`
+  outline: px solid white;
+  border-radius: 10px;
+  display: grid;
+  grid-row: 1;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: 1.5em repeat(5, 1fr);
+  grid-gap: 0px;
+  height: 300px;
+  background-color: rgb(247, 243, 236);
 `;
 
 const NameWrapper = styled.section` 
@@ -14,6 +41,21 @@ const NameWrapper = styled.section`
   font-weight: bold;
   font-style: italic;
 `;
+
+// const CompWrapper = styled.section`
+//   grid-row: 1;
+// `;
+
+// const WeatherWrapper = styled.section`
+//   outline: px solid white;
+//   border-radius: 10px;
+//   display: grid;
+//   grid-row: 1;
+//   grid-template-columns: repeat(7, 1fr);
+//   grid-gap: 0px;
+//   height: 150px;
+//   background-color: rgb(247, 243, 236);
+// `;
 
 const Calendar = () => {
   const [dates, setDates] = useState([]);
@@ -57,16 +99,16 @@ const Calendar = () => {
     // console.log('dateString', dateString[0]);
   }, []);
 
-  
-
   return (
     <React.Fragment>
-      <CalendarWrapper>
+      <div>
         <NameWrapper>
           CALENDAR 
         </NameWrapper>
-        <CalendarDay month={dates} />
-      </CalendarWrapper>
+        <CompWrapper>
+          <CalendarDay month={dates} />
+        </CompWrapper>
+      </div>
     </React.Fragment>
   );
 }

@@ -10,17 +10,11 @@ const BodyWrapper = styled.section`
   grid-template-rows: 200px 283px 282px;
 `;
 
-const GoodsWrapper = styled.section `
-  
-`;
-
 function App() {
   return (
     <div id="main-body">
       <BodyWrapper>
-        
-          <GoodsControl />
-        
+        <GoodsControl />
         <Agents />
       </BodyWrapper>
     </div>
