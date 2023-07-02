@@ -67,7 +67,8 @@ const Calendar = () => {
     const monthDays = [31, (( year % 4 ) === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
     const oneIndex = new Date(today.getFullYear(), monthNow, 1).getDay();
-
+    console.log('oneIndex', oneIndex);
+    
     const preMonthArr = Array.from(Array(oneIndex)).map((x, i) =>  { 
       return { 'date': new Date(
         monthNow === 0 ? year - 1 : year, 
@@ -75,16 +76,18 @@ const Calendar = () => {
         monthDays[monthNow - 1] - i
         ).toISOString().substring(0,10) }
     }).reverse();
-
+    console.log('preMOnthARR', preMonthArr);
     const thisMonthArr = Array.from(Array(monthDays[monthNow])).map((x, i) =>  { 
       return { 'date': new Date(
         year, 
-        5, 
+        monthNow, 
         i + 1
         ).toISOString().substring(0,10) }
     });
-
-    const endMonthArr = Array.from(Array(35 - (oneIndex + monthDays[monthNow]))).map((x, i) =>  { 
+    console.log('thisMonthArr', thisMonthArr);
+    const lastIndex = new Date(today.getFullYear(), monthNow, monthDays[monthNow]).getDay();
+    console.log('lastINdex', lastIndex);
+    const endMonthArr = Array.from(Array(7 - lastIndex)).map((x, i) =>  { 
       return { 'date': new Date(
         monthNow === 11 ? year + 1 : year, 
         monthNow === 11 ? 0 : monthNow + 1, 
