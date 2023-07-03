@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Weather from "./Weather";
-import STRController from "./STRController";
+import STRController from "./useSTRController";
 import Calendar from "./Calendar";
 import Events from "./Events";
 // import Holidays from "./Holidays";

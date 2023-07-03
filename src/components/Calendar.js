@@ -1,26 +1,9 @@
 import React, { useState, useEffect } from "react";
 import CalendarDay from "./CalendarDay";
+import usePropertyListing from "./usePropertyListing";
+// import STRController from "./STRController";
 import styled from 'styled-components';
 // import Events from "./Events";
-
-// const CalendarWrapper = styled.section`
-//   margin-top: 20px;
-
-// `;
-
-// const CompWrapper = styled.section`
-//   display: grid;
-//   grid-template-columns: repeat(7, 1fr);
-//   grid-template-rows: repeat(6, 1fr);
-// `;
-
-// const NameWrapper = styled.section` 
-//   display: grid;
-//   justify-items: end;
-//   font-size: 23px;
-//   font-weight: bold;
-//   font-style: italic;
-// `;
 
 const CompWrapper = styled.section`
   outline: px solid white;
@@ -42,23 +25,10 @@ const NameWrapper = styled.section`
   font-style: italic;
 `;
 
-// const CompWrapper = styled.section`
-//   grid-row: 1;
-// `;
-
-// const WeatherWrapper = styled.section`
-//   outline: px solid white;
-//   border-radius: 10px;
-//   display: grid;
-//   grid-row: 1;
-//   grid-template-columns: repeat(7, 1fr);
-//   grid-gap: 0px;
-//   height: 150px;
-//   background-color: rgb(247, 243, 236);
-// `;
-
 const Calendar = () => {
   const [dates, setDates] = useState([]);
+  // const [propertyList, propError] = STRController();
+  const [listingAvailability, listError] = usePropertyListing();
 
   useEffect(() => {
     const today = new Date();
@@ -87,7 +57,7 @@ const Calendar = () => {
     console.log('thisMonthArr', thisMonthArr);
     const lastIndex = new Date(today.getFullYear(), monthNow, monthDays[monthNow]).getDay();
     console.log('lastINdex', lastIndex);
-    const endMonthArr = Array.from(Array(7 - lastIndex)).map((x, i) =>  { 
+    const endMonthArr = Array.from(Array(6 - lastIndex)).map((x, i) =>  { 
       return { 'date': new Date(
         monthNow === 11 ? year + 1 : year, 
         monthNow === 11 ? 0 : monthNow + 1, 
@@ -101,6 +71,17 @@ const Calendar = () => {
     // const dateString = Object.keys(lastMonth[0]);
     // console.log('dateString', dateString[0]);
   }, []);
+  // const loadListings = () => {
+  //   usePropertyListing(propertyList);
+  // }
+
+  // useEffect(() => {
+  //   loadListings();
+  // }, [propertyList]);
+
+  useEffect(() => {
+    console.log('list avail', listingAvailability);
+  }, [listingAvailability]);
 
   return (
     <React.Fragment>

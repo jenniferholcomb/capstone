@@ -1,21 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
-import PropertyListing from './PropertyListing';
-import styled from 'styled-components';
-import db from './../firebase.js';
+import React, { useEffect, useState } from 'react';
+import db from '../firebase.js';
 import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
 
-const ShortTermRentalWrapper = styled.section`
-  display: grid;
-`;
-
-function STRController (props) {
-
-  const [propertyList, setPropertyList] = useState(null);
-  const [listingList, setListingList] = useState(null);
-  const [propLoaded, setPropLoaded] = useState(false);
-  const [listingLoaded, setListingLoaded] = useState(false);
+const useSTRController = () => {
+  const [propertyList, setPropertyList] = useState();
   const [error, setError] = useState(null);
-  const currPropList = useRef(null);
 
   useEffect(() => {
     const unSubscribe = onSnapshot(
@@ -29,8 +18,7 @@ function STRController (props) {
             id: doc.id
           });
         });
-        console.log(properties)
-        // eslint-disable-next-line
+        // eslint-disable-nxt-line
         handleGetProperties(properties);
       },
       (error) => {
@@ -57,8 +45,7 @@ function STRController (props) {
         setError(error)
       });
     } else {
-      currPropList.current = propertiesAll[0].propertyId;
-      setPropLoaded(true);
+      setPropertyList(propertiesAll[0].propertyId);
     }
   }
 
@@ -74,39 +61,15 @@ function STRController (props) {
     const date = new Date().toISOString().substring(0,10);
     const propObj = {date, propertiesId};
     
-    currPropList.current = propertiesId;
+    setPropertyList(propertiesId);
     handleSendingProps(propObj);
   };
 
   const handleSendingProps = async (propertiesId) => {
     await addDoc(collection(db, "properties"), propertiesId);
-    setPropLoaded(true);
   };
 
-  console.log(currPropList.current);
-
-  if (error) {
-    return ( 
-      <ShortTermRentalWrapper>
-        <h1>Error: {error}</h1>
-      </ShortTermRentalWrapper> 
-    );
-  } else if (propLoaded) {
-    return (
-      <ShortTermRentalWrapper>
-        <PropertyListing days={props.currentWeek} 
-                         properties={currPropList.current} />        
-      </ShortTermRentalWrapper>
-    );
-  } else {
-    return (
-      <ShortTermRentalWrapper>
-        <h1>...Loading...</h1>
-      </ShortTermRentalWrapper>
-    );
-  }
+  return [ propertyList, error ];
 }
 
-export default STRController;
-
-// 618732540583080079, 54057461 - id causes error
+export default useSTRController;
