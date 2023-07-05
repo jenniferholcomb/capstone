@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CalendarDay from "./CalendarDay";
+import useSTRController from "./useSTRController.js";
 import usePropertyListing from "./usePropertyListing";
-// import STRController from "./STRController";
 import styled from 'styled-components';
 // import Events from "./Events";
 
@@ -26,13 +26,21 @@ const NameWrapper = styled.section`
 `;
 
 const Calendar = () => {
-  const [dates, setDates] = useState([]);
-  // const [propertyList, propError] = STRController();
-  const [listingAvailability, listError] = usePropertyListing();
+  const [dates, setDates] = useState([]); 
+  const [month, setMonth] = useState();
+  // eslint-disable-next-line
+  const [propertyList, loadProperties] = useSTRController();
+  const [listingAvailability] = usePropertyListing(propertyList);
+  const [monthAvail, setMonthAvail] = useState();
+
+  useEffect(() => {
+    loadProperties(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const today = new Date();
     const monthNow = today.getMonth();
+    setMonth(monthNow + 1);
     const year = today.getFullYear();
     const monthDays = [31, (( year % 4 ) === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
@@ -71,17 +79,18 @@ const Calendar = () => {
     // const dateString = Object.keys(lastMonth[0]);
     // console.log('dateString', dateString[0]);
   }, []);
-  // const loadListings = () => {
-  //   usePropertyListing(propertyList);
-  // }
-
-  // useEffect(() => {
-  //   loadListings();
-  // }, [propertyList]);
 
   useEffect(() => {
-    console.log('list avail', listingAvailability);
-  }, [listingAvailability]);
+    if (propertyList && listingAvailability) {
+      console.log('list avail', listingAvailability);
+      console.log('dates', dates);
+      const availMonth = listingAvailability.filter(item => item.month === month);
+      console.log('availMonth', availMonth[0].availability['2023-07-04']);
+      setMonthAvail(availMonth);
+    } else if (propertyList) {
+      console.log('property list cal', propertyList);
+    }
+  }, [propertyList, listingAvailability]);
 
   return (
     <React.Fragment>
@@ -90,7 +99,8 @@ const Calendar = () => {
           CALENDAR 
         </NameWrapper>
         <CompWrapper>
-          <CalendarDay month={dates} />
+          <CalendarDay month={dates} 
+                       availablePercent={monthAvail} />
         </CompWrapper>
       </div>
     </React.Fragment>

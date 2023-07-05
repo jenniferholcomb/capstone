@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Weather from "./Weather";
-import STRController from "./useSTRController";
 import Calendar from "./Calendar";
-import Events from "./Events";
+// import Events from "./Events";
 // import Holidays from "./Holidays";
 import styled from 'styled-components';
-//import PropertyListing from "./PropertyListing";
 
 const AgentsWrapper = styled.section`
   grid-column: 3;
@@ -20,22 +18,21 @@ const AgentsWrapper = styled.section`
 
 function Agents () {
 
-  const [days, setDays] = useState([]);
+  // const [days, setDays] = useState([]);
 
-  useEffect(() => {
-    const current = new Date().getDay();
-    const d = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
-    const week = d.slice(current).concat(d.slice(0, current));
-    setDays(week);
-  }, [])
+  // useEffect(() => {
+  //   const current = new Date().getDay();
+  //   const d = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
+  //   const week = d.slice(current).concat(d.slice(0, current));
+  //   setDays(week);
+  // }, [])
 
   return (
     // <div id="agents">
       <AgentsWrapper>
         <Weather />
-        <STRController currentWeek={days} />
         <Calendar />
-        <Events />
+        {/* <Events /> */}
       </AgentsWrapper>
     // </div>
   );

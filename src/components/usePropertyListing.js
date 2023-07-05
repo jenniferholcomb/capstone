@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import db from '../firebase.js';
-import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
-import useSTRController from "./useSTRController.js";
+import { collection, addDoc, onSnapshot } from 'firebase/firestore'; // doc, deleteDoc, updateDoc, 
+// import useSTRController from "./useSTRController.js";
  
-function usePropertyListing () {
-  const [properties, propError] = STRController();
+function usePropertyListing (properties) {
+  // const [properties] = useSTRController(); // propError
   const [error, setError] = useState(null);
   const [listingAvailability, setListingAvailability] = useState(null);
 
@@ -21,13 +21,12 @@ function usePropertyListing () {
           listings.push({
             date: doc.data().date,
             availability: doc.data().datesPercent,
-            month: doc.data().month,
+            month: parseInt(doc.data().month),
             year: doc.data().year,
             id: doc.id
           });
         });
         percentArr.current = listings;
-        // eslint-disable-next-line
         handleGetListingAvail();
       },
       (error) => {
@@ -134,8 +133,11 @@ function usePropertyListing () {
     if (properties) {
       propLength.current = properties.length;
       loadListings();
-    }
+    }  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [properties]);
+
+  // console.log('list Avail', listingAvailability);
+  // console.log('properties', properties);
 
   return [listingAvailability, error];
 }

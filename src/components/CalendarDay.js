@@ -1,5 +1,5 @@
 import React from "react";
-import styled from 'styled-components';
+/// import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 
@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 //   background-color: rgb(247, 243, 236);
 // `;
 
-function CalendarDay ({ month }) {
+function CalendarDay ({ month, availablePercent }) {
   console.log('m', month)
   const days = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
   const dates = month.map(x => x.date.charAt(8) === '0' ? x.date.substring(9) : x.date.substring(8));

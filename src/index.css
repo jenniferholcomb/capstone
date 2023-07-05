@@ -14,53 +14,6 @@ code {
     monospace;
 }
 
-/* [class^='cal-item'] {
-  display: flex;
-  border-top: 4px solid white;
-  border-right: 4px solid white;
-  justify-content: center;
-  align-items: center;
-  font-size: px;
-  font-weight: 600;
-  padding: none;
-
-} */
-
-/* .cal-item-19 {
-  background-color: rgb(219, 214, 214);
-}
-
-.cal-item-20 {
-  background-color: rgb(254, 232, 218);
-}
-
-.cal-item-23 {
-  background-color: rgb(254, 232, 218);
-}
-
-.cal-item-29 {
-  background-color: rgb(254, 232, 218);
-} */
-
-/* [class^='cal-item']:last-child {
-  border-right: 1px solid black;
-  
-}
-
-[class^='cal-item']:nth-last-child(-n+7) {
-  grid-row: 5;
- 
-} */
-
-/* [class^='cal-item']:nth-child(-n+7) {
-  grid-row: 1;
-  border-top: none;
-}
-
-[class^='cal-item']:nth-child(7n) {
-  border-right: none;
-} */
-
 /* weather */
 
 [class^='wea-item']:nth-child(-n+7) {

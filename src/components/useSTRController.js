@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import db from '../firebase.js';
-import { collection, addDoc, doc, deleteDoc, updateDoc, onSnapshot } from 'firebase/firestore';
+import { collection, addDoc, onSnapshot } from 'firebase/firestore'; // doc, deleteDoc, updateDoc,
 
 const useSTRController = () => {
   const [propertyList, setPropertyList] = useState();
   const [error, setError] = useState(null);
 
-  useEffect(() => {
+  const loadProperties = async () => {
+    console.log('here');
     const unSubscribe = onSnapshot(
       collection(db, "properties"),
       (collectionSnapshot) => {
@@ -18,15 +19,15 @@ const useSTRController = () => {
             id: doc.id
           });
         });
-        // eslint-disable-nxt-line
+        console.log('properties', properties);
         handleGetProperties(properties);
       },
       (error) => {
         setError(error);
       }
-    );
+    );  
     return () => unSubscribe();
-  }, []);
+  };
 
   const handleGetProperties = async (propertiesAll) => {
     if (propertiesAll.length === 0) {
@@ -69,7 +70,9 @@ const useSTRController = () => {
     await addDoc(collection(db, "properties"), propertiesId);
   };
 
-  return [ propertyList, error ];
+  console.log('propertyList', propertyList);
+
+  return [ propertyList, loadProperties, error ];
 }
 
 export default useSTRController;
