@@ -13,9 +13,10 @@ import PropTypes from 'prop-types';
 
 function CalendarDay ({ month, availablePercent }) {
   console.log('m', month)
+  console.log('av perc', availablePercent[0].availability);
   const days = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
   const dates = month.map(x => x.date.charAt(8) === '0' ? x.date.substring(9) : x.date.substring(8));
-  const elements = [...days, ...dates];
+  const elements = [...days, ...month];
   console.log('elements', elements)
 
   return (
@@ -24,8 +25,14 @@ function CalendarDay ({ month, availablePercent }) {
         {elements.map((item, index) => 
           <>
             <div className={`list-item-cal-${index + 1}`} key={index}>
-              <p className="date">{item}</p>
-              { index > 6 ? <p className="prop-percent">80</p> : '' }
+              { index > 6 ? 
+                <>
+                  <p className="date">{item.date.charAt(8) === '0' ? item.date.substring(9) : item.date.substring(8)}</p>
+                  <p className="prop-percent">{availablePercent[0].availability[item.date]}</p> 
+                </>
+              : 
+                <p className="date">{item}</p> 
+              }
             </div>
           </>
         )}

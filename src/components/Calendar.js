@@ -31,6 +31,7 @@ const Calendar = () => {
   // eslint-disable-next-line
   const [propertyList, loadProperties] = useSTRController();
   const [listingAvailability] = usePropertyListing(propertyList);
+  const [percentLoaded, setPercentLoaded] = useState(false);
   const [monthAvail, setMonthAvail] = useState();
 
   useEffect(() => {
@@ -87,6 +88,7 @@ const Calendar = () => {
       const availMonth = listingAvailability.filter(item => item.month === month);
       console.log('availMonth', availMonth[0].availability['2023-07-04']);
       setMonthAvail(availMonth);
+      setPercentLoaded(true);
     } else if (propertyList) {
       console.log('property list cal', propertyList);
     }
@@ -99,8 +101,12 @@ const Calendar = () => {
           CALENDAR 
         </NameWrapper>
         <CompWrapper>
+          {percentLoaded ?
           <CalendarDay month={dates} 
                        availablePercent={monthAvail} />
+          :
+          null
+          }
         </CompWrapper>
       </div>
     </React.Fragment>
