@@ -5,8 +5,9 @@ import styled from "styled-components";
 
 const ContainerWrapper = styled.section`
   grid-column: 1 / span 3;
-  justify-self: start;
-  padding-left: 10px;
+  display: grid;
+  justify-self: end;
+  margin-right: 10px;
 `;
 
 const InvListWrapper = styled.section`
@@ -40,7 +41,9 @@ function GoodsList (props) {
   return (
     <React.Fragment>
       <ContainerWrapper>
-        <button className="nav-5" onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
+        <div>
+          <button className="nav-5" onClick={props.onManageInvoicesClick}>MANAGE INVOICES</button>
+        </div>
         <button className="nav-6" onClick={props.onAddInvoiceClick}>ADD NEW INVOICE</button>
       </ContainerWrapper>
       { 

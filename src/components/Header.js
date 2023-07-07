@@ -3,16 +3,14 @@ import styled from "styled-components";
 import logoArt from "./../img/BendSpoon.svg"
 
 const HeaderWrapper = styled.section`
-  grid-column: 1 / span 2;
+  grid-column: 1;
   grid-row: 1;
   
   margin-left: 40px;
   margin-top: 30px;
-  display: flex;
-  
-  grid-template-columns: repeat(3, 1fr);
-  height: 170px;
-  align-items: center;
+  display: grid;
+  justify-items: center;
+
 `;
 
 const LinerWrapper = styled.section`

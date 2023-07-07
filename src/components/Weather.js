@@ -10,13 +10,14 @@ const CompWrapper = styled.section`
 
 const WeatherWrapper = styled.section`
   outline: px solid white;
-  border-radius: 10px;
+  border-radius: none;
   display: grid;
   grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
   grid-gap: 0px;
   height: 150px;
   background-color: rgb(247, 243, 236);
+  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
 `;
 
 const NameWrapper = styled.section` 
@@ -49,7 +50,6 @@ function Weather () {
 
   const [state, dispatch] = useReducer(agentsReducer, initialState)
   
-
   // useEffect(() => {
   //   fetch(`https://api.weatherbit.io/v2.0/forecast/daily?city=Bend,OR&key=${process.env.REACT_APP_API_KEY_WEATHER}&units=I&days=7`)
   //   .then(response => {

@@ -7,7 +7,6 @@ const useSTRController = () => {
   const [error, setError] = useState(null);
 
   const loadProperties = async () => {
-    console.log('here');
     const unSubscribe = onSnapshot(
       collection(db, "properties"),
       (collectionSnapshot) => {
@@ -19,7 +18,6 @@ const useSTRController = () => {
             id: doc.id
           });
         });
-        console.log('properties', properties);
         handleGetProperties(properties);
       },
       (error) => {
@@ -69,8 +67,6 @@ const useSTRController = () => {
   const handleSendingProps = async (propertiesId) => {
     await addDoc(collection(db, "properties"), propertiesId);
   };
-
-  console.log('propertyList', propertyList);
 
   return [ propertyList, loadProperties, error ];
 }

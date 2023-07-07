@@ -6,35 +6,24 @@ import Calendar from "./Calendar";
 import styled from 'styled-components';
 
 const AgentsWrapper = styled.section`
-  grid-column: 3;
-  width: 83%;
+  grid-column: 1;
+  width: 90%;
   height: auto;
-  margin-right: 30px;
-  margin-top: 30px;
-  margin-left: 30px;
+  margin-right: -10px;
+  margin-top: 20px;
+  margin-left: 40px;
   margin-bottom: 30px;
   display: grid;
 `;
 
 function Agents () {
 
-  // const [days, setDays] = useState([]);
-
-  // useEffect(() => {
-  //   const current = new Date().getDay();
-  //   const d = ['SU', 'M', 'TU', 'W', 'TH', 'F', 'SA'];
-  //   const week = d.slice(current).concat(d.slice(0, current));
-  //   setDays(week);
-  // }, [])
-
   return (
-    // <div id="agents">
-      <AgentsWrapper>
-        <Weather />
-        <Calendar />
-        {/* <Events /> */}
-      </AgentsWrapper>
-    // </div>
+    <AgentsWrapper>
+      <Weather />
+      <Calendar />
+      {/* <Events /> */}
+    </AgentsWrapper>
   );
 }
 

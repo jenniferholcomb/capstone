@@ -12,7 +12,7 @@ function Goods(props) {
       return new Date(a.date) - new Date(b.date);
     });
     const ascendingArray = sortedArray.reverse();
-
+    console.log('ascending arr', ascendingArray)
     if (ascendingArray.length >= 2) {
       if (ascendingArray[0].unitPrice < ascendingArray[1].unitPrice) {
         setColor("rgb(223, 238, 206)");
@@ -21,6 +21,8 @@ function Goods(props) {
       } else {
         setColor("rgba(255, 255, 255, 0.785)");
       }
+    } else {
+      setColor("rgba(255, 255, 255, 0.785)");
     }
     setNewList(ascendingArray);
     setListLoaded(true);

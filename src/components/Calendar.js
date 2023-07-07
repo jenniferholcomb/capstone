@@ -3,11 +3,12 @@ import CalendarDay from "./CalendarDay";
 import useSTRController from "./useSTRController.js";
 import usePropertyListing from "./usePropertyListing";
 import styled from 'styled-components';
+import { connectFirestoreEmulator } from "firebase/firestore";
 // import Events from "./Events";
 
 const CompWrapper = styled.section`
   outline: px solid white;
-  border-radius: 10px;
+  border-radius: none;
   display: grid;
   grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
@@ -15,14 +16,16 @@ const CompWrapper = styled.section`
   grid-gap: 0px;
   height: 300px;
   background-color: rgb(247, 243, 236);
+  box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), -15px 20px 25px 0 rgba(77, 76, 76, 0.25);
 `;
 
 const NameWrapper = styled.section` 
   display: grid;
-  justify-items: end;
-  font-size: 23px;
+  justify-items: center;
+  font-size: 22px;
   font-weight: bold;
-  font-style: italic;
+  margin-top: 20px;
+  margin-bottom: -12px;
 `;
 
 const Calendar = () => {
@@ -33,6 +36,7 @@ const Calendar = () => {
   const [listingAvailability] = usePropertyListing(propertyList);
   const [percentLoaded, setPercentLoaded] = useState(false);
   const [monthAvail, setMonthAvail] = useState();
+  const [monthName, setMonthName] = useState();
 
   useEffect(() => {
     loadProperties(); // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -42,11 +46,12 @@ const Calendar = () => {
     const today = new Date();
     const monthNow = today.getMonth();
     setMonth(monthNow + 1);
+    const monthName = today.toLocaleString('default', { month: 'long' }).toUpperCase();
+    setMonthName(monthName);
     const year = today.getFullYear();
     const monthDays = [31, (( year % 4 ) === 0 ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
+    
     const oneIndex = new Date(today.getFullYear(), monthNow, 1).getDay();
-    console.log('oneIndex', oneIndex);
     
     const preMonthArr = Array.from(Array(oneIndex)).map((x, i) =>  { 
       return { 'date': new Date(
@@ -55,7 +60,11 @@ const Calendar = () => {
         monthDays[monthNow - 1] - i
         ).toISOString().substring(0,10) }
     }).reverse();
-    console.log('preMOnthARR', preMonthArr);
+    const preMonthArrBg = preMonthArr.map((item) => ({
+      ...item,
+      background: 'rgba(100, 99, 99, 0.309)'
+    }));
+    console.log('bgarr', preMonthArrBg);
     const thisMonthArr = Array.from(Array(monthDays[monthNow])).map((x, i) =>  { 
       return { 'date': new Date(
         year, 
@@ -63,9 +72,13 @@ const Calendar = () => {
         i + 1
         ).toISOString().substring(0,10) }
     });
-    console.log('thisMonthArr', thisMonthArr);
+    // const thisMonthArrBg = thisMonthArr.map((item) => ({
+    //   ...item,
+    //   background: false
+    // }));
+
     const lastIndex = new Date(today.getFullYear(), monthNow, monthDays[monthNow]).getDay();
-    console.log('lastINdex', lastIndex);
+
     const endMonthArr = Array.from(Array(6 - lastIndex)).map((x, i) =>  { 
       return { 'date': new Date(
         monthNow === 11 ? year + 1 : year, 
@@ -73,12 +86,13 @@ const Calendar = () => {
         i + 1
         ).toISOString().substring(0,10) }
     });
+    const endMonthArrBg = endMonthArr.map((item) => ({
+      ...item,
+      background: 'rgba(100, 99, 99, 0.309)'
+    }));
 
-    const allMonth = [...preMonthArr, ...thisMonthArr, ...endMonthArr];
+    const allMonth = [...preMonthArrBg, ...thisMonthArr, ...endMonthArrBg];
     setDates(allMonth);
-
-    // const dateString = Object.keys(lastMonth[0]);
-    // console.log('dateString', dateString[0]);
   }, []);
 
   useEffect(() => {
@@ -98,12 +112,16 @@ const Calendar = () => {
     <React.Fragment>
       <div>
         <NameWrapper>
-          CALENDAR 
+          STR PERCENTAGE 
         </NameWrapper>
+        <div className="cal-cap">
+          % SHORT TERM RENTAL'S BOOKED
+        </div>
         <CompWrapper>
           {percentLoaded ?
           <CalendarDay month={dates} 
-                       availablePercent={monthAvail} />
+                       availablePercent={monthAvail} 
+                       monthName={monthName} />
           :
           null
           }
@@ -114,16 +132,3 @@ const Calendar = () => {
 }
 
 export default Calendar;
-
-// const [openUserListingForms, setOpenUserListingForms] = useState({})
-// const handleEditClick = (ulId) => {
-//   const newids = { ...openUserListingForms };
-//   newids[ulId] = true;
-//   setOpenUserListingForms(newids);
-// };
-
-// const handleCancelClick = (ulId) => {
-//   const newids = { ...openUserListingForms };
-//   delete newids[ulId];
-//   setOpenUserListingForms(newids);
-// };

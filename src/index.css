@@ -1,12 +1,13 @@
 body {
-  margin: 0;
+  /* margin: 0; */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background-color: rgb(247, 243, 236); */
-  background-color: rgba(238, 235, 227, 0.989);
+  background-color: rgba(255, 255, 255, 0.785);
+  /* background-color: rgba(240, 238, 234, 0.942) */
 }
 
 code {
@@ -29,7 +30,7 @@ code {
 }
 
 [class^='wea-item']:nth-last-child(-n+7) {
-  background-color: rgba(128, 128, 128, 0.309);
+  background-color: rgba(100, 99, 99, 0.71);
 } 
 
 /* short term rental */
@@ -51,26 +52,45 @@ code {
   padding: none;
 }
 
-[class^='list-item']:nth-child(7n) {
+.list-item-cal-7, .list-item-cal-14, .list-item-cal-21, .list-item-cal-28, .list-item-cal-35, .list-item-cal-42 {
   border-right: none;
-} 
+}
 
-[class^='list-item-cal']:nth-child(-n+7) {
-  /* border-bottom: 4px solid white; */
+[class^='list-item-cal']:nth-last-child(-n+35) {
+  border-top: 4px solid white;
+}
+
+.cal-bg {
   background-color: rgba(100, 99, 99, 0.309);
+  /* background-color: rgba(221, 221, 172, 0.828); */
+}
+
+.cal-cap {
+  display: grid;
+  margin-top: 5px;
+  justify-items: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(84, 84, 84);
+}
+
+.cal-month {
+  display: grid;
+  /* border-right: 4px solid white; */
+  grid-row: 1/3;
+  grid-column: 1/8;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   justify-content: center;
   align-items: center;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 17px;
+  border-right: none;
+};
+
+[class^='wea-item']:nth-child(7n) {
+  border-right: none;
 }
-
-[class^='list-item-cal']:nth-last-child(-n+28) {
-  border-top: 3px solid white;
-}
-
-/* [class^='list-item-cal']:nth-last-child(-n+35) {
-
-} */
 
 .list-item-14 {
   border-bottom: none;
@@ -79,6 +99,7 @@ code {
 p.date {
   margin-bottom: 0;
   font-size: 11px;
+  margin-left: 3px;
 }
 
 [class='date']:nth-last-child(-n+28) {
@@ -124,7 +145,7 @@ button[class=inv-button] {
 
 button[class=nav-1] {
   width: 45%;
-  background-color: #4CAF50;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
   
@@ -135,20 +156,25 @@ button[class=nav-1] {
 
 button[class=nav-2] {
   width: 45%;
-  background-color: #4CAF50;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
-
+  font-weight: 500;
+  font-size: 15px;
+  display: grid;
+  justify-self: end;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 button[class=nav-5] {
-  width: 61%;
-  background-color: #4CAF50;
+  width: 180px;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
+  font-weight: 500;
+  font-size: 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -157,11 +183,12 @@ button[class=nav-5] {
 }
 
 button[class=nav-6] {
-  width: 61%;
-  background-color: #4CAF50;
+  width: 180px;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
-
+  font-weight: 500;
+  font-size: 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -192,13 +219,14 @@ button[class=nav-3] {
 }
 
 button[class=inv-button]:hover {
-  background-color: #45a049;
+  background-color: rgba(100, 99, 99, 0.71);
 }
 
 .logo {
   width: 60%;
   height: auto;
   display: absolute;
+  align-self: center;
 }
 
 
@@ -271,7 +299,7 @@ textarea[class=input-2] {
 
 button[class=items-button] {
   width: 100%;
-  background-color: #4CAF50;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
   margin: 8px 0;
@@ -283,7 +311,7 @@ button[class=items-button] {
 button[class=up-btn] {
   width: 150px;
   height: 60%;
-  background-color: #4CAF50;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
   margin: 8px 0;
@@ -295,7 +323,7 @@ button[class=up-btn] {
 button[class=delete] {
   width: 75px;
   height: 25px;
-  background-color: #4CAF50;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
   margin: 8px 0;
@@ -308,7 +336,7 @@ button[class=delete] {
 
 button[class^=det-btn] {
   width: 200px;
-  background-color: #4CAF50;
+  background-color: rgba(100, 99, 99, 0.71);
   color: white;
   padding: 5px 5%;
   margin: 8px 0;
@@ -340,21 +368,21 @@ button[class=inv-list-btn] {
   overflow: hidden;
   display: flex;
   padding: 15px;
-  border-radius: 10px;
-  margin-left: 30px;
-  margin-bottom: 30px;
-  margin-right: 30px;
+  /* border-radius: 10px; */
+  margin-left: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
   width: 250px;
   height: 170px;
   border: 6px rgb(248, 247, 247);
   box-shadow: 0 0px 10px 0 rgba(247, 243, 243, 0.459), 20px 6px 25px 0 rgba(77, 76, 76, 0.25);
-  /* background-color: rgb(223, 238, 206);  */
+  background-color: rgba(255, 255, 255, 0.785); 
   /* background-color: rgba(255, 255, 255, 0.785); */
 }
 
 .itemCard-1:hover {
   transform: scale(1.04);
-  transition: all 0.5s ease;
+  /* transition: 0.5s ease; */
   /* background-color: rgba(244, 241, 238, 0.515); */
 }
 
@@ -366,3 +394,11 @@ td[class=list-values] {
   padding-left: 20px;
 }
 
+.img-container {
+  display: grid;
+  justify-items: center;
+}
+
+.goods-shadow {
+  box-shadow: 0 0px 10px 0 rgba(239, 239, 239, 0.459), 15px 10px 25px 0 rgba(121, 121, 121, 0.25); 
+}

@@ -32,31 +32,30 @@ const initialState = {
 };
 
 const GoodsControlWrapper = styled.section`
-  grid-column: 1 / span 2;
-  grid-row: 2 / span 2;
-
-  border-radius: 10px;
-  margin-left: 30px;
+  grid-column: 2 / span 2;
+  grid-row: 1 / span 3;
+  margin-top: 30px;
+  margin-left: 0px;
   margin-bottom: 30px;
-  margin-right: 0px;
+  margin-right: 30px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(6, 1fr);
   justify-items: center;
   align-items: center;
   overflow-y: scroll;
-  background-color: rgb(247, 243, 236);
+  background-color: rgba(240, 238, 234, 0.942)
 `;
 
 const GoodsListWrapper = styled.section`
   // outline: 1px solid black;
   grid-column: 1 / span 3;
   margin-top: -30px;
-  width: 100%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 10px;
 `;
 
 const UpdateWrapper = styled.section`
@@ -202,7 +201,7 @@ function GoodsControl () {
   return (
     <React.Fragment>
       <Header />
-      <GoodsControlWrapper>
+      <GoodsControlWrapper className="goods-shadow">
       { 
       error ?
         <p>Theres was an error: {error}</p>
