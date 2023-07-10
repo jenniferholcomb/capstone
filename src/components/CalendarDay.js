@@ -13,12 +13,12 @@ function CalendarDay ({ month, availablePercent, monthName }) {
       if (availablePercent[0].availability[item.date] >= 90) { 
         return {
           ...item,
-          background: 'rgb(254, 232, 218'
+          background: 'rgb(254, 232, 218)'
         } 
       } else if (availablePercent[0].availability[item.date] >= 70) {
         return {
           ...item,
-          background: 'rgba(249, 249, 223, 0.903)'
+          background: 'rgba(243, 249, 194, 0.8)'
         }
       } else {
         if (item.background) {
@@ -26,7 +26,7 @@ function CalendarDay ({ month, availablePercent, monthName }) {
         } else {
           return {
             ...item,
-            background: 'none'
+            background: 'rgba(211, 238, 206, 0.9)'
           };
         }
       }
@@ -42,18 +42,22 @@ function CalendarDay ({ month, availablePercent, monthName }) {
       {monthBg && (
         <>
           <div className="cal-month">
-            <p>{monthName}</p>
+            <div className="cal-text">
+              <p>{monthName}</p>
+            </div>
           </div>
-          {monthBg.map((item, index) => 
-            <>
-              <div className={`list-item-cal-${index + 1}`} key={index} style={{backgroundColor: `${item.background}`}}>
-                <>
-                  <p className="date">{item.date.charAt(8) === '0' ? item.date.substring(9) : item.date.substring(8)}</p>
-                  <p className="prop-percent">{availablePercent[0].availability[item.date]}</p> 
-                </>
-              </div>
-            </>
-          )}
+          {/* <div className="list-item"> */}
+            {monthBg.map((item, index) => 
+              <>
+                <div className={`list-item-cal-${index + 1}`} key={index} style={{backgroundColor: `${item.background}`}}>
+                  <>
+                    <p className="date">{item.date.charAt(8) === '0' ? item.date.substring(9) : item.date.substring(8)}</p>
+                    <p className="prop-percent">{availablePercent[0].availability[item.date]}</p> 
+                  </>
+                </div>
+              </>
+            )}
+          {/* </div> */}
         </>
       )}
     </React.Fragment>

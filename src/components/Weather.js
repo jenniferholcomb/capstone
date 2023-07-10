@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import WeatherDay from './WeatherDay';
 
 const CompWrapper = styled.section`
-  grid-row: 1;
+  grid-row: 2;
 `;
 
 const WeatherWrapper = styled.section`
@@ -42,7 +42,7 @@ const initialState = {
   // forecast: [],
 
   isLoaded: true,
-  forecast: [36, 41, 44, 48, 51, 58, 59, 64, 69, 75, 79, 81, 83, 80, 'c02d', 'c01d', 'c02d', 'c02d', 'c02d', 'c02d', 'c02d', 'Few clouds', 'Clear Sky', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds'],
+  forecast: [51, 48, 50, 49, 52, 62, 64, 87, 82, 83, 81, 84, 90, 95, 'c02d', 'c01d', 'c02d', 'c02d', 'c02d', 'c02d', 'c02d', 'Few clouds', 'Clear Sky', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds', 'Few clouds'],
   error: null
 };
 

@@ -145,16 +145,3 @@ AddNewItems.propTypes = {
 };
 
 export default AddNewItems;
-
-{/* <CodeWrapper>
-<p>{item.itemCode}</p> 
-</CodeWrapper>
-<DescriptionWrapper>
-<p>{item.description}</p> 
-</DescriptionWrapper>
-<UnitsWrapper>
-<p>{item.quantity}</p> 
-</UnitsWrapper>
-<PriceWrapper>
-<p>{item.extendedAmount}</p> 
-</PriceWrapper> */}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import "./Goods.scss";
 import PropTypes from 'prop-types';
 
 function Goods(props) {
@@ -15,14 +16,14 @@ function Goods(props) {
     console.log('ascending arr', ascendingArray)
     if (ascendingArray.length >= 2) {
       if (ascendingArray[0].unitPrice < ascendingArray[1].unitPrice) {
-        setColor("rgb(223, 238, 206)");
+        setColor("rgb(211, 238, 206, 0.8)");
       } else if (ascendingArray[0].unitPrice > ascendingArray[1].unitPrice) {
         setColor("rgb(254, 232, 218")
       } else {
-        setColor("rgba(255, 255, 255, 0.785)");
+        setColor("rgb(247, 243, 236)");
       }
     } else {
-      setColor("rgba(255, 255, 255, 0.785)");
+      setColor("rgb(247, 243, 236)");
     }
     setNewList(ascendingArray);
     setListLoaded(true);
@@ -32,17 +33,14 @@ function Goods(props) {
     <React.Fragment>
       {
         listLoaded ?
-          <div style={{backgroundColor: `${color}`}} className="itemCard-2">
+          <div style={{borderLeft: `18px solid ${color}`}} className="itemCard-2">
+            {/* <h5 className="list-values">{newList[0].description}</h5> */}
             <table>
-              <tbody>
+              <tbody className="goods-list">
+                <th className="list-values-desc">{newList[0].description}</th>
                 <tr>
-                  <th>ITEM CODE</th>
-                  <td className="list-values">{newList[0].itemCode}</td>
-                </tr>
-                <tr><td className="list-values">{newList[0].description}</td></tr>
-                <tr>
-                  <th>DATE</th>
-                  <th>PRICE</th>
+                  <th>Date</th>
+                  <th>Price</th>
                 </tr>
                 {newList.map((value, index) => 
                   <React.Fragment key={index}>
@@ -52,6 +50,10 @@ function Goods(props) {
                     </tr>
                   </React.Fragment>
                 )}
+                <tr className="list-values-3">
+                  <th>Item Code</th>
+                  <td className="list-values">{newList[0].itemCode}</td>
+                </tr>
               </tbody>
             </table>
           </div>

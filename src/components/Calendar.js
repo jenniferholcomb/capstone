@@ -12,7 +12,7 @@ const CompWrapper = styled.section`
   display: grid;
   grid-row: 1;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: 1.5em repeat(5, 1fr);
+  grid-template-rows: 1.2em repeat(5, 1fr);
   grid-gap: 0px;
   height: 300px;
   background-color: rgb(247, 243, 236);
@@ -22,9 +22,9 @@ const CompWrapper = styled.section`
 const NameWrapper = styled.section` 
   display: grid;
   justify-items: center;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 17px;
   margin-bottom: -12px;
 `;
 
@@ -72,10 +72,6 @@ const Calendar = () => {
         i + 1
         ).toISOString().substring(0,10) }
     });
-    // const thisMonthArrBg = thisMonthArr.map((item) => ({
-    //   ...item,
-    //   background: false
-    // }));
 
     const lastIndex = new Date(today.getFullYear(), monthNow, monthDays[monthNow]).getDay();
 

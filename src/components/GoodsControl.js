@@ -1,5 +1,4 @@
 import React, { useEffect, useReducer, useRef } from "react";
-import Header from "./Header";
 import AddNewInvoice from "./AddNewInvoice";
 import AddNewItems from "./AddNewItems";
 import GoodsList from './GoodsList';
@@ -32,34 +31,27 @@ const initialState = {
 };
 
 const GoodsControlWrapper = styled.section`
+  display: grid;
   grid-column: 2 / span 2;
   grid-row: 1 / span 3;
-  margin-top: 30px;
-  margin-left: 0px;
-  margin-bottom: 30px;
-  margin-right: 30px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  justify-items: center;
-  align-items: center;
-  overflow-y: scroll;
-  background-color: rgba(240, 238, 234, 0.942)
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 4.8em repeat(6, 1fr);
 `;
 
-const GoodsListWrapper = styled.section`
-  // outline: 1px solid black;
-  grid-column: 1 / span 3;
-  margin-top: -30px;
-  width: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-`;
+// const GoodsListWrapper = styled.section`
+//   display: grid;
+//   grid-row: 2 / span 6;
+//   grid-column: 1 / span 4;
+//   margin-left: 20px;
+//   margin-bottom: 30px;
+//   margin-right: 35px;
+//   justify-items: center;
+//   align-items: center;
+//   overflow-y: scroll;
+// `;
 
 const UpdateWrapper = styled.section`
-  grid-column: 1 / span 3;
+  grid-column: 1 / span 4;
   width: 100%;
   display: flex;
   align-items: center;
@@ -68,6 +60,22 @@ const UpdateWrapper = styled.section`
   margin-top: 20px;
   gap: 20px;
 `;
+
+// const NameWrapper = styled.section` 
+//   display: grid;
+//   grid-row: 1;
+//   grid-column: 1 / span 4;
+//   font-size: 19px;
+//   font-weight: bold;
+//   color: white;
+//   background-color: rgba(100, 99, 99, 0.71);
+//   justify-content: start;
+//   margin-top: 30px;
+//   margin-left: 20px;
+//   margin-right: 35px;
+//   padding-top: 6px;
+//   padding-left: 23px;
+// `;
 
 function GoodsControl () {
   const [state, dispatch] = useReducer(goodsControlReducer, initialState);
@@ -110,7 +118,7 @@ function GoodsControl () {
         collectionSnapshot.forEach((doc) => {
           goods.push({
             itemCode: doc.data().itemCode,
-            description: doc.data().description,
+            description: doc.data().description.toUpperCase(),
             quantity: doc.data().quantity,
             unitPrice: doc.data().unitPrice,
             extendedAmount: doc.data().extendedAmount, 
@@ -200,62 +208,63 @@ function GoodsControl () {
 
   return (
     <React.Fragment>
-      <Header />
-      <GoodsControlWrapper className="goods-shadow">
-      { 
-      error ?
-        <p>Theres was an error: {error}</p>
-      : formVisible ? 
-        <AddNewInvoice 
-          onNewInvoiceCreation={handleAddingInvoiceInfo}
-          onReset={() => dispatch(getReset())} />
-      : itemsFormVisible ?
-        <React.Fragment>
-          <AddNewItems
-            onAddItemsCreation={handleAddingMoreItems}
-            onCompleteAddingItems={handleCompleteAddingItems}
-            currentInvoice={currentItems}
-            onReset={() => dispatch(getReset())} />
-        </React.Fragment>
-      : manageInvoiceVisible ?
-        <React.Fragment>
-          <InvoiceList 
-            onInvoiceSelection={handleSelectedInvoice}
-            invoices={invoiceData}
-            onReset={() => dispatch(getReset())} />
-        </React.Fragment>  
-      : invoiceDetailVisible ?
-        <React.Fragment>
-          <InvoiceDetail 
-            invoice={currentItems.current} 
-            onClickingDelete = {handleDeleteClick}
-            onClickingEdit = {() => dispatch(getEditInvoice())}
-            onReset={() => dispatch(getReset())} />
-        </React.Fragment>
-      : editFormVisible ?
-        <UpdateWrapper>
-          <UpdateInvoiceForm
-            invoice={currentItems.current}
-            onEditFormCreation={handleUpdatingInvoice} 
-            onDeleteItem={handleDeletingItem} 
-            onClickingDelete = {handleDeleteClick}
-            onReset={() => dispatch(getReset())}/>
-        </UpdateWrapper> 
-      : goodsLoaded ?
-        <React.Fragment>
-          <GoodsList
-            goods={currentGoods.current} 
-            onManageInvoicesClick={() => dispatch(getManageInvoice())}
-            onAddInvoiceClick={() => dispatch(getFormVisible())} />
-        </React.Fragment>
-      :
-        <React.Fragment>
-          <button className="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
-          <button className="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
-          <p><em>...Loading</em></p>
-        </React.Fragment>
-
-      }   
+      <GoodsControlWrapper>
+        
+        {/* <GoodsListWrapper className="goods-shadow"> */}
+          { 
+          error ?
+            <p>Theres was an error: {error}</p>
+          : formVisible ? 
+            <AddNewInvoice 
+              onNewInvoiceCreation={handleAddingInvoiceInfo}
+              onReset={() => dispatch(getReset())} />
+          : itemsFormVisible ?
+            <React.Fragment>
+              <AddNewItems
+                onAddItemsCreation={handleAddingMoreItems}
+                onCompleteAddingItems={handleCompleteAddingItems}
+                currentInvoice={currentItems}
+                onReset={() => dispatch(getReset())} />
+            </React.Fragment>
+          : manageInvoiceVisible ?
+            <React.Fragment>
+              <InvoiceList 
+                onInvoiceSelection={handleSelectedInvoice}
+                invoices={invoiceData}
+                onReset={() => dispatch(getReset())} />
+            </React.Fragment>  
+          : invoiceDetailVisible ?
+            <React.Fragment>
+              <InvoiceDetail 
+                invoice={currentItems.current} 
+                onClickingDelete = {handleDeleteClick}
+                onClickingEdit = {() => dispatch(getEditInvoice())}
+                onReset={() => dispatch(getReset())} />
+            </React.Fragment>
+          : editFormVisible ?
+            <UpdateWrapper>
+              <UpdateInvoiceForm
+                invoice={currentItems.current}
+                onEditFormCreation={handleUpdatingInvoice} 
+                onDeleteItem={handleDeletingItem} 
+                onClickingDelete = {handleDeleteClick}
+                onReset={() => dispatch(getReset())}/>
+            </UpdateWrapper> 
+          : 
+            <React.Fragment>
+              <GoodsList
+                goods={currentGoods.current} 
+                onManageInvoicesClick={() => dispatch(getManageInvoice())}
+                onAddInvoiceClick={() => dispatch(getFormVisible())} />
+            </React.Fragment>
+          // :
+          //   <React.Fragment>
+          //     <button className="nav-2" onClick={() => dispatch(getManageInvoice())}>MANAGE INVOICES</button>
+          //     <button className="nav-1" onClick={() => dispatch(getFormVisible())}>ADD NEW INVOICE</button>
+          //     <p><em>...Loading</em></p>
+          //   </React.Fragment>
+          }   
+        {/* </GoodsListWrapper> */}
       </GoodsControlWrapper>
     </React.Fragment>
   );

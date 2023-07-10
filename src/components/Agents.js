@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./Header";
 import Weather from "./Weather";
 import Calendar from "./Calendar";
 // import Events from "./Events";
@@ -20,6 +21,7 @@ function Agents () {
 
   return (
     <AgentsWrapper>
+      <Header />
       <Weather />
       <Calendar />
       {/* <Events /> */}
