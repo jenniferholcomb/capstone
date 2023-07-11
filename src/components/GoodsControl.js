@@ -37,7 +37,7 @@ function GoodsControl () {
   const currentGoods = useRef(state.goodsData);
   const internalRef = useRef(null);
 
-  useEffect(() => {
+  const loadInvoices = () => {
     const unSubscribe = onSnapshot(
       collection(db, "invoices"),
       (collectionSnapshot) => {
@@ -62,9 +62,9 @@ function GoodsControl () {
     );
 
     return () => unSubscribe();
-  }, []);
+  };
 
-  useEffect(() => {
+  const loadItems = () => {
     const unSubscribe = onSnapshot(
       collection(db, "items"),
       (collectionSnapshot) => {
@@ -91,6 +91,11 @@ function GoodsControl () {
     );
 
     return () => unSubscribe();
+  };
+
+  useEffect(() => { 
+    loadInvoices();
+    loadItems();
   }, []);
 
   const handleSendingData = async () => {
