@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 
 function CalendarDay ({ month, availablePercent, monthName }) {
   const [monthBg, setMonthBg] = useState();
-  console.log('m', month)
-  console.log('av perc', availablePercent[0].availability);
-  console.log('mm', month[0].background);
 
   useEffect(() => {
-    console.log('here')
     const newMonth = month.map(item => {
       if (availablePercent[0].availability[item.date] >= 90) { 
         return {
@@ -32,7 +28,6 @@ function CalendarDay ({ month, availablePercent, monthName }) {
       }
     });
 
-    console.log('nm', newMonth);
     setMonthBg(newMonth);
   }, []);
 

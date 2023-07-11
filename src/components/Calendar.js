@@ -64,7 +64,6 @@ const Calendar = () => {
       ...item,
       background: 'rgba(100, 99, 99, 0.309)'
     }));
-    console.log('bgarr', preMonthArrBg);
     const thisMonthArr = Array.from(Array(monthDays[monthNow])).map((x, i) =>  { 
       return { 'date': new Date(
         year, 
@@ -93,14 +92,10 @@ const Calendar = () => {
 
   useEffect(() => {
     if (propertyList && listingAvailability) {
-      console.log('list avail', listingAvailability);
-      console.log('dates', dates);
       const availMonth = listingAvailability.filter(item => item.month === month);
-      console.log('availMonth', availMonth[0].availability['2023-07-04']);
       setMonthAvail(availMonth);
       setPercentLoaded(true);
     } else if (propertyList) {
-      console.log('property list cal', propertyList);
     }
   }, [propertyList, listingAvailability]);
 

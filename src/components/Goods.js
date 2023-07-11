@@ -13,7 +13,7 @@ function Goods(props) {
       return new Date(a.date) - new Date(b.date);
     });
     const ascendingArray = sortedArray.reverse();
-    console.log('ascending arr', ascendingArray)
+    
     if (ascendingArray.length >= 2) {
       if (ascendingArray[0].unitPrice < ascendingArray[1].unitPrice) {
         setColor("rgb(211, 238, 206, 0.8)");
@@ -26,7 +26,7 @@ function Goods(props) {
       setColor("rgb(247, 243, 236)");
     }
     setNewList(ascendingArray);
-    setListLoaded(true);
+    setListLoaded(true); // eslint-disable-next-line
   }, [])
 
   return (
@@ -35,9 +35,9 @@ function Goods(props) {
         listLoaded ?
           <div style={{borderLeft: `18px solid ${color}`}} className="itemCard-2">
             {/* <h5 className="list-values">{newList[0].description}</h5> */}
-            <table>
+            <table className="table-goods">
               <tbody className="goods-list">
-                <th className="list-values-desc">{newList[0].description}</th>
+                <th className="list-values">{newList[0].description}</th>
                 <tr>
                   <th>Date</th>
                   <th>Price</th>

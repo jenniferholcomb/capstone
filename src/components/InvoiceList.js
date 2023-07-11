@@ -1,51 +1,45 @@
 import React from "react";
 import Invoice from "./Invoice";
+import "./InvoiceList.scss";
 import PropTypes from 'prop-types';
-import styled from "styled-components";
-
-const ContainerWrapper = styled.section`
-  grid-column: 1 / span 3;
-  justify-self: start;
-  padding-left: 10px;
-`;
-
-const InvListWrapper = styled.section`
-  grid-column: 1 / span 3;
-  grid-row: 2;
-  padding-top: 60px;
-  padding: 20px;
-  display: inline-flex;
-  flex-flow: row wrap;
-  width: 100%;
-  justify-content: center;
-`;
 
 function InvoiceList (props) {
   return (
-    <React.Fragment>
-      <ContainerWrapper>
-        <button className="inv-list-btn" onClick={props.onReset}>BACK TO GOODS</button>
-      </ContainerWrapper>
-      <InvListWrapper>
-        {props.invoices.map((entry, index) => 
-          <Invoice
-            whenInvoiceClicked= {props.onInvoiceSelection}
-            purveyor={entry.purveyor}
-            invoiceNumber={entry.invoiceNumber}
-            date={entry.date}
-            numberItems={entry.numberItems}
-            total={entry.total}
-            key={index} />
-        )}
-      </InvListWrapper>
-    </React.Fragment>
+    <>
+      <div className="bar-inv-wrapper">
+        <div className="name-inv-wrapper">
+          MANAGE INVOICES
+        </div>
+        <div className="container-inv-wrapper">
+          <button className="nav-inv-list-1" onClick={props.onReset}>BACK TO GOODS</button>
+        </div>
+      </div>
+      <div className="invoice-list-wrapper">
+        <div className="invoice-list-container">
+          {props.invoices.map((entry, index) => 
+            <Invoice
+              whenInvoiceClicked= {props.onInvoiceSelection}
+              purveyor={entry.purveyor}
+              invoiceNumber={entry.invoiceNumber}
+              date={entry.date}
+              numberItems={entry.numberItems}
+              total={entry.total}
+              // onInvList={props.onManageInvoices}
+              onReset={props.onReset}
+              key={index} />
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 
 InvoiceList.propTypes = {
   onInvoiceSelection: PropTypes.func,
   invoices: PropTypes.array,
-  onReset: PropTypes.func
+  onReset: PropTypes.func,
+  onManageInvoices: PropTypes.func
 };
 
 export default InvoiceList;
+// className="inv-list-btn"

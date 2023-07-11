@@ -148,7 +148,7 @@ input[class=inv] {
   box-sizing: border-box;
 }
 
-button[class=inv-button] {
+/* button[class=inv-button] {
   width: 100%;
   background-color: #4CAF50;
   color: white;
@@ -157,7 +157,7 @@ button[class=inv-button] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 button[class=nav-1] {
   width: 45%;
@@ -184,38 +184,7 @@ button[class=nav-2] {
   cursor: pointer;
 }
 
-button[class=nav-5] {
-  width: 170px;
-  height: 32px;
-  /* background-color: rgba(180, 245, 232, 0.43); */
-  background-color: white;
-  color: rgba(100, 99, 99, .95);
-  padding: 5px 5%;
-  font-weight: 500;
-  font-size: 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 0px 5px 0 rgba(239, 239, 239, 0.459), 3px 3px 10px 0 rgba(121, 121, 121, 0.25); 
-  /* margin-bottom: 10px;
-  margin-top: 10px; */
-}
-
-button[class=nav-6] {
-  width: 170px;
-  height: 32px;
-  background-color: white;
-  color: rgba(100, 99, 99, .95);
-  padding: 5px 5%;
-  font-weight: 500;
-  font-size: 15px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: 0 0px 5px 0 rgba(239, 239, 239, 0.459), 3px 3px 10px 0 rgba(121, 121, 121, 0.25); 
-}
-
-button[class=inv-list-btn-mmm] {
+/* button[class=inv-list-btn-mmm] {
   width: 150px;
   height: 60%;
   background-color: #4CAF50;
@@ -226,7 +195,7 @@ button[class=inv-list-btn-mmm] {
   border-radius: 4px;
   cursor: pointer;
   margin-left: 10px;
-}
+} */
 
 button[class=nav-3] {
   width: 30%;
@@ -239,9 +208,9 @@ button[class=nav-3] {
   cursor: pointer;
 }
 
-button[class=inv-button]:hover {
+/* button[class=inv-button]:hover {
   background-color: rgba(100, 99, 99, 0.71);
-}
+} */
 
 .logo {
   width: 60%;
@@ -251,7 +220,7 @@ button[class=inv-button]:hover {
 }
 
 
-input[class=items] {
+/* input[class=items] {
   width: 48%;
   padding-top: 14px;
   padding-bottom: 14px;
@@ -261,9 +230,9 @@ input[class=items] {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-}
+} */
 
-input[class=input-3] {
+/* input[class=input-3] {
   width: 100%;
   margin: 8px 0;
   margin-left: 10px;
@@ -272,12 +241,12 @@ input[class=input-3] {
   border-radius: 4px;
   box-sizing: border-box;
   font-size: 14px;
-}
+} */
 
-input[class=items]::placeholder {
+/* input[class=items]::placeholder {
   text-align: center;
 
-}
+} */
 
 input[class=input-1] {
   width: 48%;
@@ -290,7 +259,7 @@ input[class=input-1] {
   font-size: 14px;
 }
 
-textarea {
+/* textarea {
   width: 100%;
   height: 50px;
   padding: 8px 20px;
@@ -303,8 +272,7 @@ textarea {
   font-size: 14px;
   text-align: center;
   padding-top: 11px;
- 
-}
+} */
 
 img {
   display: flex;
@@ -318,7 +286,7 @@ textarea[class=input-2] {
   width: 90%;
 }
 
-button[class=items-button] {
+/* button[class=items-button] {
   width: 100%;
   background-color: rgba(100, 99, 99, 0.71);
   color: white;
@@ -327,7 +295,7 @@ button[class=items-button] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 button[class=up-btn] {
   width: 150px;
@@ -352,7 +320,6 @@ button[class=delete] {
   border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
-
 }
 
 button[class^=det-btn] {
@@ -366,7 +333,7 @@ button[class^=det-btn] {
   cursor: pointer;
 }
 
-button[class=inv-list-btn] {
+/* button[class=inv-list-btn] {
   width: 150px;
   height: 60%;
   background-color: #4CAF50;
@@ -377,19 +344,15 @@ button[class=inv-list-btn] {
   border-radius: 4px;
   cursor: pointer;
   margin-left: 10px;
-}
-
+} */
+/* 
 .inv-list-btn-container {
   margin: -50px;
   
-}
+} */
 
 .img-container {
   display: grid;
   justify-items: center;
 }
 
-.goods-shadow {
-  /* box-shadow: 0 0px 10px 0 rgba(239, 239, 239, 0.459), 15px 10px 25px 0 rgba(121, 121, 121, 0.25);  */
-  background-color: rgba(215, 205, 195, 0.363);
-}

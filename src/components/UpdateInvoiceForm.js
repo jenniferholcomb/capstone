@@ -1,30 +1,7 @@
 import React, { useState } from "react";
+import "./InvoiceList.scss";
+import "./UpdateInvoiceForm.scss";
 import PropTypes from 'prop-types';
-import styled from "styled-components";
-
-
-const InvoiceWrapper = styled.section`
-  display: grid;
-  justify-items: center;
-  outline: none;
-`;
-
-const TableWrapper = styled.section`
-  display: grid;
-  grid-column: 1 / span 3;
-  grid-row: 2;
-  width: 95%
-  outline: none;
-  padding-right: 40px;
-  padding-left: 40px;
-  
-`;
-
-const CancelWrapper = styled.section`
-  display: grid;
-  grid-column: 2 / span 2;;
-  grid-row: 1;
-`;
 
 function UpdateInvoiceForm(props) {
   const { invoice } = props;
@@ -77,8 +54,6 @@ function UpdateInvoiceForm(props) {
     } else {
       const deleteId = newState[index+1].id;
       const updatedItems = [...newState.slice(0,index+1), ...newState.slice(index+2, newState.length)];
-      console.log(updatedItems);
-      console.log('up')
       setState(updatedItems);
       props.onDeleteItem(deleteId, updatedItems);
     }
@@ -90,110 +65,116 @@ function UpdateInvoiceForm(props) {
     props.onEditFormCreation(newState);
   }
 
-  console.log(invoice)
-
   return (
-    <React.Fragment>
-      
-        
-        <form onSubmit={handleEditsSubmission}>
-        <InvoiceWrapper>
-        <table>
-        <tr>
-          <td><label htmlFor="purveyor">PURVEYOR</label></td>
-          <td><input
-              className="input-3"
-              type='text'
-              name='purveyor'
-              placeholder={invoice[0].purveyor} 
-              defaultValue={invoice[0].purveyor}
-              onChange={(e) => handleChange(e, 0)}
-              required /></td>
-        </tr>
-        <tr>
-          <td><label htmlFor="invoiceNumber">INVOICE#</label></td>
-          <td><input
-                className="input-3"
-                type='number'
-                name='invoiceNumber'
-                placeholder={invoice[0].invoiceNumber} 
-                defaultValue={invoice[0].invoiceNumber} 
-                onChange={(e) => handleAllChange(e)}       
-                required /></td>
-        </tr>
-        <tr> 
-          <td><label htmlFor="date">DATE</label></td>
-          <td><input
-                className="input-3"
-                type='date'
-                name='date'
-                placeholder={invoice[0].date}
-                defaultValue={invoice[0].date} 
-                onChange={(e) => handleAllChange(e)}                  
-                required /></td>
-        </tr>
-
-        </table>
-        
-        
-        <TableWrapper>
-        <hr />
-        <table>
-        <tr>
-          <th>No./</th>
-          <th>Item#</th>
-          <th>Description</th>
-          <th>Units</th>
-          <th>Price/Unit</th>
-        </tr>
-            {invoice.slice(1).map((item, index) => 
-              <React.Fragment>
-                <tr>
-                <td>{index + 1}</td>
-                <td><input
-                  className="input-1"
+    <> 
+      <div className="bar-inv-wrapper">
+        <div className="name-inv-wrapper">
+          EDIT INVOICE
+        </div>
+        <div className="container-inv-wrapper">
+          <button className="nav-inv-list-1" onClick={props.onReset}>BACK TO LIST</button>
+        </div>
+      </div>
+      <div className="invoice-list-wrapper">
+        <div className="invoice-det-container">
+          <form onSubmit={handleEditsSubmission}>
+          <div className="invoice-wrapper">
+          <table className="edit-head">
+            <tr>
+              <td className="edit-label"><label htmlFor="purveyor">PURVEYOR</label></td>
+              <td><input
+                  className="input-3"
                   type='text'
-                  name='itemCode'
-                  placeholder={item.itemCode}
-                  defaultValue={item.itemCode} 
-                  onChange={(e) => handleChange(e, (index+1))}                
-                  required /></td>      
-                <td><textarea
-                  className="input-2"
-                  name='description'
-                  placeholder={item.description}
-                  defaultValue={item.description} 
-                  onChange={(e) => handleChange(e, (index+1))} 
+                  name='purveyor'
+                  placeholder={invoice[0].purveyor} 
+                  defaultValue={invoice[0].purveyor}
+                  onChange={(e) => handleChange(e, 0)}
                   required /></td>
-                <td><input
-                  className="input-1"
-                  type='number'
-                  name='quantity'
-                  placeholder={item.quantity}
-                  defaultValue={item.quantity}  
-                  onChange={(e) => handleChange(e, (index+1))}               
-                  required /></td>
-                <td><input
-                  className="input-1"
-                  type='number'
-                  name='unitPrice'
-                  placeholder={item.unitPrice}
-                  defaultValue={item.unitPrice}  
-                  onChange={(e) => handleChange(e, (index+1))}               
-                  required /></td>
-                <td><button className="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
-                </tr>
-              </React.Fragment>
-            )}
+            </tr>
+            <tr>
+              <td><label htmlFor="invoiceNumber">INVOICE#</label></td>
+              <td><input
+                    className="input-3"
+                    type='number'
+                    name='invoiceNumber'
+                    placeholder={invoice[0].invoiceNumber} 
+                    defaultValue={invoice[0].invoiceNumber} 
+                    onChange={(e) => handleAllChange(e)}       
+                    required /></td>
+            </tr>
+            <tr> 
+              <td><label htmlFor="date">DATE</label></td>
+              <td><input
+                    className="input-3"
+                    type='date'
+                    name='date'
+                    placeholder={invoice[0].date}
+                    defaultValue={invoice[0].date} 
+                    onChange={(e) => handleAllChange(e)}                  
+                    required /></td>
+            </tr>
           </table>
-          </TableWrapper>
-            <CancelWrapper>
-              <button className="up-btn" type="submit">UPDATE INVOICE</button>
-              <button className="up-btn" onClick={props.onReset}>CANCEL</button>
-            </CancelWrapper>
-          </InvoiceWrapper>
-        </form><br />
-    </React.Fragment>
+        
+          <div className="table-wrapper">
+            <hr />
+            <table>
+            <tr>
+              <th className="data-head-1">No./</th>
+              <th className="data-head-2">Item#</th>
+              <th className="data-head-3">Description</th>
+              <th className="data-head-4">Units</th>
+              <th className="data-head-5">Price/Unit</th>
+            </tr>
+                {invoice.slice(1).map((item, index) => 
+                  <>
+                    <tr>
+                    <td>{index + 1}</td>
+                    <td><input
+                      className="input-1"
+                      type='text'
+                      name='itemCode'
+                      placeholder={item.itemCode}
+                      defaultValue={item.itemCode} 
+                      onChange={(e) => handleChange(e, (index+1))}                
+                      required /></td>      
+                    <td className="data-row"><textarea
+                      className="input-2"
+                      name='description'
+                      placeholder={item.description}
+                      defaultValue={item.description} 
+                      onChange={(e) => handleChange(e, (index+1))} 
+                      required /></td>
+                    <td><input
+                      className="input-1"
+                      type='number'
+                      name='quantity'
+                      placeholder={item.quantity}
+                      defaultValue={item.quantity}  
+                      onChange={(e) => handleChange(e, (index+1))}               
+                      required /></td>
+                    <td><input
+                      className="input-1"
+                      type='number'
+                      name='unitPrice'
+                      placeholder={item.unitPrice}
+                      defaultValue={item.unitPrice}  
+                      onChange={(e) => handleChange(e, (index+1))}               
+                      required /></td>
+                    <td><button className="delete" onClick={() => handleDeleteItem(index)}>DELETE</button></td>
+                    </tr>
+                  </>
+                )}
+              </table>
+            </div>
+              <div className="cancel-wrapper">
+                <button className="nav-inv-list-2" type="submit">UPDATE INVOICE</button>
+                <button className="nav-inv-list-2" onClick={props.onReset}>CANCEL</button>
+              </div>
+            </div>
+          </form><br />
+        </div>
+      </div>
+    </>
   );
 }
 

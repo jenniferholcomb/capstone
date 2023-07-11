@@ -115,7 +115,7 @@ const goodsControlReducer = (state, action) => {
         invoiceDetailVisible: false,
         editFormVisible: false,
         itemsFormVisible: false,
-        manageInvoiceVisible: false
+        manageInvoiceVisible: false,
       }
     default:
       throw new Error(`There is no action matching ${action.type}.`);

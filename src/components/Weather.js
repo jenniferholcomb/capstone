@@ -72,8 +72,6 @@ function Weather () {
 
   const { error, isLoaded, forecast } = state;
 
-  console.log(forecast);
-
   if (error) {
     return ( 
       <WeatherWrapper>

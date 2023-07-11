@@ -1,22 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import "./GoodsList.scss";
+import "./AddNewInvoice.scss";
 import { v4 } from 'uuid';
-
-const NewInvoiceWrapper = styled.section`
-  display: grid;
-  width: 60%;
-  height: 80%;
-  justify-content: center;
-  padding: 30px;
-  text-align: center;
-  
-  
-  outline: 1px solid black;
-  border-radius: 10px;
-  grid-column: 1 / span 3;
-  grid-row: 1 / span 6;
-`;
 
 function AddNewInvoice(props) {
 
@@ -31,30 +17,39 @@ function AddNewInvoice(props) {
   }
 
   return (
-    <React.Fragment>
-      <NewInvoiceWrapper>
-      <h3>START NEW INVOICE</h3>
-        <form onSubmit={handleNewInvoiceSubmission}>
-          <input
+    <>
+      <div className="bar-wrapper">
+        <div className="name-wrapper">
+          COST OF GOODS
+        </div>
+        <div className="container-wrapper">
+          <button className="nav-6" onClick={props.onReset}>CANCEL</button>
+        </div>
+      </div>
+      <div className="goods-list-wrapper">
+        <div className="new-invoice-wrapper">
+          <h4 className="head-add">START NEW INVOICE</h4>
+          <form onSubmit={handleNewInvoiceSubmission}>
+            <input
+              class="inv"
+              type='text'
+              name='purveyor'
+              placeholder='Purveyor' required/><br />
+            <input 
             class="inv"
-            type='text'
-            name='purveyor'
-            placeholder='Purveyor' required/><br />
-          <input 
-          class="inv"
-            type='number'
-            name='invoiceNumber'
-            placeholder='Invoice #' required/><br />
-          <input 
-            class="inv"
-            type='date'
-            name='date'
-            placeholder='Date' required/><br />
-          <button class="inv-button" type='submit'>NEXT</button>
-        </form>
-        <button class="inv-button" onClick={props.onReset}>CANCEL</button>
-      </NewInvoiceWrapper>
-    </React.Fragment>
+              type='number'
+              name='invoiceNumber'
+              placeholder='Invoice #' required/><br />
+            <input 
+              class="inv"
+              type='date'
+              name='date'
+              placeholder='Date' required/><br />
+            <button class="nav-inv-list-3" type='submit'>NEXT</button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -1,0 +1,43 @@
+.header-wrapper {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 10px;
+  display: grid;
+};
+
+.subhead-wrap {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-bottom: 0px;
+};
+
+.tag-wrap {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(100, 99, 99, .95);
+  margin-top: 11px;
+  padding-bottom: 2px;
+  border-bottom: .5px solid;
+  border-color:rgba(77, 76, 76, 0.25);
+};
+
+.empty {
+  width: 100%;
+  display: inline-block;
+};
+
+.loc-wrap {
+  margin-top: 12px;
+  margin-bottom: 14px;
+  color: black;
+  font-size: 20px;
+  font-weight: 900;
+};
+
+img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  resize: none;
+}
