@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/react-gh-pages/static/css/main.bb775757.css",
-    "main.js": "/react-gh-pages/static/js/main.50fb6e45.js",
-    "static/media/BendSpoon.svg": "/react-gh-pages/static/media/BendSpoon.9a1ae547fab688b238957f987e99aaa3.svg",
-    "index.html": "/react-gh-pages/index.html",
-    "main.bb775757.css.map": "/react-gh-pages/static/css/main.bb775757.css.map",
-    "main.50fb6e45.js.map": "/react-gh-pages/static/js/main.50fb6e45.js.map"
+    "main.css": "/BendInSpoon/static/css/main.bb775757.css",
+    "main.js": "/BendInSpoon/static/js/main.132bf98c.js",
+    "static/media/BendSpoon.svg": "/BendInSpoon/static/media/BendSpoon.9a1ae547fab688b238957f987e99aaa3.svg",
+    "index.html": "/BendInSpoon/index.html",
+    "main.bb775757.css.map": "/BendInSpoon/static/css/main.bb775757.css.map",
+    "main.132bf98c.js.map": "/BendInSpoon/static/js/main.132bf98c.js.map"
   },
   "entrypoints": [
     "static/css/main.bb775757.css",
-    "static/js/main.50fb6e45.js"
+    "static/js/main.132bf98c.js"
   ]
 }
