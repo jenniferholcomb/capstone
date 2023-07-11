@@ -1,4 +1,4 @@
-# CAPSTONE - WIP
+# CAPSTONE - Bend In Spoon
 
 #### A forecasting tool to be used by small restaurants to plan food inventory and labor.
 
